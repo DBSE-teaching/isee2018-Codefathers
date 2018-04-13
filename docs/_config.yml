@@ -1,0 +1,5 @@
+name: ISEE 2018
+markdown: kramdown
+baseurl: /isee2018
+permalink: /blog/:year/:month/:day/:title/
+theme: jekyll-theme-dinky
