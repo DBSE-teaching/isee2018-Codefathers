@@ -15,7 +15,7 @@ We consist of 4 people and the sole reason we end up together, was that it just 
 
 * **Ilias Merentitis**. A Greek Erasmus stundent. He is in the fourth year of his Barchelor studies in Informatics. His main interest is android application development. He is fascinated with how much somebody can do with such a small device. He has some experience with android studio, and android programing with java. He hopes that this project will help him develop his existing skills further, and to catch up with new modern technologies.
 
-* **Dimitris Tzilivakis** Also an Erasmus student from Greece. He is in the fourth year of his studies in Informatics. He was also working during those years as a full stack web developer and graphic Designer in a small IT company in Greece. His passion is design and concept artist, therefore he has previous experience into UI designing and making presentations. With this project  He hopes to improve his communication skills, work as a member of a team and  also learn Android Development and improve his Java skills.
+* **Dimitris Tzilivakis** Also an Erasmus student from Greece. He is in the fourth year of his studies in Informatics. He was also working during those years as a full stack web developer and graphic Designer in a small IT company in Greece. He is passionate about design and concept artist, therefore he has previous experience into UI designing and making presentations. With this project  He hopes to improve his communication skills, work as a member of a team and  also learn Android Development and improve his Java skills.
 
 * 
  
