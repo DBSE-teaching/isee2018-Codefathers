@@ -15,7 +15,7 @@ The name "Codefathers", as well as the team logo, is derived directly from the m
 
 
 We consist of 4 people and the sole reason we ended up together, was that it just happened that we sat next each other in the first lecture.
-![Members image]({{site.baseurl}}/images/members "Our members profile")
+![Members image]({{site.baseurl}}/images/members.png "Our members profile")
 
 * **Ejas Nazeerutheen**. He is coming from South india. He has done his Masters in Chemical and Energy Engineering.Before that, he worked as an business intelligence analyst in Infosys, an IT giant, in India, therefore he is not just experienced with Java but also with dealing with clients and gathering information about requirements. He hopes that he will be able to improve his skills in project management using the Scrum principle, and to dive into Android Development.
 
@@ -52,10 +52,15 @@ What is more this flexible way of assigning roles will help us respond to possib
 We consist of people who met in the context of this course, therefore we don't know each other well yet. As a result communication will be one of the first challenges we will face. We have taken some very first steps towards solving this problem (or we plan to take them sure).
 
 * We will make use of technologies such online instant messaging, and teamviewer to help each other.
+
 * Frequent scheduled face to face meets to prepare for presentations.
+
 * Direct group calls, if emergency clarification is needed. 
+
 * Github for organising the whole project.
+
 * Use some principles of Scrum in order to have an organised and flexible schedule, apply them through Zenhub 
+
 
 ... and of course hanging out for beers.
 
