@@ -17,7 +17,7 @@ The name "Codefathers", as well as the team logo, is derived directly from the m
 We consist of 4 people and the sole reason we ended up together, was that it just happened that we sat next each other in the first lecture.
 ![Members image]({{site.baseurl}}/images/members.png "Our members profile")
 
-* **Ejas Nazeerutheen**. He is coming from South india. He has done his Masters in Chemical and Energy Engineering.Before that, he worked as an business intelligence analyst in Infosys, an IT giant, in India, therefore he is not just experienced with Java but also with dealing with clients and gathering information about requirements. He hopes that he will be able to improve his skills in project management using the Scrum principle, and to dive into Android Development.
+* **Ejas Nazeerutheen**. He is coming from South india. He has done his Masters in Chemical and Energy Engineering.Before gthat, he worked as an business intelligence analyst in Infosys, an IT giant, in India, therefore he is not just experienced with Java but also with dealing with clients and gathering information about requirements. He hopes that he will be able to improve his skills in project management using the Scrum principle, and to dive into Android Development.
 
 * **Ilias Merentitis**. A Greek Erasmus stundent. He is in the fourth year of his Barchelor studies in Informatics. His main interest is android application development. He is fascinated with how much somebody can do with such a small device. He has some experience with android studio, and android programing with java. He hopes that this project will help him develop his existing skills further, and to catch up with new modern technologies.
 
@@ -40,11 +40,11 @@ From the member presentation somebody can easily see the range of each member ab
 
 * Dimitris will be responsible for "making everything pretty", the design of the application, the graphic images of the blog and the design of the slides and managing the github repositories.
 
-All of the team member will help into the implementation and managing the github repository
+* Alaba will help throughout the project on many different levels, inclunding github  management and during the implementation.
 
-However, those roles are not absolute. Every member can and will take up with different roles and responsibilities during the development stage, as we all want to learn something new.
+However, those roles are not absolute. Every member can and will take up  different roles and responsibilities during the development stage, as we all want to learn something new.
 
-What is more this flexible way of assigning roles will help us respond to possible changes in a better way, since we would be able to immediately switch roles if nessecary. 
+What is more, this flexible way of assigning roles will help us respond to possible changes in a better way, since we would be able to immediately switch roles if nessecary. 
 
 ## Communication and organisation 
 ![Members image]({{site.baseurl}}/images/communication.png "Our members profile")
