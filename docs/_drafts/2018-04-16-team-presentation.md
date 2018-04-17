@@ -1,10 +1,12 @@
 ---
 layout: post
 title: "Team Presentation"
-date: 2018-04-16
+date: 2018-04-17
 ---
 ## first Steps.
+<span align=center class=full-width>
 ![Steps image]({{site.baseurl}}/images/steps@3x.png "Steps towards the first stable release")
+</span>
 
 The road from the formation of  an idea about an application till the final release is long, sometimes dangerous, but it is a route full of experiences and learning. We are the team "Codefathers" and we are about to start this journey. Welcome aboard!
 
@@ -13,11 +15,10 @@ The road from the formation of  an idea about an application till the final rele
 The name "Codefathers", as well as the team logo, is derived directly from the movie series "The Godfather". Like the  movie protagonist was able to control everything behind the scenes, we also hope to control efficiently every aspect of the software development proccess.
 ![Members image]({{site.baseurl}}/images/Codefathers.png "Our members profile")
 
-
 We consist of 4 people and the sole reason we ended up together, was that it just happened that we sat next each other in the first lecture.
-
+<span align=center class=full-width>
 ![Members image]({{site.baseurl}}/images/members@3x.png "Our members profile")
-
+</span>
 
 * **Ejas Nazeerutheen**. He is coming from South india. He has done his Masters in Chemical and Energy Engineering.Before that, he worked as an business intelligence analyst in Infosys, an IT giant, in India, therefore he is not just experienced with Java but also with dealing with clients and gathering information about requirements. He hopes that he will be able to improve his skills in project management using the Scrum principle, and to dive into Android Development.
 
@@ -32,7 +33,9 @@ We consist of 4 people and the sole reason we ended up together, was that it jus
 ... and it will also be a long journey for us from those early steps of this team presentation till the very final release.
 
 ## Loosely defined roles.
+<span align=center class=full-width>
 ![Members image]({{site.baseurl}}/images/roles@3x.png "Our members profile")
+</span>
 
 From the member presentation somebody can easily see the range of each member abilities. Our skills extends to different areas therefore it is easy to assign roles so each member can focus on different aspects.
 
@@ -49,7 +52,9 @@ However, those roles are not absolute. Every member can and will take up with di
 What is more this flexible way of assigning roles will help us respond to possible changes in a better way, since we would be able to immediately switch roles if nessecary. 
 
 ## Communication and organisation 
+<span align=center class=full-width>
 ![Members image]({{site.baseurl}}/images/communication@3x.png "Our members profile")
+</span>
 
 We consist of people who met in the context of this course, therefore we don't know each other well yet. As a result communication will be one of the first challenges we will face. We have taken some very first steps towards solving this problem (or we plan to take them sure).
 
