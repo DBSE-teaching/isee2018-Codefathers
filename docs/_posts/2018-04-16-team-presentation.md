@@ -9,10 +9,9 @@ date: 2018-04-17
 The road from the formation of  an idea about an application till the final release is long, sometimes dangerous, but it is a route full of experiences and learning. We are the team "Codefathers" and we are about to start this journey. Welcome aboard!
 
 ## Who are we?
+![Codefathers image]({{site.baseurl}}/images/Codefathers.png "Ourlogo")
 
 The name "Codefathers", as well as the team logo, is derived directly from the movie series "The Godfather". Like the  movie protagonist was able to control everything behind the scenes, we also hope to control efficiently every aspect of the software development proccess.
-![Members image]({{site.baseurl}}/images/Codefathers.png "Our members profile")
-
 
 We consist of 4 people and the sole reason we ended up together, was that it just happened that we sat next each other in the first lecture.
 ![Members image]({{site.baseurl}}/images/members.png "Our members profile")
@@ -25,31 +24,31 @@ We consist of 4 people and the sole reason we ended up together, was that it jus
 
 * **Alaba Ojo**: Master student from Nigeria, with an electrical engineering background and experience in telecommunication industry. His major area of interest is Internet of things, so naturally this course is an excellent opportunity for him as it provides an interesting demonstration of internet connectivity that can be expanded to include devices. This course will enable him to connect the dots between electrical engineering and software engineering.
  
- At first glance we are kinda different, we all share the same goal though, which is to make software that will help people and solve everyday problems. This is why choose to develop an  app that will help people to reassure that their loved ones, have always arrived safely to their destination after a long journey.
+ At first glance we are kinda different, we all share the same goal though, which is to make software that will help people and solve everyday problems. This is why choose to develop an  app that will help people to reassure that their loved ones, have always arrived safely to their destination after a journey.
 
-... and it will also be a long journey for us from those early steps of this team presentation till the very final release.
+... and it will also be a long journey for us from those early steps of this team presentation, until the very final release.
 
 ## Loosely defined roles.
 ![Members image]({{site.baseurl}}/images/roles.png "Our members profile")
 
-From the member presentation somebody can easily see the range of each member abilities. Our skills extends to different areas therefore it is easy to assign roles so each member can focus on different aspects.
+From the member presentation somebody can easily see the range of each member abilities. Our skills extends to different areas therefore it is easy to assign some abstract roles. 
 
-* Ilias will focus more on the coding stage of the application, since he has previous experience. 
+* **Ilias** will focus more on the coding stage of the application, since he has previous experience. 
 
-* Ejas will also focus on development, but will be the brain power behind the requirement gathering and analysis.
+* **Ejas** will also focus on development, but will be the brain power behind the requirement gathering and analysis.
 
-* Dimitris will be responsible for "making everything pretty", the design of the application, the graphic images of the blog and the design of the slides and managing the github repositories.
+* **Dimitris** will make sure "everything pretty", design the ui of the application, the graphic images of the blog and the slides.
 
-* Alaba will help throughout the project on many different levels, inclunding github  management and during the implementation.
+* **Alaba** will help throughout the project on many different levels, including github management and android developing
 
-However, those roles are not absolute. Every member can and will take up  different roles and responsibilities during the development stage, as we all want to learn something new.
+However, those roles are not absolute. Every member can  and **is encouraged** to  take up  different roles and responsibilities during the development stage. Staying into confort zones can be boring. We are not an aeroplane crew, where the flight attetand has to stay to his role, and his role only, because touching the pilot cogpit could be fatal. We are software engineers, and this job demands creativity. By strictly restricting somebody to one role, you restrict his creativity. 
 
-What is more, this flexible way of assigning roles will help us respond to possible changes in a better way, since we would be able to immediately switch roles if nessecary. 
+What is more, this flexible way of assigning roles will help us respond to possible changes in a better way, since we would be able to immediately switch roles if nessecary.  
 
 ## Communication and organisation 
 ![Members image]({{site.baseurl}}/images/communication.png "Our members profile")
 
-We consist of people who met in the context of this course, therefore we don't know each other well yet. As a result communication will be one of the first challenges we will face. We have taken some very first steps towards solving this problem (or we plan to take them sure).
+We consist of people who met in the context of this course, therefore we don't know each other well yet. As a result communication will be one of the first challenges we will face. We have taken some very first steps towards solving this problem (or at least we plan to take them).
 
 * We will make use of technologies such online instant messaging, and teamviewer to help each other.
 
@@ -59,7 +58,7 @@ We consist of people who met in the context of this course, therefore we don't k
 
 * Github for organising the whole project.
 
-* Use some principles of Scrum in order to have an organised and flexible schedule, apply them through Zenhub 
+* Use some principles of Scrum in order to have an organised and flexible schedule, apply them through Zenhub.
 
 
 ... and of course hanging out for beers.
