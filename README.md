@@ -13,3 +13,5 @@ The additional challenge is to manage cooperate and cordinate our team through a
 Here you will find our development Blog, we will frequently update it with posts about our development process, and our experiences.
 So stay tuned with us for more updates.
 
+https://dbse-teaching.github.io/isee2018-Codefathers/
+
