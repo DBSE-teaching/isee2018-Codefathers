@@ -110,17 +110,17 @@ What is more some of the user stories are a bit generic, and will perhaps break 
 ## Bonus Section: The App Logo!!!
 While we were not able to present any estimation about the time it will take, we did create the the official app logo (and the name)!.
 
-![logo]({{site.baseurl}}images/requirements/logo.png "logo")
+![logo]({{site.baseurl}}/images/requirements/logo.png "logo")
 
 At first we were considering names like "GoHome!" which definitely sounded more "offensive" than what we wanted and the triangular "warning"-type logo didn't help at all. We completely droped this name, but we kept the alert part of the logo, so Tripalert was born.
 
-![Logo ideas]({{site.baseurl}}images/requirements/logosIdeas.jpg "logo2")
+![Logo ideas]({{site.baseurl}}/images/requirements/logosIdeas.jpg "logo2")
 
 
 What is more the triangular logo did not look good at all not only combined with the typefont, but as well as in an application slot at an actual smartphone that we tested it.  That's why we went to an old and classical circular shape that fits in every occasion, while keeping the simple design and the bright yellow and dark gray combination which created a great contrast and made the design to stand out!
 
 Of course those were not the only logos we considered so here are some alternatives.
-![Logo ideas]({{site.baseurl}}images/requirements/logosIdeas2.jpg "logo3")
+![Logo ideas]({{site.baseurl}}/images/requirements/logosIdeas2.jpg "logo3")
 
 
 And that was all for now, the roads continues, and we are getting closer and closer to the implementation phase.
