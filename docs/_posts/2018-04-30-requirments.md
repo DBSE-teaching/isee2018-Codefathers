@@ -12,7 +12,7 @@ Hello once again! By the time this post is beeing written we have already in our
 
 As logic (...and Agile/Scrum ) commands, in order to learn more about the project we had to meet with our client and discuss it. This is a terrifying thought for begginer software engineers like us. It is not uncommon for a developer to imagine his client (or employeer) as his personal enemy that want to make his life unbearable with his endless requirements that most of the time conflict each other, or they are impossible to implement. So being developers as well, we pictured the first meeting somewhat like this:
 
-![Round 1]({{site.baseurl}}/images/requirements/artboard2.png "requirement analysis: Round one, Fight!")
+![Round 1]({{site.baseurl}}/images/requirements/Artboard2.png "requirement analysis: Round one, Fight!")
 
 In the end the client proved himself somebody that knows what he wants, and we were able to extract most of the requirements by letting him  freely explain how he pictured the application, after that we asked him general questions based on what he described trying to maintain an order. Since we are 4 members, hence 4 minds thinking at the same time (parallel proccessing?) we were able to ask questions that we might not have thought individually, and at the same time we kept notes. 
 
@@ -60,7 +60,7 @@ Those are the most user stories that can be analysed more perhaps.
 We had our user stories, we had our questions ready, and armed with those we entered the meeting room for the next meeting where we should validate if we got everything right. This is the point that one may wondered if everything that he did would rejected, and so were we. Perhaps this is how we imagined that this meeting whould go: 
 
 
-![Round 2]({{site.baseurl}}/images/requirements/artboard4.png "requirement analysis: Round two, Fight!")
+![Round 2]({{site.baseurl}}/images/requirements/Artboard4.png "requirement analysis: Round two, Fight!")
 
 
 
