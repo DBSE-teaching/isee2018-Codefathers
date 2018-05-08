@@ -36,7 +36,7 @@ if I am too late or stop for too long or continue it by recalculating the arriva
 
  **to be able to create trackings**
 
-*  to insert destination, because my trip needs to end and begin somewhere.
+* to insert destination, because my trip needs to end and begin somewhere.
 * to select contacts from the contact list as followers so that they can be notified 
 * I need to allow or disallow the option to share my location on emergency notifications
 * I need to estimate my arrival time
