@@ -1,6 +1,7 @@
+---
 layout: post
 title: "Project requirements"
-date: 2018-04-17
+date: 2018-04-30
 ---
 ## The journey continues...
 ![Steps image]({{site.baseurl}}/images/requirments/first.jpg "Steps towards the first stable release")
