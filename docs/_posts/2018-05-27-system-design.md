@@ -13,7 +13,7 @@ We are down to, almost, the last phase before we start the actual implemetation,
 Firstly we will look through how the application will  behave in one certain scenario. 
 
 The case scenario is as follows: The publisher is creating a tracking by filling the corresponding form and choosing his followers and then publish it. After that the tracking details along with the follower list that are actively following the publisher right now. 
-The publisher doesn't arrive in his destination on time, that is why a a prompt will appear in the publisher's screen so that he can chose if he wants to abort the opeation and explain with a message the reason or continue and recalculate. The publisher does not respond and therefore the follower will be notified tha user is unresponsive. We can see this behaviour in the following diagrams 
+The publisher doesn't arrive in his destination on time, that is why a a prompt will appear in the publisher's screen so that he can chose if he wants to abort the opeation and explain with a message the reason or continue and recalculate. The publisher does not respond and therefore the follower will be notified tha user is ugit nresponsive. We can see this behaviour in the following diagrams 
 
 ![Sequence Diagram]({{site.baseurl}}/images/systemDesign/sequence-d.jpg " ")
 
@@ -22,7 +22,7 @@ The publisher doesn't arrive in his destination on time, that is why a a prompt 
 # Classes and patterns
 We specified some first drafts of  Interfaces, abstract classes and concrete classes that are going to be  "hopefully" used in our design. We tried to specify them in a way so that we can easily make our code readable and as extensible as possible. But as all things in life, those specifications might change when we get into the implementation part.
 
-![class Diagram]({{site.baseurl}}/images/systemDesign/class-d.png " ")
+![class Diagram]({{site.baseurl}}/images/systemDesign/class-d.jpg " ")
 
 Let's look trhough some of the basic classes: 
 
