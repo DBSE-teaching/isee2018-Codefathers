@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#FFD600</color>
+    <color name="colorTrackingCreation">#4DD0E1</color>
+    <color name="colorBackGround">#eceff1</color>
+    <color name="colorCardBackGround">#fffff</color>
+    <color name="colorDestructiveAction">#000000</color>
+    <color name="colorNextAction">#009688</color>
+    <color name="colorConfirmAction">#c49900</color>
+    <color name="colorEmergency">#FF6433</color>
+    <color name="colorDelayPauseNotResponding">#FFB74B</color>
+    <color name="colorEverythingFine">#B0BEC5</color>
+    <color name="colorTextOnWhite">#263238</color>
+    <color name="colorTextOnBlack">#EEEEEE</color>
+
+
+
 </resources>
