@@ -12,10 +12,20 @@
         <activity android:name=".HomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- parentActivity name is only used above api 17 but should be fine i guess -->
+        <activity
+            android:name=".About"
+            android:label="About"
+            android:parentActivityName=".HomeScreen"
+            />
+        <activity
+            android:name=".Settings"
+            android:label="Settings"
+            android:parentActivityName=".HomeScreen"
+            > </activity>
     </application>
 
 </manifest>

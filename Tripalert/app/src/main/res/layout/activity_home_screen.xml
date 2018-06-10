@@ -8,14 +8,14 @@
     tools:context=".HomeScreen">
 
     <TextView
-        android:layout_width="180dp"
-        android:layout_height="103dp"
+        android:layout_width="147dp"
+        android:layout_height="69dp"
         android:text="Hello Kurwa!"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
