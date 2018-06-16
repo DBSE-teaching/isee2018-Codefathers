@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeScreen">
+        <activity
+            android:name=".HomeScreen"
+            android:theme="@style/Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -20,12 +23,12 @@
             android:name=".About"
             android:label="About"
             android:parentActivityName=".HomeScreen"
-            />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Settings"
             android:label="Settings"
-            android:parentActivityName=".HomeScreen"
-            > </activity>
+            android:parentActivityName=".HomeScreen"></activity>
+        <activity android:name=".SelectContacts" android:label="@string/addContacts"></activity>
     </application>
 
 </manifest>

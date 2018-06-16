@@ -2,4 +2,12 @@
     <string name="app_name">Tripalert</string>
     <string name="settings"> Settings</string>
     <string name="about"> About </string>
+    <string name="myTrackings"> My Tracking </string>
+    <string name="followed"> Followed Trackings</string>
+    <string name="newTracking">Create</string>
+    <string name="noTrackingMsg">Oops seems you haven\'t start a tracking </string>
+    <string name="noFollowedTracking"> Seems nobody selected you to a follower \.\.\. yet</string>
+    <string name="addContacts"> Select Followers </string>
+    <string name="addLocations"> Specify Details </string>
+    <string name="VerifyTracking"> Verify Tracking </string>
 </resources>
