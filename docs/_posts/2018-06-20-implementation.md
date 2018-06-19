@@ -4,7 +4,7 @@ title: "Implementation"
 date: 2018-06-19
 ---
 
-![Steps image]({{site.baseurl}}/images/implementation/intro.png "Steps towards the first stable release")
+![Steps image]({{site.baseurl}}/images/implementation/intro.jpg "Steps towards the first stable release")
  
 There has been quite some time since the last blog post, at this time we have started the implementation, and that means code. We have created the ui, at least in theory and now we are in the proccess of making come true 
 
