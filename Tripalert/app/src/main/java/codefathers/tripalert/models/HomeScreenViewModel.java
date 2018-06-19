@@ -11,6 +11,7 @@ import codefathers.tripalert.database.AppDatabase;
 import codefathers.tripalert.database.TrackingModel;
 
 public class HomeScreenViewModel extends AndroidViewModel {
+
     private final LiveData<List<TrackingModel>> followedTrackings;
     private final LiveData<List<TrackingModel>> createdTracking;
     private AppDatabase appDatabase;

@@ -1,5 +1,6 @@
 package codefathers.tripalert;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,8 +11,9 @@ import static android.app.PendingIntent.getActivity;
 
 public class PagerAdapter extends FragmentPagerAdapter {
 
-    int numOfTabs;
-    public PagerAdapter(FragmentManager fm, int numOfTabs) {
+    private int  numOfTabs;
+
+    public PagerAdapter(FragmentManager fm , int numOfTabs) {
         super(fm);
         this.numOfTabs = numOfTabs;
     }

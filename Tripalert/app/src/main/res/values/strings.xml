@@ -9,5 +9,13 @@
     <string name="noFollowedTracking"> Seems nobody selected you to a follower \.\.\. yet</string>
     <string name="addContacts"> Select Followers </string>
     <string name="addLocations"> Specify Details </string>
-    <string name="VerifyTracking"> Verify Tracking </string>
+    <string name="verifyTracking"> Verify Tracking </string>
+    <string name= "sharedLocationPref"> Emergency location sharing</string>
+    <string name= "sharedLocationDesc"> Share location with followers in case the emergency button is pressed </string>
+    <string name= "gpsRefreshRatePref"> Gps refresh rate (Minutes) </string>
+    <string name= "gpsRefreshRatePrefDesc"> How often the application will check for your location to determine status of tracking</string>
+    <string name= "reachDestinationPref"> Destination reached area (Meters) </string>
+    <string name= "reachDestinationPrefDesc"> How many meters should be the radius of the area around the destination that when reached the tracking is considered finished</string>
+    <string name= "delayedNotificationPref"> Delay notification (Minutes) </string>
+    <string name= "delayedNotificationPrefDesc"> How many minutes after the passing of the estimated time the tracking is considered delayed</string>
 </resources>

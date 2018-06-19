@@ -1,23 +1,65 @@
 package codefathers.tripalert.database;
-
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+/**
+ * This class is used to provide the structure of the corresponding
+ * table inside the SQLite db. We also have annotated with @Entity
+ */
 @Entity
 public class TrackingModel {
+
+    /**
+     * id will be used as the primary key of the TrackingModel
+     * table in sqlite, and as identifier;
+     */
     @PrimaryKey(autoGenerate = true)
     public int id;
-    // we will ignore for the moment the fact that this is no fucking way in 3NF or equivalent
+    /**
+     * the address of the destination
+     */
     private String destinationName;
+
+    /**
+     * the starting point address name
+     */
     private String startingPoint;
-    private  String destinationCords;
+
+    /**
+     * the coordinates of the the destination  encoded as "long;lang"
+     */
+    private String destinationCords;
+
+    /**
+     * the coordinates of the the starting point encoded as "long;lang"
+     */
     private String startingPointCords;
-    private int estimatedTime;
-    private int status;
-    private Boolean isCreated;
+
+    /**
+     * the phone number that each tracking is ascociated to
+     */
     private String phoneNumber;
 
-    public  TrackingModel(String destinationCords, String destinationName, String startingPointCords, String startingPoint, int status, int estimatedTime, String phoneNumber)
+    /**
+     * the time that the user exepcts a trip to last. The time
+     * is in minutes.
+     */
+    private int estimatedTime;
+
+    /** the status of the current tracking. We use here the specified
+     * code of each status.
+     */
+    private int status;         //todo: see if its possible to do this in enum.
+
+    /**
+     * if the tracking is created or t
+     */
+    private Boolean isCreated;
+
+
+    public  TrackingModel(String destinationCords, String destinationName,
+                          String startingPointCords, String startingPoint,
+                          int status, int estimatedTime, String phoneNumber)
     {
         this.destinationCords = destinationCords;
         this.destinationName = destinationName;
@@ -50,5 +92,9 @@ public class TrackingModel {
 
     public int getStatus() {
         return status;
+    }
+
+    public String getDestinationCords() {
+        return destinationCords;
     }
 }

@@ -19,7 +19,6 @@
             android:layout_marginRight="28dp"
             android:layout_marginTop="28dp"
             android:text="@string/noFollowedTracking"
-            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>

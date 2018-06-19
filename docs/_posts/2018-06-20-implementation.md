@@ -1,64 +1,66 @@
 ---
 layout: post
-title: "System Design"
-date: 2018-05-27
+title: "Implementation"
+date: 2018-06-19
 ---
 
-![Steps image]({{site.baseurl}}/images/systemDesign/intro2.png "Steps towards the first stable release")
+![Steps image]({{site.baseurl}}/images/implementation/intro.png "Steps towards the first stable release")
  
-We are down to, almost, the last phase before we start the actual implemetation, that means we got some diagrams to write about today along with some other things. 
+There has been quite some time since the last blog post, at this time we have started the implementation, and that means code. We have created the ui, at least in theory and now we are in the proccess of making come true 
+
+# However, how we should write code?  
+It is important to realize that writing in code as part of a team requires quite some cooperation and to agree on some standards. Therefore we decided to adopt the naming standards of Javasoft. 
+
+Naming is very important, because code is being read more times than it is written, therefore it is meant to be easy to read and to understand. Therefore we use descriptive names in the variables and our functions, a sample code fragment from one of our class is the bellow, we put much care for our variable to make sense and be easy to read.
+
+![cose]({{site.baseurl}}/images/implementation/2.jpg " ")
+ 
+# Who will be using our application.
+
+Besides the coding part, in order to design the application's UI we had to go into a small search regarding who will be using the application. We came up with 2 main categories, and we mainily going to present why the application might be important from their point of view.
+
+*Students and young people*
+
+![2]({{site.baseurl}}/images/implementation/3.jpg " ")
+
+Students may be leaving away of their parents, they are also not very eager to get phone calls all the time about where they are, therefore an application like tripalert might help them keeping their close persons from being worried. 
+
+*Parents*
+
+![3]({{site.baseurl}}/images/implementation/4.jpg " ")
+
+As it is might be infered from the previous persona the other one will be parents. 
+
+parents tend to care a lot about their children leading them to making continuous calls that are annoying most of the time. Therefore Tripalert will help them beeing updated about the safety of their kid whithout bothering it with phone calls at times that they shouldn't. 
+
+# Design
+
+We have mocked up all of the screens that may pop up or appear in the application, but we would like to focus on some specific user stories:
+
+![3]({{site.baseurl}}/images/implementation/5.jpg " ")
+
+As it is obvious in the design we took into consideration the fact that a publisher might be a follower at the same time. So we splitted the main home screen into two tabs that the user could swip from one to another. In the "my tracking" tab if there is no tracking right now, a button is displaying to prompt the user to create one. 
+
+After this the user is taken through some steps in order to create the tracking. It is important to notice we choose another color for those screens in order to differiate them. Also in case of the user press cancel the operation is cancelled. Because its destructive action the button is in black. 
+
+Lastly the user is taken back to the main screen where he can see his tracking.
+
+![3]({{site.baseurl}}/images/implementation/6.jpg " ")
+
+Here a user takes over the follower's role and wants to see the statuses of his followed trackings, which lie in the second tab of the homescreen. 
+
+It is important to notice that the trackings are highlighted differently, and this is because they are in a different status. For example grey is used for a tracking that is in an "ongoing" status, red for "emergency" and yellow for "not responding" or "delayed" status. 
+
+The user can easily click into a tracking and inspect its situtation log with some more details.
+
+Lastly if there is a change into the status a notification is going to be displayed inside the action bar.
+
+# Changes that happened.
+
+Actually we have redefined quite a lot parts of the application, the most important is the one on the classes. We decided we need to store somewhere the trackings so we want to implement a MVVC pattern using the library Room to handle SQLlite, the library LiveData and android's ViewModel architecture pattern. Since we are currently working on that, we do not have something to present, but this will definetely happen in the next blog post.
 
 
-# Behaviour  
-Firstly we will look through how the application will  behave in one certain scenario. 
 
-The case scenario is as follows: The publisher is creating a tracking by filling the corresponding form and choosing his followers and then publish it. After that the tracking details along with the follower list that are actively following the publisher right now. 
-The publisher doesn't arrive in his destination on time, that is why a a prompt will appear in the publisher's screen so that he can chose if he wants to abort the opeation and explain with a message the reason or continue and recalculate. The publisher does not respond and therefore the follower will be notified tha user is ugit nresponsive. We can see this behaviour in the following diagrams 
 
-![Sequence Diagram]({{site.baseurl}}/images/systemDesign/sequence-d.jpg " ")
 
-![state Diagram]({{site.baseurl}}/images/systemDesign/state-d.png " ")
 
-# Classes and patterns
-We specified some first drafts of  Interfaces, abstract classes and concrete classes that are going to be  "hopefully" used in our design. We tried to specify them in a way so that we can easily make our code readable and as extensible as possible. But as all things in life, those specifications might change when we get into the implementation part.
-
-![class Diagram]({{site.baseurl}}/images/systemDesign/class-d.jpg " ")
-
-Let's look trhough some of the basic classes: 
-
-* Observable: This is abstract class which follows the observer pattern. The is the class which other classes(IObservers) need to monitor.
-
-* The ObserverImpl implements the interface (IObserver).
-Subject class is an Observable with additional features. This include setting up the track and maintaining relationship with other necessary classes.
-
-* StatusList: This is an enumeration created to hold all possible status of the subject.
-
-* StatusSelector: This is a service class which is responsible for methods logic that triggers change of status in the Subject class.
-
-* IMessage: Interface which is responsible for all messaging service. This enhances the ability to modify our message types and channels
-
-As can somebody see through the class diagram we used the observer design pattern. This will prove extremely usefull since it is ideal for event driven application like ours.
-
-The Observer pattern is used in this design and we have named our classes according to this pattern.
-
-# How do we plan to work
-
-With the Implementation phase finally on the horizon, we have to make some plans on how we will start developing. 
-
-firstly, decide to devote a small 2-3 sprint for creating a very simple application by following the git workflow and try to cooperate through that. This may seem not unimportant but it will definetely help us to avoid some mistakes during the development of the actuall application.
-
- After that, we are going to start tackling our product backlog. Therefore we plan an one week, or even less, sprint and hopefully try to implement the basic functionality of the app such us tracking creation, and have look a bit into the notification system. 
-
-From this point we will revaluate what we have done and create more sprints accordingly.
-
-Finally we have already make a mockup of the application ui that the client approved and we will try to follow it as close as possible
-
-# No key revisions... only dreams
-
-We can proudly claim that there weren't any changes. We are still confident that with the current structure we will be able to implement the requirements and the objectives that we have already specified. 
-
-Let's hope that our confidence is well based and there will be no suprises. 
-
-*[Spoiler alert]* from our experience, this is just a developer's utopian dream, and utopian dreams are called like this for one reason: they are never fulfilled 
-
-![ Diagram]({{site.baseurl}}/images/systemDesign/diagrams.png " ")

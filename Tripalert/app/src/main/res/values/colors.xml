@@ -11,7 +11,7 @@
     <color name="colorDelayPauseNotResponding">#FFB74B</color>
     <color name="colorEverythingFine">#B0BEC5</color>
     <color name="colorTextOnWhite">#263238</color>
-    <color name="colorTextOnBlack">#EEEEEE</color>
+    <color name="colorTextOnBlack">#eeeeee</color>
     <color name="primary_material_light">#ffc107</color>
     <color name="accent_material_light">#009688</color>
     <color name="colorTextOnWhiteTrans">#c8263238</color>

@@ -20,22 +20,21 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="136dp"
             android:layout_marginRight="136dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="64dp"
             android:background="@color/colorTrackingCreation"
             android:text="@string/newTracking"
-            android:textColor="@color/colorTextOnWhite"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="314dp"
-            android:layout_height="89dp"
-            android:layout_marginBottom="28dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginStart="56dp"
             android:text="@string/noTrackingMsg"
-            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/newTrackingBtn"
             app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>

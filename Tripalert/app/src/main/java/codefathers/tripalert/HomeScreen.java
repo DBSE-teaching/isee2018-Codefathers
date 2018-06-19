@@ -19,31 +19,10 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         goToSettings();
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabLayout);
-        tabLayout.addTab( tabLayout.newTab().setText(R.string.myTrackings));
-        tabLayout.addTab( tabLayout.newTab().setText(R.string.followed));
-        System.out.print("will this work?");
-        final ViewPager viewPager = (ViewPager)findViewById(R.id.viewPager);
-        final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
+        makeTabs();
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                System.out.print("tab selected");
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
+
     private void goToSettings(){
         Button settingsBtn = (Button) findViewById(R.id.settingsBtn);
         settingsBtn.setOnClickListener(new View.OnClickListener() {
@@ -56,14 +35,22 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
     }
 
     private void makeTabs(){
-        //i have no idea how this works :P but lets hope it does.
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabLayout);
+        tabLayout.addTab( tabLayout.newTab().setText(R.string.myTrackings));
+        tabLayout.addTab( tabLayout.newTab().setText(R.string.followed));
         final ViewPager viewPager = (ViewPager)findViewById(R.id.viewPager);
         final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        // the follows sets the naem of the tabs that the addTab failed to do before for some reason;
+        tabLayout.getTabAt(0).setText(getResources().getText(R.string.myTrackings));
+        tabLayout.getTabAt(1).setText(getResources().getText(R.string.followed));
+
+
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -83,31 +70,4 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
 
     }
 
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //replace the bar with the title with the main menu
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
-        return true;
-    }
-
-    @Override
-   public boolean onOptionsItemSelected(MenuItem item) {
-        //actions for menu
-        switch (item.getItemId()){
-            case R.id.settingsMenu:
-                //this is how we change from one screen to another)
-                Intent intent1 = new Intent(this,Settings.class);
-                this.startActivity(intent1);
-                return  true;
-            case R.id.aboutMenu:
-                Intent intent2 = new Intent(this,About.class);
-                this.startActivity(intent2);
-                return  true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    */
 }
