@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "636579396052",
+    "firebase_url": "https://tripalert-18e7f.firebaseio.com",
+    "project_id": "tripalert-18e7f",
+    "storage_bucket": "tripalert-18e7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636579396052:android:e85cc7be50932b34",
+        "android_client_info": {
+          "package_name": "codefathers.isee.com.tripalert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636579396052-9mtjds3bh66e1bm3f8ar7djoi4be3r93.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "codefathers.isee.com.tripalert",
+            "certificate_hash": "8ecccdf438f01db2459c21cd848f03ab0ae6ef2d"
+          }
+        },
+        {
+          "client_id": "636579396052-osathh9i5loitjqjrqs4okbip4vtg43h.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "636579396052-osathh9i5loitjqjrqs4okbip4vtg43h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArRd9f4lfEkDgrbDWAMru3ZxtTHuoMK2A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636579396052-osathh9i5loitjqjrqs4okbip4vtg43h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

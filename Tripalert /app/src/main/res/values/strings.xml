@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Tripalert</string>
+    <string name="channel_one">homeSafe</string>
+    <string name="channel_one_description">This indicate the track ends successfully</string>
+    <string name="notification_text">Tracking setup succeed. Be safe! Just tap if you need to cancel</string>
+    <string name="transport_id" translatable="false">123egal</string>
+    <string name="firebase_path" translatable="false">locations</string>
+    <string name="firebase_email" translatable="false">stevxl@gmail.com</string>
+    <string name="firebase_password" translatable="false">ISEEcodefathers</string>
+    <array name="topics">
+        <item>Topic 1</item>
+        <item>Topic 2</item>
+    </array>
+</resources>

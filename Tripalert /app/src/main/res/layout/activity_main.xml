@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/timeText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Est Time in millisecs"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/emailText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/btnTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sendTimeEst"
+        android:text="EstTime"
+        app:layout_constraintStart_toEndOf="@+id/timeText" />
+
+    <EditText
+        android:id="@+id/longText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Longitude"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/anyText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeText" />
+
+    <EditText
+        android:id="@+id/latText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Latitude"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCoord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/longText" />
+
+    <Button
+        android:id="@+id/btnCoord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sendDestinationSetting"
+        android:text="SendCoord"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/latText" />
+
+    <EditText
+        android:id="@+id/anyText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Msg"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSendAny"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCoord" />
+
+    <Button
+        android:id="@+id/btnSendAny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sendText"
+        android:text="SendMsg"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anyText" />
+
+
+    <Button
+        android:id="@+id/btnTrack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:onClick="setupTracking"
+        android:text="Create Track"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>
