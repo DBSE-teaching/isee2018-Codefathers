@@ -1,15 +1,26 @@
 package codefathers.tripalert;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import codefathers.tripalert.database.TrackingModel;
+import codefathers.tripalert.models.HomeScreenViewModel;
 
 
 /**
@@ -29,6 +40,11 @@ public class MyTracking extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ConstraintLayout notCreatedLayout;
+    private LinearLayout createdLayout;
+
+
+    private HomeScreenViewModel viewModel;
 
     private OnFragmentInteractionListener mListener;
 
@@ -48,8 +64,6 @@ public class MyTracking extends Fragment {
     public static MyTracking newInstance(String param1, String param2) {
         MyTracking fragment = new MyTracking();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,7 +74,31 @@ public class MyTracking extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewModel =  ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
+        viewModel.getCreatedTracking().observe(this, new Observer<TrackingModel>() {
+            @Override
+            public void onChanged(@Nullable TrackingModel trackingModel) {
+                TextView txt =  (TextView) getView().findViewById(R.id.currStart);
+                TextView txt2 =  (TextView) getView().findViewById(R.id.currDestination);
+                TextView txt3 =  (TextView) getView().findViewById(R.id.currStartedAt);
+                TextView txt4 =  (TextView) getView().findViewById(R.id.currEstimated);
+                txt.setText(trackingModel.getStartingPoint());
+                txt2.setText(trackingModel.getDestinationName());
+                txt4.setText(String.valueOf(trackingModel.getEstimatedTime()));
+                txt3.setText("dunno");
+
+                createdLayout.setVisibility(View.VISIBLE);
+                notCreatedLayout.setVisibility(View.INVISIBLE);
+            }
+        });
 
     }
 
@@ -69,7 +107,8 @@ public class MyTracking extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_my_tracking, container, false);
-
+        this.createdLayout = (LinearLayout) v.findViewById(R.id.created) ;
+        this.notCreatedLayout = (ConstraintLayout) v.findViewById(R.id.notCreated) ;
         Button settingsBtn = (Button) v.findViewById(R.id.newTrackingBtn);
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,13 +117,6 @@ public class MyTracking extends Fragment {
             }
         });
         return v;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override

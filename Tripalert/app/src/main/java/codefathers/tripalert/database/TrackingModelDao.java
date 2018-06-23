@@ -18,15 +18,20 @@ public interface TrackingModelDao {
     LiveData<List<TrackingModel>> getFollowedTrackings();
 
     @Query("select * from TrackingModel where isCreated = 1")
-    LiveData<List<TrackingModel>> getCreatedTracking();
+    LiveData<TrackingModel> getCreatedTracking();
 
     @Query("select * from TrackingModel where id = :id")
-    TrackingModel getItemByID(int id);
+    LiveData<TrackingModel> getItemByID(int id);
 
     @Insert(onConflict = REPLACE)
     void addTracking(TrackingModel trackingModel);
-
+    @Insert
+    void insertAll(TrackingModel... trackingModels);
     @Delete
     void deleteTracking(TrackingModel trackingModel);
+
+    @Query("Delete from TrackingModel")
+    void deleteAll();
+
 
 }

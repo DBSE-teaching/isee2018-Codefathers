@@ -7,9 +7,9 @@
     <color name="colorDestructiveAction">#000000</color>
     <color name="colorNextAction">#4dd0e1</color>
     <color name="colorConfirmAction">#c49900</color>
-    <color name="colorEmergency">#FF6433</color>
+    <color name="colorEmergency">#ff6433</color>
     <color name="colorDelayPauseNotResponding">#FFB74B</color>
-    <color name="colorEverythingFine">#B0BEC5</color>
+    <color name="colorEverythingFine">#b0bec5</color>
     <color name="colorTextOnWhite">#263238</color>
     <color name="colorTextOnBlack">#eeeeee</color>
     <color name="primary_material_light">#ffc107</color>

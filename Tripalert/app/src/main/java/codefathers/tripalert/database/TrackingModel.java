@@ -59,7 +59,7 @@ public class TrackingModel {
 
     public  TrackingModel(String destinationCords, String destinationName,
                           String startingPointCords, String startingPoint,
-                          int status, int estimatedTime, String phoneNumber)
+                          int status, int estimatedTime, String phoneNumber, Boolean isCreated )
     {
         this.destinationCords = destinationCords;
         this.destinationName = destinationName;
@@ -67,7 +67,7 @@ public class TrackingModel {
         this.startingPoint = startingPoint;
         this.estimatedTime = estimatedTime;
         this.status = status;
-        this.isCreated = false;
+        this.isCreated = isCreated;
         this.phoneNumber = phoneNumber;
     }
     public String getDestinationName() {
@@ -96,5 +96,17 @@ public class TrackingModel {
 
     public String getDestinationCords() {
         return destinationCords;
+    }
+
+    public static TrackingModel[] populateData(){
+        return new TrackingModel[]{
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6943227389", true ),
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6979738129", false ),
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6979738231", false )
+        };
+    }
+
+    public Boolean getCreated() {
+        return isCreated;
     }
 }

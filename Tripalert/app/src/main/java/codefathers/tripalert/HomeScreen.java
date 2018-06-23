@@ -1,5 +1,6 @@
 package codefathers.tripalert;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
@@ -12,12 +13,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragmentInteractionListener, FollowedTrackings.OnFragmentInteractionListener{
+import codefathers.tripalert.models.HomeScreenViewModel;
 
+public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragmentInteractionListener, FollowedTrackings.OnFragmentInteractionListener{
+    public HomeScreenViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        viewModel = ViewModelProviders.of(this).get(HomeScreenViewModel.class);
         goToSettings();
         makeTabs();
 

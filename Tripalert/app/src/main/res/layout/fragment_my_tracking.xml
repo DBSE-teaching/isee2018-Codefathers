@@ -11,6 +11,7 @@
 
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/notCreated"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -37,5 +38,178 @@
             android:text="@string/noTrackingMsg"
             app:layout_constraintBottom_toTopOf="@+id/newTrackingBtn"
             app:layout_constraintStart_toStartOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/created"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="243dp">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="fill"
+                android:padding="8dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="29dp"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/labelTo"
+                        android:layout_width="143dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginTop="0dp"
+                        android:text="@string/currTrackingDestination"
+                        android:textColor="@color/colorTextOnWhite"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/LabelFrom"
+                        android:layout_width="146dp"
+                        android:layout_height="19dp"
+                        android:layout_margin="0dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/currTrackingStart"
+                        android:textColor="@color/colorTextOnWhite"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/currDestination"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:layout_marginEnd="100dp"
+                        android:layout_marginRight="100dp"
+                        android:layout_marginTop="8dp"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                    <TextView
+                        android:id="@+id/currStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="TextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/LabelFrom" />
+                </TableRow>
+
+            </TableLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="fill"
+                android:padding="8dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/labelEstimated"
+                        android:layout_width="143dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/EstimatedTime"
+                        android:textColor="@color/colorTextOnWhite"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/labelAt"
+                        android:layout_width="146dp"
+                        android:layout_height="19dp"
+                        android:layout_margin="0dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/currTrackingTimeStarted"
+                        android:textColor="@color/colorTextOnWhite"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/currStartedAt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="TextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/LabelFrom" />
+
+                    <TextView
+                        android:id="@+id/currEstimated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:layout_marginEnd="68dp"
+                        android:layout_marginRight="68dp"
+                        android:layout_marginTop="16dp"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                </TableRow>
+
+            </TableLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="238dp"
+            android:layout_margin="8dp" />
+
+    </LinearLayout>
+
 </FrameLayout>

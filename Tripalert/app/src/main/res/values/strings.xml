@@ -18,4 +18,10 @@
     <string name= "reachDestinationPrefDesc"> How many meters should be the radius of the area around the destination that when reached the tracking is considered finished</string>
     <string name= "delayedNotificationPref"> Delay notification (Minutes) </string>
     <string name= "delayedNotificationPrefDesc"> How many minutes after the passing of the estimated time the tracking is considered delayed</string>
+    <string name= "currTrackingStart"> From </string>
+    <string name= "currTrackingDestination"> To </string>
+    <string name= "currTrackingTimeStarted"> Started At </string>
+    <string name= "EstimatedTime"> Estimated Duration </string>
+    <string name= "currTrackingFollowers"> Followers </string>
+    <string name= "unfollow"> Unfollow </string>
 </resources>
