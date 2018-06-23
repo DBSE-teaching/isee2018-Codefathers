@@ -32,8 +32,17 @@ public class MainActivity extends AppCompatActivity {
         Button mButton = (Button) findViewById(R.id.btnCoord);
         final EditText mLongitude = (EditText) findViewById(R.id.longText);
         final EditText mLatitude = (EditText) findViewById(R.id.latText);
-        Log.d("Dest Longitude", mLongitude.getText().toString());
-        Log.d("Dest Latitude", mLatitude.getText().toString());
+
+        DataStoreService mDataStoreService = new DataStoreService();
+        Double lati = Double.parseDouble(mLatitude.getText().toString());
+        Double longi = Double.parseDouble(mLongitude.getText().toString());
+
+        Log.d("Dest Longitude", longi.toString());
+        Log.d("Dest Latitude", lati.toString());
+
+        GpsCoordinates gps = new GpsCoordinates(longi.toString(),lati.toString());
+        AppUser appUser = new AppUser("alab23");
+        mDataStoreService.dbWrite(gps, appUser);
     }
     public void sendTimeEst(View view) {
         //Intent intent = new Intent(this, GpsTrackActivity.class);
