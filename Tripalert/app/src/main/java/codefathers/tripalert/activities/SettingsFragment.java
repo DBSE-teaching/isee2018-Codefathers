@@ -1,7 +1,9 @@
-package codefathers.tripalert;
+package codefathers.tripalert.activities;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+
+import codefathers.tripalert.R;
 
 public class SettingsFragment extends PreferenceFragment {
     @Override

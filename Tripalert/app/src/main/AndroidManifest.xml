@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".HomeScreen"
+            android:name=".activities.HomeScreen"
             android:theme="@style/Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,15 +20,15 @@
         </activity>
         <!-- parentActivity name is only used above api 17 but should be fine i guess -->
         <activity
-            android:name=".About"
+            android:name=".activities.About"
             android:label="About"
-            android:parentActivityName=".HomeScreen"
+            android:parentActivityName=".activities.HomeScreen"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Settings"
+            android:name=".activities.Settings"
             android:label="Settings"
-            android:parentActivityName=".HomeScreen"></activity>
-        <activity android:name=".SelectContacts" android:label="@string/addContacts"></activity>
+            android:parentActivityName=".activities.HomeScreen"></activity>
+        <activity android:name=".activities.SelectContacts" android:label="@string/addContacts"></activity>
     </application>
 
 </manifest>

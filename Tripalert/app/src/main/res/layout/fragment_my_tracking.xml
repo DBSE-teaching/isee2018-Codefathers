@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackGround"
-    tools:context=".MyTracking">
+    tools:context=".activities.MyTracking">
 
     <!-- TODO: Update blank fragment layout -->
 

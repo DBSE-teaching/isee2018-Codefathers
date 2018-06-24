@@ -1,11 +1,11 @@
-package codefathers.tripalert;
+package codefathers.tripalert.adapters;
 
-import android.content.Context;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.widget.Toast;
+
+import codefathers.tripalert.activities.FollowedTrackings;
+import codefathers.tripalert.activities.MyTracking;
 
 import static android.app.PendingIntent.getActivity;
 
