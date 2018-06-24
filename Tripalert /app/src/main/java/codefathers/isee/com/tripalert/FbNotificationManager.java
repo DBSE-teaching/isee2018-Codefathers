@@ -33,10 +33,6 @@ public class FbNotificationManager {
                         .setSmallIcon(R.drawable.ic_tracker)
                         .setContentTitle(title)
                         .setContentText(body);
-
-
-
-
         Intent resultIntent = new Intent(mCtx, MainActivity.class);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(mCtx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);

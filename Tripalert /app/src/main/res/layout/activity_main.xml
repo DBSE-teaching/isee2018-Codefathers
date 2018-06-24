@@ -10,13 +10,14 @@
         android:id="@+id/timeText"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Est Time in millisecs"
+        android:hint="estTime"
+        android:inputType="time"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/emailText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnTime"
@@ -25,6 +26,21 @@
         android:onClick="sendTimeEst"
         android:text="EstTime"
         app:layout_constraintStart_toEndOf="@+id/timeText" />
+
+
+    <TextView
+        android:id="@+id/dispText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="Display"
+        android:inputType="number|numberSigned|numberDecimal"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/longText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
     <EditText
         android:id="@+id/longText"
@@ -80,7 +96,7 @@
         android:id="@+id/btnSendAny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="sendText"
+        android:onClick="sendMessage"
         android:text="SendMsg"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
     public void setupTracking(View view) {
         Intent intent = new Intent(this, GpsTrackActivity.class);
         //EditText editText = (EditText) findViewById(R.id.editText);
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     public void sendDestinationSetting(View view) {
         //Intent intent = new Intent(this, GpsTrackActivity.class);
         Button mButton = (Button) findViewById(R.id.btnCoord);
@@ -46,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Dest Longitude", longi.toString());
         Log.d("Dest Latitude", lati.toString());
 
-        GpsCoordinates gps = new GpsCoordinates(longi.toString(),lati.toString());
+        GpsCoordinates gps = new GpsCoordinates(longi.toString(), lati.toString());
         AppUser appUser = new AppUser("alab23");
         mDataStoreService.dbWrite(gps, appUser);
     }
+
     public void sendTimeEst(View view) {
         //Intent intent = new Intent(this, GpsTrackActivity.class);
         Button mButton = (Button) findViewById(R.id.btnTime);
@@ -59,15 +63,47 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendText(View view) {
         //Intent intent = new Intent(this, GpsTrackActivity.class);
-         final EditText anyText = (EditText) findViewById(R.id.anyText);
-         String dText = anyText.getText().toString();
+        final EditText anyText = (EditText) findViewById(R.id.anyText);
+        String dText = anyText.getText().toString();
         Log.d("Message here", anyText.getText().toString());
         DataStoreService mDataStoreService = new DataStoreService();
-        GpsCoordinates gps = new GpsCoordinates("999longiz","777lat");
+        GpsCoordinates gps = new GpsCoordinates("999longiz", "777lat");
         AppUser appUser = new AppUser("alab23");
         mDataStoreService.dbWrite(gps, appUser);
     }
 
+    public void sendMessageDD(View view) {
 
+         EditText editMessage = (EditText) findViewById(R.id.anyText);
+         TextView textView = (TextView) findViewById(R.id.dispText);
+
+        //get text from edittext and convert it to string
+        String messageString = editMessage.getText().toString();
+
+        //set string from edittext to textview
+        textView.setText(messageString);
+
+        //clear edittext after sending text to message
+        editMessage.setText("");
+
+
+    }
+
+    public void sendMessage(View view) {
+
+        EditText editMessage = (EditText) findViewById(R.id.anyText);
+        TextView textView = (TextView) findViewById(R.id.dispText);
+
+        DataStoreService mDataStoreService = new DataStoreService();
+
+        mDataStoreService.writeMessageDb(editMessage, textView);
+
+        //get text from edittext and convert it to string
+
+    }
+
+    // Database listener
 
 }
+
+
