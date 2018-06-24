@@ -1,5 +1,6 @@
 package codefathers.isee.com.tripalert;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,12 +19,75 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import codefathers.isee.com.tripalert.Model.AppUser;
 import codefathers.isee.com.tripalert.Model.GpsCoordinates;
 
+import static android.content.Intent.EXTRA_TEXT;
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void sendNotification(View view) {
+        final String TITLE = "codefathers.isee.com.tripalert.extra.TITLE";
+        final String BODY = "codefathers.isee.com.tripalert.extra.BODY";
+
+        EditText editText = (EditText) findViewById(R.id.timeText);
+        String message = editText.getText().toString();
+
+        String textMessage = message+"ups gooooooood";
+        Intent sendIntent = new Intent(this, NotificationService.class);
+        sendIntent.setAction(Intent.ACTION_MAIN);
+        sendIntent.putExtra(EXTRA_TEXT, textMessage);
+        sendIntent.setType("text/plain");
+
+
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        Log.d("Intent nio","about to call inten11");
+
+        startService(sendIntent);
+
+        Context context = getApplicationContext();
+        CharSequence text = "Hello toast hoho!";
+        int duration = Toast.LENGTH_SHORT;
+        Toast.makeText(this, text, duration).show();
+
+    }
+
+
+
+    public void sendToast(View view) {
+
+        EditText editText = (EditText) findViewById(R.id.timeText);
+        Log.d("sendToast", "eof2222 ");
+        String message = editText.getText().toString();
+
+        String title = "gooooooood";
+        String body = "bodycontents";
+
+        Log.d("sendToast", "eof333 ");
+        NotificationService.sendToast(this, title, body);
+
+    }
+
+    public void sendToast2(View view) {
+        //Context context;
+        final String TITLE = "codefathers.isee.com.tripalert.extra.TITLE";
+        final String BODY = "codefathers.isee.com.tripalert.extra.BODY";
+
+        Log.d("sendToast", "eof1111 ");
+
+        EditText editText = (EditText) findViewById(R.id.timeText);
+        Log.d("sendToast", "eof2222 ");
+        String message = editText.getText().toString();
+
+        String textMessage = message+"ups gooooooood";
+
+        Log.d("sendToast", "eof333 ");
+        NotificationService.startActionToast(this, TITLE, BODY);
+
     }
 
     public void setupTracking(View view) {

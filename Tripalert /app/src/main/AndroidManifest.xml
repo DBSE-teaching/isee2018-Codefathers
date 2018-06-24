@@ -36,6 +36,13 @@
             android:name=".DataStoreService"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".NotificationService"
+            android:exported="false" />
+        <service
+            android:name=".NotifService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

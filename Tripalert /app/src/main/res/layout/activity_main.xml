@@ -23,7 +23,7 @@
         android:id="@+id/btnTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="sendTimeEst"
+        android:onClick="sendToast"
         android:text="EstTime"
         app:layout_constraintStart_toEndOf="@+id/timeText" />
 
