@@ -101,8 +101,9 @@ public class TrackingModel {
     public static TrackingModel[] populateData(){
         return new TrackingModel[]{
             new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6943227389", true ),
-            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6979738129", false ),
-            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6979738231", false )
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",3 ,20 , "6979738129", false ),
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6979738231", false ),
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",2 ,20 , "6979735637", false )
         };
     }
 

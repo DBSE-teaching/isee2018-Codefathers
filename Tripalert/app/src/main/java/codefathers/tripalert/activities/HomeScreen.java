@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import codefathers.tripalert.adapters.PagerAdapter;
+import codefathers.tripalert.adapters.HomesPagerAdapter;
 import codefathers.tripalert.R;
 import codefathers.tripalert.models.HomeScreenViewModel;
 
@@ -42,8 +42,8 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         tabLayout.addTab( tabLayout.newTab().setText(R.string.myTrackings));
         tabLayout.addTab( tabLayout.newTab().setText(R.string.followed));
         final ViewPager viewPager = (ViewPager)findViewById(R.id.viewPager);
-        final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
+        final HomesPagerAdapter homesPagerAdapter = new HomesPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        viewPager.setAdapter(homesPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
         // the follows sets the naem of the tabs that the addTab failed to do before for some reason;

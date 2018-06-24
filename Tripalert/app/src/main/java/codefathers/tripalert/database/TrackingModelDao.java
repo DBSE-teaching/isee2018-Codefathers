@@ -14,10 +14,10 @@ public interface TrackingModelDao {
     @Query("select * from TrackingModel")
     LiveData<List<TrackingModel>> getAllTrackings();
 
-    @Query("select * from TrackingModel where isCreated = 0 ")
+    @Query("select * from TrackingModel where  isCreated = 0 ")
     LiveData<List<TrackingModel>> getFollowedTrackings();
 
-    @Query("select * from TrackingModel where isCreated = 1")
+    @Query("select * from TrackingModel where  isCreated = 1")
     LiveData<TrackingModel> getCreatedTracking();
 
     @Query("select * from TrackingModel where id = :id")

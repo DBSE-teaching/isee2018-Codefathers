@@ -26,7 +26,7 @@ public class HomeScreenViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<TrackingModel>> getFollowedTrackings() {
-        followedTrackings = appDatabase.trackingModel().getAllTrackings();
+        followedTrackings = appDatabase.trackingModel().getFollowedTrackings();
         return followedTrackings;
     }
 

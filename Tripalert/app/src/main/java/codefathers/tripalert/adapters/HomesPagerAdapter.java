@@ -9,11 +9,11 @@ import codefathers.tripalert.activities.MyTracking;
 
 import static android.app.PendingIntent.getActivity;
 
-public class PagerAdapter extends FragmentPagerAdapter {
+public class HomesPagerAdapter extends FragmentPagerAdapter {
 
     private int  numOfTabs;
 
-    public PagerAdapter(FragmentManager fm , int numOfTabs) {
+    public HomesPagerAdapter(FragmentManager fm , int numOfTabs) {
         super(fm);
         this.numOfTabs = numOfTabs;
     }

@@ -1,14 +1,26 @@
 package codefathers.tripalert.activities;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import java.util.List;
 
 import codefathers.tripalert.R;
+import codefathers.tripalert.adapters.FollowedTrackingsRecyclerAdapter;
+import codefathers.tripalert.database.TrackingModel;
+import codefathers.tripalert.models.HomeScreenViewModel;
 
 
 /**
@@ -28,6 +40,9 @@ public class FollowedTrackings extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private HomeScreenViewModel viewModel;
+    private ConstraintLayout notFollowingLayout;
+    private LinearLayout followingLayout;
 
     private OnFragmentInteractionListener mListener;
 
@@ -54,6 +69,11 @@ public class FollowedTrackings extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -66,7 +86,26 @@ public class FollowedTrackings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_followed_trackings, container, false);
+        View v = inflater.inflate(R.layout.fragment_followed_trackings, container, false);
+        this.followingLayout = (LinearLayout) v.findViewById(R.id.following);
+        this.notFollowingLayout = (ConstraintLayout) v.findViewById(R.id.notFollowing);
+        RecyclerView recyclerView = v.findViewById(R.id.trackingsRecyclerView);
+        //set up recycler Adapter
+        final FollowedTrackingsRecyclerAdapter adapter = new FollowedTrackingsRecyclerAdapter(getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        viewModel =  ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
+        viewModel.getFollowedTrackings().observe(this, new Observer<List<TrackingModel>>() {
+            @Override
+            public void onChanged(@Nullable List<TrackingModel> trackingModels) {
+                adapter.setTrackings(trackingModels);
+                followingLayout.setVisibility(View.VISIBLE);
+                notFollowingLayout.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        return v;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
