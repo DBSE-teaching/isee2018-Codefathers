@@ -1,6 +1,13 @@
 package codefathers.isee.com.tripalert;
 
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -24,5 +31,7 @@ public class FbMessagingService extends FirebaseMessagingService {
         FbNotificationManager.getInstance(getApplicationContext())
                 .displayNotification(title, body);
 
+
     }
+
 }

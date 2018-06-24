@@ -18,5 +18,8 @@ public class FbInstanceIdService extends FirebaseInstanceIdService {
 
         //new token is only generated when the app is reinstalled or the data is cleared
         Log.d("MyRefreshedToken", token);
+        Log.d("MyRefreshedToken", token);
+        Log.d("MyRefreshedToken", token);
+        Log.d("MyRefreshedToken", token);
     }
 }

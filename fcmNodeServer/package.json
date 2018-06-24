@@ -1,0 +1,15 @@
+{
+  "name": "fcmnodeserver",
+  "version": "1.0.0",
+  "description": "firebase messaging using node server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alaba Ojo",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^5.12.1",
+    "request": "^2.87.0"
+  }
+}
