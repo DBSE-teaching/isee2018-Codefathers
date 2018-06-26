@@ -1,40 +1,40 @@
 package codefathers.isee.com.tripalert;
-        import android.app.NotificationChannel;
-        import android.app.NotificationManager;
-        import android.app.Service;
-        import android.content.Intent;
-        import android.graphics.Color;
-        import android.os.Build;
-        import android.os.IBinder;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.Service;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.IBinder;
 //above 3 are the original import
-        import com.google.android.gms.location.FusedLocationProviderClient;
-        import com.google.android.gms.location.LocationCallback;
-        import com.google.android.gms.location.LocationRequest;
-        import com.google.android.gms.location.LocationResult;
-        import com.google.android.gms.location.LocationServices;
-        import com.google.android.gms.location.LocationSettingsRequest;
-        import com.google.android.gms.location.LocationSettingsResponse;
-        import com.google.android.gms.location.SettingsClient;
-        import com.google.android.gms.tasks.OnCompleteListener;
-        import com.google.android.gms.tasks.Task;
-        import com.google.firebase.auth.AuthResult;
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-        import android.app.PendingIntent;
-        import android.app.Service;
-        import android.content.BroadcastReceiver;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.content.IntentFilter;
-        import android.content.pm.PackageManager;
-        import android.location.Location;
-        import android.Manifest;
-        import android.os.IBinder;
-        import android.support.v4.app.NotificationCompat;
-        import android.support.v4.content.ContextCompat;
-        import android.util.Log;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.Manifest;
+import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 
 public class GpsTrackService extends Service {
@@ -57,7 +57,7 @@ public class GpsTrackService extends Service {
     }
     //create notification channel
     private void createNotificationChannel() {
-           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_one);
             String description = getString(R.string.channel_one_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;

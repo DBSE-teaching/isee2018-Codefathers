@@ -92,9 +92,7 @@ public class NotificationService extends IntentService {
 
 
  private void handleActionNotification(String TITLE, String BODY) {
-        // TODO: Handle action Notification
-       Log.d("action", "handle action toast");
-        throw new UnsupportedOperationException("Not yet implemented");
+
     }
 
     ////simple TOAST

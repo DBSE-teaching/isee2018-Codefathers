@@ -1,7 +1,14 @@
 package codefathers.isee.com.tripalert;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,11 +30,49 @@ import static android.content.Intent.EXTRA_TEXT;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
+    private BoundMsgService boundMsgService;
+    private Boolean isBound = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //set listener to button
+        findViewById(R.id.anyText).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseMessaging.getInstance().subscribeToTopic("topic");
+                //FirebaseMessaging.getInstance().unsubscribeFromTopic(“your_topic”); this to unsubs
+                Toast.makeText(getApplicationContext(), "You just did something: Topic Subscribed", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("MainActivity","onStart called");
+        Intent intent = new Intent(this,BoundMsgService.class);
+        //start service with binding
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        isBound=true;
+    }
+
+    public void sendBroadcast(View view) {
+        EditText editText = (EditText) findViewById(R.id.timeText);
+        String message = editText.getText().toString();
+
+        String textMessage = message+"ups gooooooood";
+        Intent sendIntent = new Intent(this, NotificationService.class);
+        sendIntent.setAction(Intent.ACTION_MAIN);
+        sendIntent.putExtra(EXTRA_TEXT, textMessage);
+        sendIntent.setType("text/plain");
+
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        Log.d("Intent nio","about to call inten11");
+        sendBroadcast(sendIntent);
+
     }
 
     public void sendNotification(View view) {
@@ -166,7 +211,70 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // Database listener
+    ////////BINDING SERvICES
+
+    private boolean mShouldUnbind;
+    String TAG = "MainActivity";
+
+    private static final int PERMISSIONS_REQUEST = 1;
+    /////////////////
+
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            BoundMsgService.MsgBinder binder = (BoundMsgService.MsgBinder)service;
+            boundMsgService = binder.getService();
+            //isBound =True
+            Toast.makeText(MainActivity.this, "main_service_connected",
+                    Toast.LENGTH_SHORT).show();
+        }
+        public void onServiceDisconnected(ComponentName className) {
+            boundMsgService = null;
+            Toast.makeText(MainActivity.this, "R.string.local_service_disconnected",
+                    Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    void doBindService() {
+
+        if (bindService(new Intent(MainActivity.this, FbMessagingService.class),
+                mConnection, Context.BIND_AUTO_CREATE)) {
+            mShouldUnbind = true;
+        } else {
+            Log.e("MY_APP_TAG", "Error: The requested service doesn't " +
+                    "exist, or this client isn't allowed access to it.");
+        }
+    }
+
+    void doUnbindService() {
+        if (mShouldUnbind) {
+            // Release information about the service's state.
+            unbindService(mConnection);
+            mShouldUnbind = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        doUnbindService();
+    }
+
+
+    public void testBroadcast(View v){
+
+        boundMsgService.sendBroadcast(new Intent(MainActivity.this, FbMessagingService.class));
+
+    }
+
+    public void displayTrackingNotice(Context context){
+        Log.d(TAG,"diplay tracking notification");
+        boundMsgService.testBroadcast(context);
+        //sendBroadcast(new Intent(MainActivity.this, BoundMsgService.class));
+
+    }
+
+
 
 }
 

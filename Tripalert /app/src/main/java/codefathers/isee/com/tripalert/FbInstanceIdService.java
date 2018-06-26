@@ -13,13 +13,13 @@ public class FbInstanceIdService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         super.onTokenRefresh();
-
-        String token = FirebaseInstanceId.getInstance().getToken();
-
-        //new token is only generated when the app is reinstalled or the data is cleared
-        Log.d("MyRefreshedToken", token);
-        Log.d("MyRefreshedToken", token);
-        Log.d("MyRefreshedToken", token);
-        Log.d("MyRefreshedToken", token);
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d("MyRefreshedToken", refreshedToken);
+       // PreferenceData.setStringPref(PreferenceData.KEY_GCM_ID,this,refreshedToken);
+        // Save token to database
+     sendRegistrationToServer(refreshedToken);
+    }
+    private void sendRegistrationToServer(String token) {
+        // TODO: Implement this method to send token to your app server.
     }
 }
