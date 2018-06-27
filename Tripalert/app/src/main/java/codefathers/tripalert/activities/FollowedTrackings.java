@@ -19,7 +19,7 @@ import java.util.List;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.adapters.FollowedTrackingsRecyclerAdapter;
-import codefathers.tripalert.models.TrackingModel;
+import codefathers.tripalert.models.Tracking;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
@@ -32,12 +32,10 @@ import codefathers.tripalert.viewModels.HomeScreenViewModel;
  * create an instance of this fragment.
  */
 public class FollowedTrackings extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private HomeScreenViewModel viewModel;
@@ -58,7 +56,6 @@ public class FollowedTrackings extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment FollowedTrackings.
      */
-    // TODO: Rename and change types and number of parameters
     public static FollowedTrackings newInstance(String param1, String param2) {
         FollowedTrackings fragment = new FollowedTrackings();
         Bundle args = new Bundle();
@@ -95,10 +92,10 @@ public class FollowedTrackings extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         viewModel =  ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
-        viewModel.getFollowedTrackings().observe(this, new Observer<List<TrackingModel>>() {
+        viewModel.getFollowedTrackings().observe(this, new Observer<List<Tracking>>() {
             @Override
-            public void onChanged(@Nullable List<TrackingModel> trackingModels) {
-                adapter.setTrackings(trackingModels);
+            public void onChanged(@Nullable List<Tracking> trackings) {
+                adapter.setTrackings(trackings);
                 followingLayout.setVisibility(View.VISIBLE);
                 notFollowingLayout.setVisibility(View.INVISIBLE);
             }
@@ -108,7 +105,6 @@ public class FollowedTrackings extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -143,7 +139,6 @@ public class FollowedTrackings extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

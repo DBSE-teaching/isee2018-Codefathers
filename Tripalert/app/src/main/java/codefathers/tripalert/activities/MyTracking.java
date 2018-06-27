@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import codefathers.tripalert.R;
-import codefathers.tripalert.models.TrackingModel;
+import codefathers.tripalert.models.Tracking;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
@@ -30,12 +30,10 @@ import codefathers.tripalert.viewModels.HomeScreenViewModel;
  * create an instance of this fragment.
  */
 public class MyTracking extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private ConstraintLayout notCreatedLayout;
@@ -58,7 +56,6 @@ public class MyTracking extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment MyTracking.
      */
-    // TODO: Rename and change types and number of parameters
     public static MyTracking newInstance(String param1, String param2) {
         MyTracking fragment = new MyTracking();
         Bundle args = new Bundle();
@@ -81,17 +78,17 @@ public class MyTracking extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel =  ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
-        viewModel.getCreatedTracking().observe(this, new Observer<TrackingModel>() {
+        viewModel.getCreatedTracking().observe(this, new Observer<Tracking>() {
             @Override
-            public void onChanged(@Nullable TrackingModel trackingModel) {
-                if(trackingModel != null ) {
+            public void onChanged(@Nullable Tracking tracking) {
+                if(tracking != null ) {
                     TextView txt = (TextView) getView().findViewById(R.id.currStart);
                     TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
                     TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
                     TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
-                    txt.setText(trackingModel.getStartingPoint());
-                    txt2.setText(trackingModel.getDestinationName());
-                    txt4.setText(String.valueOf(trackingModel.getEstimatedTime()));
+                    txt.setText(tracking.getDestination().getAddress());
+                    txt2.setText(tracking.getStartingPoint().getAddress());
+                    txt4.setText(String.valueOf(tracking.getEstimatedTime()));
                     txt3.setText("dunno");
                     createdLayout.setVisibility(View.VISIBLE);
                     notCreatedLayout.setVisibility(View.INVISIBLE);
@@ -148,7 +145,6 @@ public class MyTracking extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

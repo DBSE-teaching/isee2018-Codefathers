@@ -12,14 +12,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import codefathers.tripalert.models.TrackingModel;
+import codefathers.tripalert.models.Tracking;
 
 import codefathers.tripalert.R;
 
 public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<FollowedTrackingsRecyclerAdapter.ViewHolder> {
     private static final String TAG = "FollowedTrackingsRecycl";
     private LayoutInflater mInflater;           //i have no idea what this is
-    private List<TrackingModel> mTrackings;      //cached copies of trackings
+    private List<Tracking> mTrackings;      //cached copies of trackings
     //the view holder holds the seperate views.
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView phoneNumber;
@@ -50,10 +50,10 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mTrackings != null ){
-            TrackingModel current = mTrackings.get(position);
-            holder.phoneNumber.setText(current.getPhoneNumber());
-            holder.destination.setText(current.getDestinationName());
-            holder.startingPoint.setText(current.getStartingPoint());
+            Tracking current = mTrackings.get(position);
+            holder.phoneNumber.setText(current.getCreator().getPhoneNumber());
+            holder.destination.setText(current.getDestination().getAddress());
+            holder.startingPoint.setText(current.getStartingPoint().getAddress());
             int color =  ContextCompat.getColor(holder.card.getContext(),R.color.colorEverythingFine);;
             switch (current.getStatus()){
                 case 2: color = ContextCompat.getColor(holder.card.getContext(),R.color.colorDelayPauseNotResponding);break;
@@ -66,7 +66,7 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
 
     }
 
-    public void setTrackings(List<TrackingModel> trackings){
+    public void setTrackings(List<Tracking> trackings){
         mTrackings = trackings;
         notifyDataSetChanged();
     }
