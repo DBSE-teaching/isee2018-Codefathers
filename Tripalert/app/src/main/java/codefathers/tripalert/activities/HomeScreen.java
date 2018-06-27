@@ -12,7 +12,7 @@ import android.widget.Button;
 
 import codefathers.tripalert.adapters.HomesPagerAdapter;
 import codefathers.tripalert.R;
-import codefathers.tripalert.models.HomeScreenViewModel;
+import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragmentInteractionListener, FollowedTrackings.OnFragmentInteractionListener{
     public HomeScreenViewModel viewModel;

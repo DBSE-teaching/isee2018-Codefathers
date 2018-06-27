@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import codefathers.tripalert.R;
-import codefathers.tripalert.database.TrackingModel;
-import codefathers.tripalert.models.HomeScreenViewModel;
+import codefathers.tripalert.models.TrackingModel;
+import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
 /**
@@ -84,17 +84,20 @@ public class MyTracking extends Fragment {
         viewModel.getCreatedTracking().observe(this, new Observer<TrackingModel>() {
             @Override
             public void onChanged(@Nullable TrackingModel trackingModel) {
-                TextView txt =  (TextView) getView().findViewById(R.id.currStart);
-                TextView txt2 =  (TextView) getView().findViewById(R.id.currDestination);
-                TextView txt3 =  (TextView) getView().findViewById(R.id.currStartedAt);
-                TextView txt4 =  (TextView) getView().findViewById(R.id.currEstimated);
-                txt.setText(trackingModel.getStartingPoint());
-                txt2.setText(trackingModel.getDestinationName());
-                txt4.setText(String.valueOf(trackingModel.getEstimatedTime()));
-                txt3.setText("dunno");
-
-                createdLayout.setVisibility(View.VISIBLE);
-                notCreatedLayout.setVisibility(View.INVISIBLE);
+                if(trackingModel != null ) {
+                    TextView txt = (TextView) getView().findViewById(R.id.currStart);
+                    TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
+                    TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
+                    TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
+                    txt.setText(trackingModel.getStartingPoint());
+                    txt2.setText(trackingModel.getDestinationName());
+                    txt4.setText(String.valueOf(trackingModel.getEstimatedTime()));
+                    txt3.setText("dunno");
+                    createdLayout.setVisibility(View.VISIBLE);
+                    notCreatedLayout.setVisibility(View.INVISIBLE);
+                }else{
+                    createdLayout.setVisibility(View.INVISIBLE);
+                }
             }
         });
 

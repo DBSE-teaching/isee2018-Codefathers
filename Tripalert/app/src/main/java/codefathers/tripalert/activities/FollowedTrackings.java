@@ -19,8 +19,8 @@ import java.util.List;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.adapters.FollowedTrackingsRecyclerAdapter;
-import codefathers.tripalert.database.TrackingModel;
-import codefathers.tripalert.models.HomeScreenViewModel;
+import codefathers.tripalert.models.TrackingModel;
+import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
 /**

@@ -146,6 +146,19 @@
                     android:layout_marginBottom="8dp">
 
                     <TextView
+                        android:id="@+id/labelAt"
+                        android:layout_width="146dp"
+                        android:layout_height="19dp"
+                        android:layout_margin="0dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/currTrackingTimeStarted"
+                        android:textColor="@color/colorTextOnWhite"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
                         android:id="@+id/labelEstimated"
                         android:layout_width="143dp"
                         android:layout_height="wrap_content"
@@ -158,18 +171,6 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/labelAt"
-                        android:layout_width="146dp"
-                        android:layout_height="19dp"
-                        android:layout_margin="0dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/currTrackingTimeStarted"
-                        android:textColor="@color/colorTextOnWhite"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
                 </TableRow>
 
                 <TableRow

@@ -1,7 +1,5 @@
 package codefathers.tripalert.adapters;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -10,13 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
-import codefathers.tripalert.database.TrackingModel;
+import codefathers.tripalert.models.TrackingModel;
 
 import codefathers.tripalert.R;
 

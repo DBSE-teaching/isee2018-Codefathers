@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="codefathers.tripalert">
 
+    <!-- todo: change the allowBackup when finished -->
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -27,8 +28,20 @@
         <activity
             android:name=".activities.Settings"
             android:label="Settings"
-            android:parentActivityName=".activities.HomeScreen"></activity>
-        <activity android:name=".activities.SelectContacts" android:label="@string/addContacts"></activity>
+            android:parentActivityName=".activities.HomeScreen" />
+        <activity
+            android:name=".activities.SelectContacts"
+            android:label="@string/addContacts"
+            android:theme="@style/Steps" />
+        <activity
+            android:name=".activities.SpecifyDetails"
+            android:label="Specify Tracking Details"
+            android:theme="@style/Steps" />
+        <activity
+            android:name=".activities.ConfirmTracking"
+            android:theme="@style/Steps"
+            android:label="Confirm Tracking"
+            />
     </application>
 
 </manifest>

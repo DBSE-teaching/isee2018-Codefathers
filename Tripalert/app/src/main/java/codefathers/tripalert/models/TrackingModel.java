@@ -1,4 +1,4 @@
-package codefathers.tripalert.database;
+package codefathers.tripalert.models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -56,10 +56,13 @@ public class TrackingModel {
      */
     private Boolean isCreated;
 
+    private Boolean isPublished;
+
 
     public  TrackingModel(String destinationCords, String destinationName,
                           String startingPointCords, String startingPoint,
-                          int status, int estimatedTime, String phoneNumber, Boolean isCreated )
+                          int status, int estimatedTime, String phoneNumber,
+                          Boolean isCreated, Boolean isPublished )
     {
         this.destinationCords = destinationCords;
         this.destinationName = destinationName;
@@ -69,6 +72,7 @@ public class TrackingModel {
         this.status = status;
         this.isCreated = isCreated;
         this.phoneNumber = phoneNumber;
+        this.isPublished = false;
     }
     public String getDestinationName() {
         return destinationName;
@@ -100,14 +104,25 @@ public class TrackingModel {
 
     public static TrackingModel[] populateData(){
         return new TrackingModel[]{
-            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6943227389", true ),
-            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",3 ,20 , "6979738129", false ),
-            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6979738231", false ),
-            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",2 ,20 , "6979735637", false )
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6943227389", true, true),
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",3 ,20 , "6979738129", false,true  ),
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6979738281", false,true ),
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6979738261", false,true ),
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",1 ,20 , "6979738291", false,true ),
+            new TrackingModel("0000:0000","To Somewhere","0000:0000", "From Somewhere ",2 ,20 , "6979735637", false,true  ),
+
         };
     }
 
     public Boolean getCreated() {
         return isCreated;
+    }
+
+    public Boolean getPublished() {
+        return isPublished;
+    }
+
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 }
