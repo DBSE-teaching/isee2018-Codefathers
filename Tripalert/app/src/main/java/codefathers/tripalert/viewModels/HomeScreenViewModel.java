@@ -1,4 +1,4 @@
-package codefathers.tripalert.models;
+package codefathers.tripalert.viewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -14,24 +14,28 @@ public class HomeScreenViewModel extends AndroidViewModel {
 
     private LiveData<List<TrackingModel>> followedTrackings;
     private LiveData<TrackingModel> createdTracking;
-    private AppDatabase appDatabase;
+   // private AppDatabase appDatabase; //todo: change this to firebase repo :P
 
     public HomeScreenViewModel(@NonNull Application application) {
         super(application);
-        this.appDatabase = AppDatabase.getDatabase(this.getApplication());
+        //this.appDatabase = AppDatabase.getDatabase(this.getApplication());
+        //todo: create the referenece to the firebase repository there
     }
 
     public void deleteTracking(TrackingModel trackingModel){
-        appDatabase.trackingModel().deleteTracking(trackingModel);
+        //appDatabase.trackingModel().deleteTracking(trackingModel);
     }
 
     public LiveData<List<TrackingModel>> getFollowedTrackings() {
-        followedTrackings = appDatabase.trackingModel().getFollowedTrackings();
+       // followedTrackings = appDatabase.trackingModel().getFollowedTrackings();
+
         return followedTrackings;
     }
 
     public LiveData<TrackingModel> getCreatedTracking() {
-        createdTracking = appDatabase.trackingModel().getCreatedTracking();
+      //  createdTracking = appDatabase.trackingModel().getCreatedTracking();
         return createdTracking;
     }
+
+
 }
