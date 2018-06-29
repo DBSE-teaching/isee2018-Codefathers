@@ -17,6 +17,7 @@ import codefathers.tripalert.models.User;
 public class SelectContacts extends AppCompatActivity implements NextStepActivity{
 
     private Tracking tracking;
+    private List<User> followers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,4 +54,9 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
     public void saveData() {
 
     }
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
+    }
+
 }

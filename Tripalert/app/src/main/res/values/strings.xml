@@ -27,4 +27,7 @@
     <string name="next"> Next </string>
     <string name="cancel"> Cancel </string>
     <string name="confirm"> Confirm </string>
+    <string name="cannotProcceedDetails"> Make sure you fill out all details</string>
+    <string name="cannotProcceedGoBack"> You cant go back, press cancel to go to the home screen </string>
+    <string name="cannotProcceedFollowers"> Please select some contacts as followers. </string>
 </resources>
