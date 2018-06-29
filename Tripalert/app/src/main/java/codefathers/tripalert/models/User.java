@@ -1,8 +1,9 @@
 package codefathers.tripalert.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable{
     /**
      * phone number of the user. Important to cross check with a user's
      * contacts

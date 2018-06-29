@@ -21,6 +21,7 @@ import codefathers.tripalert.models.Tracking;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -30,48 +31,22 @@ import codefathers.tripalert.viewModels.HomeScreenViewModel;
  * create an instance of this fragment.
  */
 public class MyTracking extends Fragment {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
     private ConstraintLayout notCreatedLayout;
     private LinearLayout createdLayout;
-
-
     private HomeScreenViewModel viewModel;
-
     private OnFragmentInteractionListener mListener;
-
     public MyTracking() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyTracking.
-     */
-    public static MyTracking newInstance(String param1, String param2) {
+    public static MyTracking newInstance() {
         MyTracking fragment = new MyTracking();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
-        }
-
     }
 
     @Override
@@ -81,20 +56,17 @@ public class MyTracking extends Fragment {
         viewModel.getCreatedTracking().observe(this, new Observer<Tracking>() {
             @Override
             public void onChanged(@Nullable Tracking tracking) {
-                if(tracking != null ) {
-                    TextView txt = (TextView) getView().findViewById(R.id.currStart);
-                    TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
-                    TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
-                    TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
-                    txt.setText(tracking.getDestination().getAddress());
-                    txt2.setText(tracking.getStartingPoint().getAddress());
-                    txt4.setText(String.valueOf(tracking.getEstimatedTime()));
-                    txt3.setText("dunno");
-                    createdLayout.setVisibility(View.VISIBLE);
-                    notCreatedLayout.setVisibility(View.INVISIBLE);
-                }else{
-                    createdLayout.setVisibility(View.INVISIBLE);
-                }
+
+                TextView txt = (TextView) getView().findViewById(R.id.currStart);
+                TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
+                TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
+                TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
+                txt.setText(tracking.getDestination().getAddress());
+                txt2.setText(tracking.getStartingPoint().getAddress());
+                txt4.setText(String.valueOf(tracking.getEstimatedTime()));
+                txt3.setText("dunno");
+                createdLayout.setVisibility(View.VISIBLE);
+                notCreatedLayout.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -104,14 +76,14 @@ public class MyTracking extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_my_tracking, container, false);
+        View v =  inflater.inflate(R.layout.fragment_my_tracking, container,    false);
         this.createdLayout = (LinearLayout) v.findViewById(R.id.created) ;
         this.notCreatedLayout = (ConstraintLayout) v.findViewById(R.id.notCreated) ;
         Button settingsBtn = (Button) v.findViewById(R.id.newTrackingBtn);
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), SelectContacts.class));
+                startActivity(new Intent(getActivity(), SpecifyDetails.class));
             }
         });
         return v;

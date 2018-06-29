@@ -1,12 +1,14 @@
 package codefathers.tripalert.models;
 
-public class Location
+import java.io.Serializable;
+
+public class Location implements Serializable
 {
     private String address;
     private String lang;
     private String lat;
 
-    Location(String lang, String lat){
+    public Location(String lang, String lat){
         this.lang = lang;
         this.lat = lat;
     }

@@ -95,6 +95,7 @@ public class FollowedTrackings extends Fragment {
         viewModel.getFollowedTrackings().observe(this, new Observer<List<Tracking>>() {
             @Override
             public void onChanged(@Nullable List<Tracking> trackings) {
+
                 adapter.setTrackings(trackings);
                 followingLayout.setVisibility(View.VISIBLE);
                 notFollowingLayout.setVisibility(View.INVISIBLE);

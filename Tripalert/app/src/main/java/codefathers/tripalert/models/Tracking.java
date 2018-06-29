@@ -1,12 +1,13 @@
 package codefathers.tripalert.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * This class is used to provide the structure of the corresponding
  * table inside the SQLite db. We also have annotated with @Entity
  */
-public class Tracking {
+public class Tracking implements Serializable{
 
     /**
      * id will be used as the primary key of the Tracking
@@ -74,6 +75,15 @@ public class Tracking {
 
     public Location getDestination() {
         return destination;
+    }
+
+    public List<LogItem> getSituationLog() {
+        return situationLog;
+    }
+
+    public void setSituationLog(List<LogItem> situationLog) {
+        this.situationLog = situationLog;
+        
     }
 }
 
