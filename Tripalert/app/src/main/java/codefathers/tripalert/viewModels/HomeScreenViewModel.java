@@ -8,11 +8,10 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
+import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.models.Location;
 import codefathers.tripalert.models.Tracking;
-import codefathers.tripalert.models.User;
 
 public class HomeScreenViewModel extends AndroidViewModel {
 
@@ -55,13 +54,13 @@ public class HomeScreenViewModel extends AndroidViewModel {
         Location tempDest = new Location("0000","00000");
         tempDest.setAddress(" Destination Address Street");
         List<Tracking> list = new ArrayList<Tracking>();
-        Tracking tracking = new Tracking(tempStart,tempDest,0,25,new User("694633453","maraki<3","maraki@fraoulitsa.gr"));
+        Tracking tracking = new Tracking(tempStart,tempDest,0,25,new AppUser("694633453","maraki<3","maraki@fraoulitsa.gr"));
         list.add(tracking);
         list.add(
-                new Tracking(tempStart,tempDest,2,25,new User("694633453","maraki<3","maraki@fraoulitsa.gr"))
+                new Tracking(tempStart,tempDest,2,25,new AppUser("694633453","maraki<3","maraki@fraoulitsa.gr"))
         );
         list.add(
-                new Tracking(tempStart,tempDest,3,25,new User("694633453","maraki<3","maraki@fraoulitsa.gr"))
+                new Tracking(tempStart,tempDest,3,25,new AppUser("694633453","maraki<3","maraki@fraoulitsa.gr"))
         );
 
         followedTrackings.setValue(list);

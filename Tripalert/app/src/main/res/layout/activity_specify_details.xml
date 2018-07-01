@@ -35,7 +35,7 @@
                 android:layout_width="317dp"
                 android:layout_height="match_parent"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="text" />
 
         </TableRow>
 
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 tools:layout_editor_absoluteY="46dp" />
 
         </TableRow>
@@ -86,7 +86,7 @@
                 app:srcCompat="@drawable/ic_access_time_black_24dp" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/estTime"
                 android:layout_width="24dp"
                 android:layout_height="wrap_content"
                 android:ems="10"

@@ -1,7 +1,11 @@
 package codefathers.tripalert.models;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.util.Date;
 
+
+@IgnoreExtraProperties
 public class LogItem {
     /**
      * the status that logItem belongs

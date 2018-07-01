@@ -61,8 +61,8 @@ public class MyTracking extends Fragment {
                 TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
                 TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
                 TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
-                txt.setText(tracking.getDestination().getAddress());
-                txt2.setText(tracking.getStartingPoint().getAddress());
+                txt.setText("TO DO");
+                txt2.setText("TO DO");
                 txt4.setText(String.valueOf(tracking.getEstimatedTime()));
                 txt3.setText("dunno");
                 createdLayout.setVisibility(View.VISIBLE);

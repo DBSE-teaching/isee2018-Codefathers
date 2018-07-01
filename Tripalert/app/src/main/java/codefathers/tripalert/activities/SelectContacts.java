@@ -4,20 +4,20 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.interfaces.NextStepActivity;
+import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.models.Tracking;
-import codefathers.tripalert.models.User;
+import codefathers.tripalert.services.DatabaseService;
 
 public class SelectContacts extends AppCompatActivity implements NextStepActivity{
 
     private Tracking tracking;
-    private List<User> followers;
+    private List<AppUser> followers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +28,12 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
     public void onNext(View v) {
 
         Intent intent = new Intent(SelectContacts.this,ConfirmTracking.class);
-        List <User> userList = new ArrayList<User>();
-        userList.add(new User("6948231245","Mitsaros","mitsos@gmail.com"));
-        userList.add(new User("6948261245","Mitsaros3","mitso2s@gmail.com"));
+        getData();
+        List <AppUser> appUserList = new ArrayList<AppUser>();
+        appUserList.add(new AppUser("6948231245","Mitsaros","mitsos@gmail.com"));
+        appUserList.add(new AppUser("6948261245","Mitsaros3","mitso2s@gmail.com"));
         Bundle bundle = new Bundle();
-        tracking.getCreator().setFollowers(userList);
+        tracking.getCreator().setFollowers(appUserList);
         bundle.putSerializable("tracking",tracking);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -55,8 +56,15 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
 
     }
 
-    public void setFollowers(List<User> followers) {
+    public void setFollowers(List<AppUser> followers) {
         this.followers = followers;
+    }
+
+    public void gtData(View v) {
+        DatabaseService databaseService = new DatabaseService();
+        databaseService.readTracksFromDb();
+        databaseService.readUsersFromDb();
+
     }
 
 }
