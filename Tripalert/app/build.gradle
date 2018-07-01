@@ -67,4 +67,6 @@ dependencies {
     // optional - Test helpers for LiveData
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
     implementation 'com.android.support:cardview-v7:27.1.1'
+
+    implementation 'com.google.android.gms:play-services-places:15.0.1'
 }
