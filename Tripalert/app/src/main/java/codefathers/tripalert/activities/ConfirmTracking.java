@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.interfaces.NextStepActivity;
@@ -15,7 +16,6 @@ public class ConfirmTracking extends AppCompatActivity implements NextStepActivi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_tracking);
-        tracking = (Tracking)getIntent().getSerializableExtra("tracking");
     }
 
     @Override
@@ -26,14 +26,21 @@ public class ConfirmTracking extends AppCompatActivity implements NextStepActivi
     }
 
     @Override
-    public void onCancel(View v) {
+    public void onBackPressed()
+    {
+        String msg = getString(R.string.cannotProcceedGoBack);
+        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
+    @Override
+    public void onCancel(View v) {
         startActivity(new Intent(ConfirmTracking.this, HomeScreen.class ));
     }
 
     @Override
     public void getData() {
-
+        tracking = (Tracking)getIntent().getSerializableExtra("tracking");
     }
 
     @Override

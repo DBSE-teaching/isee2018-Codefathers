@@ -39,9 +39,8 @@
             android:theme="@style/Steps" />
         <activity
             android:name=".activities.ConfirmTracking"
-            android:theme="@style/Steps"
             android:label="Confirm Tracking"
-            />
+            android:theme="@style/Steps" />
     </application>
 
 </manifest>
