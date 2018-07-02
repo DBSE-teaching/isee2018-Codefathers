@@ -79,7 +79,7 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
         if (requestCode == PLACE_PICKER_REQUEST_1) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(this, data);
-                String toastMsg = String.format("Place: %s", place.getName());
+                String toastMsg = String.format("Place: %s", place.getAddress().toString());
                 Toast.makeText(SpecifyDetails.this, toastMsg, Toast.LENGTH_LONG).show();
                 String s = place.getLatLng().toString();
                 String[] latLng = s.substring(10, s.length() - 1).split(",");
@@ -87,13 +87,13 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
                 String LongStartingPoint = latLng[1];
                 setStartingPoint(LongStartingPoint, LatStartingPoint, place.getAddress().toString());
 
-                tv_StartingPoint.setText("Starting Point: " + place.getName());
+                tv_StartingPoint.setText("Starting Point: " + place.getAddress().toString());
             }
         }
         if (requestCode == PLACE_PICKER_REQUEST_2) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(this, data);
-                String toastMsg = String.format("Place: %s", place.getName());
+                String toastMsg = String.format("Place: %s", place.getAddress().toString());
                 Toast.makeText(SpecifyDetails.this, toastMsg, Toast.LENGTH_LONG).show();
 
                 String s = place.getLatLng().toString();
@@ -102,7 +102,7 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
                 String LongDestination = latLng[1];
                 setDestination(LongDestination, LatDestination, place.getAddress().toString());
 
-                tv_Destination.setText("Destination: " + place.getName());
+                tv_Destination.setText("Destination: " + place.getAddress().toString());
             }
         }
     }

@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/tv_Destination"
-        android:layout_width="wrap_content"
+        android:layout_width="329dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
@@ -51,7 +51,7 @@
 
     <TextView
         android:id="@+id/tv_StartingPoint"
-        android:layout_width="wrap_content"
+        android:layout_width="323dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
