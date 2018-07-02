@@ -5,22 +5,14 @@ import java.io.Serializable;
 public class Location implements Serializable
 {
     private String address;
-    private String lang;
-    private String lat;
+    private String Long;
+    private String Lat;
 
-    public Location(String lang, String lat){
-        this.lang = lang;
-        this.lat = lat;
+    public Location(String Long, String Lat){
+        this.Long = Long;
+        this.Lat = Lat;
     }
 
-
-    public String getLang() {
-        return lang;
-    }
-
-    public String getLat() {
-        return lat;
-    }
 
     public String getAddress() {
         return address;
@@ -28,5 +20,13 @@ public class Location implements Serializable
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getLong() {
+        return Long;
+    }
+
+    public String getLat() {
+        return Lat;
     }
 }

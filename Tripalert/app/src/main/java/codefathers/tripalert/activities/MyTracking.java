@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.models.Tracking;
+import codefathers.tripalert.models.User;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
@@ -53,17 +54,16 @@ public class MyTracking extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel =  ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
-        viewModel.getCreatedTracking().observe(this, new Observer<Tracking>() {
+        viewModel.getUser().observe(this, new Observer<User>() {
             @Override
-            public void onChanged(@Nullable Tracking tracking) {
-
+            public void onChanged(@Nullable User user   ) {
                 TextView txt = (TextView) getView().findViewById(R.id.currStart);
                 TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
                 TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
                 TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
-                txt.setText(tracking.getDestination().getAddress());
-                txt2.setText(tracking.getStartingPoint().getAddress());
-                txt4.setText(String.valueOf(tracking.getEstimatedTime()));
+                txt.setText(user.getCreatedTracking().getDestination().getAddress());
+                txt2.setText(user.getCreatedTracking().getStartingPoint().getAddress());
+                txt4.setText(String.valueOf(user.getCreatedTracking().getEstimatedTime()));
                 txt3.setText("dunno");
                 createdLayout.setVisibility(View.VISIBLE);
                 notCreatedLayout.setVisibility(View.INVISIBLE);

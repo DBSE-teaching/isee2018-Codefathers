@@ -17,15 +17,19 @@ import codefathers.tripalert.models.User;
 public class HomeScreenViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Tracking>> followedTrackings;
-    private LiveData<Tracking> createdTracking;
+    private LiveData<User> user;
     //private AppDatabase appDatabase;
     public HomeScreenViewModel(@NonNull Application application) {
         super(application);
+
        // this.appDatabase = AppDatabase.getDatabase(this.getApplication());
     }
 
     public void unfollowTracking (Tracking tracking){
        // appDatabase.tracking().deleteTracking(tracking);
+    }
+    public void abortTracking(){
+
     }
 
     public LiveData<List<Tracking>> getFollowedTrackings() {
@@ -37,18 +41,20 @@ public class HomeScreenViewModel extends AndroidViewModel {
         return followedTrackings;
     }
 
-    public LiveData<Tracking> getCreatedTracking() {
-        if(createdTracking == null ){
-            createdTracking = new MutableLiveData<Tracking>();
-            loadCreatedTracking();
+    public LiveData<User> getUser() {
+        if(user == null ){
+            user = new MutableLiveData<User>();
+            loadUser();
         }
         //createdTracking = appDatabase.trackingModel().getCreatedTracking();
-        return createdTracking;
+        return user;
     }
 
     private void loadFollowedTrackings(){
 
-
+        /**
+         * logic behind firebase
+         */
         Location tempStart = new Location("000","0000");
         tempStart.setAddress(" Location Address Street");
 
@@ -67,7 +73,11 @@ public class HomeScreenViewModel extends AndroidViewModel {
         followedTrackings.setValue(list);
     }
 
-    private void loadCreatedTracking(){
+    private void loadUser(){
+        /**
+         *
+         * logic behind firebase
+         * **/
 
     }
 }

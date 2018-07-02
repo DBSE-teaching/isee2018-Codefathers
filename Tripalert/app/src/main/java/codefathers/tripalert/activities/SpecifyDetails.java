@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +24,10 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
 
     private Location destination = null ;
     private Location startingPoint = null ;
-    private int estimatedTime = 0 ;
+    private String estimatedTime = "" ;
 
     private TextView tv_StartingPoint, tv_Destination;
-    private ImageView iv_StartingPoint, iv_Destination;
+    private Button iv_StartingPoint, iv_Destination;
     private int PLACE_PICKER_REQUEST_1 = 1;
     private int PLACE_PICKER_REQUEST_2 = 2;
 
@@ -37,8 +38,8 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
 
         tv_StartingPoint = (TextView) findViewById(R.id.tv_StartingPoint);
         tv_Destination = (TextView) findViewById(R.id.tv_Destination);
-        iv_StartingPoint = (ImageView) findViewById(R.id.iv_StartingPoint);
-        iv_Destination = (ImageView) findViewById(R.id.iv_Destination);
+        iv_StartingPoint = (Button) findViewById(R.id.iv_StartingPoint);
+        iv_Destination = (Button) findViewById(R.id.iv_Destination);
 
         iv_StartingPoint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +81,6 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
                 Place place = PlacePicker.getPlace(this, data);
                 String toastMsg = String.format("Place: %s", place.getName());
                 Toast.makeText(SpecifyDetails.this, toastMsg, Toast.LENGTH_LONG).show();
-
                 String s = place.getLatLng().toString();
                 String[] latLng = s.substring(10, s.length() - 1).split(",");
                 String LatStartingPoint = latLng[0];
@@ -114,8 +114,10 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
      */
     @Override
     public void onNext(View v) {
+        //set whatever the user has in the field.
+        setEstimatedTime();
         //check if every input is specified
-        if(destination != null && startingPoint != null && estimatedTime == 0 ){
+        if(destination != null && startingPoint != null && !estimatedTime.equals("") && !estimatedTime.equals("0")){
             //create the intent and pass the data.
             Intent intent = new Intent(SpecifyDetails.this, SelectContacts.class);
             intent.putExtras(makeBundle());
@@ -133,7 +135,7 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
      private  Bundle makeBundle(){
          //todo: pass the user object from homescreen.
          User creator = new User("39473957403","mitsaras","mitsos14@hotmail.gr");
-         Tracking temp = new Tracking(startingPoint,destination,0,estimatedTime, creator);
+         Tracking temp = new Tracking(startingPoint,destination,0,Integer.parseInt(estimatedTime), creator);
          Bundle bundle = new Bundle();
          bundle.putSerializable("tracking",temp);
         return bundle;
@@ -152,33 +154,33 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
 
     /**
      * function to call in order to set the destination
-     * @param lang
+     * @param longt
      * @param lat
      * @param address
      */
-    private void setDestination(String lang, String lat, String address){
-        this.destination = new Location(lang, lat);
+    private void setDestination(String longt, String lat, String address){
+        this.destination = new Location(longt, lat);
         this.destination.setAddress(address);
     }
 
     /**
      * function to call in order to set the Starting Point
-     * @param lang
+     * @param longt
      * @param lat
      * @param address
      */
-    private void setStartingPoint(String lang, String lat, String address){
-        this.startingPoint = new Location(lang, lat);
+    private void setStartingPoint(String longt, String lat, String address){
+        this.startingPoint = new Location(longt, lat);
         this.startingPoint.setAddress(address);
     }
 
     /**
      * function to call in order to set the estimated Time
-     * @param minutes
      */
-    private void setEstimatedTime(int minutes){
-        this.estimatedTime = minutes;
-    }
+    private void setEstimatedTime(){
+        EditText string  = (EditText) findViewById(R.id.estimatedTImeField);
+        estimatedTime = string.getText().toString();
+        }
     /**
      * event that handles the on back click event.
      * @param v

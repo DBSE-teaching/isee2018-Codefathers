@@ -6,120 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".activities.SpecifyDetails">
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="660dp"
-        tools:layout_editor_absoluteY="0dp">
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="308dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="16dp"
+        android:text="Estimated Duration"
+        android:textColor="@color/colorTextOnWhite"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/estimatedTImeField"
+        app:layout_constraintStart_toStartOf="@+id/estimatedTImeField" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="308dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="32dp"
+        android:text="Select Starting Point"
+        android:textColor="@color/colorTextOnWhite"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_StartingPoint"
+        app:layout_constraintStart_toStartOf="@+id/iv_StartingPoint" />
 
-        </TableRow>
+    <Button
+        android:id="@+id/iv_Destination"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:text="Select"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp">
+    <TextView
+        android:id="@+id/tv_Destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="No Destination Selected"
+        app:layout_constraintBottom_toTopOf="@+id/iv_Destination"
+        app:layout_constraintStart_toStartOf="@+id/iv_Destination" />
 
-            <ImageView
-                android:id="@+id/iv_StartingPoint"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/ic_gps_fixed_black_24dp" />
+    <TextView
+        android:id="@+id/tv_StartingPoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="No starting point selected"
+        app:layout_constraintBottom_toTopOf="@+id/iv_StartingPoint"
+        app:layout_constraintStart_toStartOf="@+id/iv_StartingPoint" />
 
-            <TextView
-                android:id="@+id/tv_StartingPoint"
-                android:layout_width="317dp"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Starting Point" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp">
-
-            <ImageView
-                android:id="@+id/iv_Destination"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/ic_location_on_black_24dp" />
-
-            <TextView
-                android:id="@+id/tv_Destination"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Destination"
-                tools:layout_editor_absoluteY="46dp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp">
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/ic_access_time_black_24dp" />
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="24dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <EditText
+        android:id="@+id/estimatedTImeField"
+        android:layout_width="216dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/iv_StartingPoint"
+        app:layout_constraintTop_toBottomOf="@+id/iv_StartingPoint" />
 
 
     <Button
@@ -150,4 +98,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@string/next" />
+
+    <Button
+        android:id="@+id/iv_StartingPoint"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Select"
+        app:layout_constraintStart_toStartOf="@+id/iv_Destination"
+        app:layout_constraintTop_toBottomOf="@+id/iv_Destination" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="308dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="36dp"
+        android:text="Select Destination"
+        android:textColor="@color/colorTextOnWhite"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_Destination"
+        app:layout_constraintStart_toStartOf="@+id/iv_Destination" />
 </android.support.constraint.ConstraintLayout>
