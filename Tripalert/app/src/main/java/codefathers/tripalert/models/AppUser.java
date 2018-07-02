@@ -1,14 +1,33 @@
 package codefathers.tripalert.models;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class User implements Serializable{
+
+@IgnoreExtraProperties
+public class AppUser implements Serializable{
+    public AppUser() {
+    }
+
     /**
      * phone number of the user. Important to cross check with a user's
      * contacts
      */
+    private String token;
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     private String phoneNumber;
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     /**
      * user name of the user, todo: specify if we really need this
      */
@@ -21,7 +40,7 @@ public class User implements Serializable{
      * the lists of followers that following his tracking, null
      * if there are no followers.
      */
-    private List<User> followers = null;
+    private List<AppUser> followers = null;
     /**
      * email of google account;
      */
@@ -30,24 +49,29 @@ public class User implements Serializable{
     /**
      * the users that this user following, null if no users
      */
-    private List<User> following = null ;
+    private List<AppUser> following = null ;
 
-    public User(String phoneNumber, String userName, String email){
+    public AppUser(String email, String token) {
+        this.token = token;
+        this.email = email;
+    }
+
+    public AppUser(String phoneNumber, String userName, String email){
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.userName = userName;
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public Tracking getCreatedTracking() {
@@ -58,19 +82,27 @@ public class User implements Serializable{
         this.createdTracking = createdTracking;
     }
 
-    public List<User> getFollowers() {
+    public List<AppUser> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(List<User> followers) {
+    public void setFollowers(List<AppUser> followers) {
         this.followers = followers;
     }
 
-    public List<User> getFollowing() {
+    public List<AppUser> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<User> following) {
+    public void setFollowing(List<AppUser> following) {
         this.following = following;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

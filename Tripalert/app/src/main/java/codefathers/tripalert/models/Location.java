@@ -1,32 +1,49 @@
 package codefathers.tripalert.models;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.io.Serializable;
 
+import javax.annotation.Nullable;
+
+@IgnoreExtraProperties
 public class Location implements Serializable
 {
-    private String address;
-    private String Long;
-    private String Lat;
+    protected String address;
+    protected String lang;
+    protected String lat;
 
-    public Location(String Long, String Lat){
-        this.Long = Long;
-        this.Lat = Lat;
+    public String getLang() {
+        return lang;
     }
 
+    public String getLat() {
+        return lat;
+    }
+
+    public Location() {
+    }
+
+
+
+    public Location(String lang, String lat){
+        this.lang = lang;
+        this.lat = lat;
+    }
 
     public String getAddress() {
         return address;
     }
 
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getLong() {
-        return Long;
-    }
-
-    public String getLat() {
-        return Lat;
     }
 }

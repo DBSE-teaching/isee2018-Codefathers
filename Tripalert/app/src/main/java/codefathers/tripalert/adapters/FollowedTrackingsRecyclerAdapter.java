@@ -51,6 +51,10 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mTrackings != null ){
             Tracking current = mTrackings.get(position);
+            /* holder.phoneNumber.setText(current.getCreator().getPhoneNumber());
+            holder.destination.setText(current.getDestination().getAddress());
+            holder.startingPoint.setText(current.getStartingPoint().getAddress());
+*/
             holder.phoneNumber.setText(current.getCreator().getPhoneNumber());
             holder.destination.setText(current.getDestination().getAddress());
             holder.startingPoint.setText(current.getStartingPoint().getAddress());

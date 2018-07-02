@@ -1,5 +1,7 @@
 package codefathers.tripalert.models;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import java.util.List;
  * This class is used to provide the structure of the corresponding
  * table inside the SQLite db. We also have annotated with @Entity
  */
+@IgnoreExtraProperties
 public class Tracking implements Serializable{
 
     /**
@@ -14,6 +17,35 @@ public class Tracking implements Serializable{
      * todo:do we need a primary key for NoSql?
      */
     public int id;
+
+    public Tracking() {
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setStartingPoint(Location startingPoint) {
+        this.startingPoint = startingPoint;
+    }
+
+    public void setDestination(Location destination) {
+        this.destination = destination;
+    }
+
+    public void setEstimatedTime(int estimatedTime) {
+        this.estimatedTime = estimatedTime;
+    }
+
+    public void setCreator(AppUser creator) {
+        this.creator = creator;
+    }
+
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     /**
      * starting point Location details
      */
@@ -26,7 +58,7 @@ public class Tracking implements Serializable{
     /**
      * holds the data of the creator, like phonenumber etc...
      */
-    private User creator;
+    private AppUser creator;
     /**
      * the time that the user exepcts a trip to last. The time
      * is in minutes.
@@ -45,7 +77,7 @@ public class Tracking implements Serializable{
 
     private List<LogItem> situationLog;
 
-    public Tracking(Location startingPoint, Location destination, int status, int estimatedTime, User creator) {
+    public Tracking(Location startingPoint, Location destination, int status, int estimatedTime, AppUser creator) {
         this.startingPoint = startingPoint;
         this.estimatedTime = estimatedTime;
         this.status = status;
@@ -68,7 +100,7 @@ public class Tracking implements Serializable{
         return status;
     }
 
-    public User getCreator() {
+    public AppUser getCreator() {
         return creator;
     }
 

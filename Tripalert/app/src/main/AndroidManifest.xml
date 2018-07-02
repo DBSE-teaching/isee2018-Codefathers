@@ -2,26 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="codefathers.tripalert">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <!-- todo: change the allowBackup when finished -->
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyArHpPNqowyMiNjeoCFrrPS29T_BmyAEGA"
-            />
-
         <activity
-            android:name=".activities.HomeScreen"
+            android:name=".activities.GoogleLoginActivity"
             android:theme="@style/Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,6 +51,7 @@
             android:name=".activities.ConfirmTracking"
             android:label="Confirm Tracking"
             android:theme="@style/Steps" />
+        <activity android:name=".activities.HomeScreen"></activity>
     </application>
 
 </manifest>

@@ -23,15 +23,18 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_contacts);
+        getData();
     }
     @Override
     public void onNext(View v) {
+
         if(tracking.getCreator().getFollowers() != null){
+
             Intent intent = new Intent(SelectContacts.this,ConfirmTracking.class);
-      /*  List <User> userList = new ArrayList<User>();
-        userList.add(new User("6948231245","Mitsaros","mitsos@gmail.com"));
-        userList.add(new User("6948261245","Mitsaros3","mitso2s@gmail.com"));
-        */
+            List <User> userList = new ArrayList<User>();
+            userList.add(new User("6948231245","Mitsaros","mitsos@gmail.com"));
+            userList.add(new User("6948261245","Mitsaros3","mitso2s@gmail.com"));
+            setFollowers(userList);
             intent.putExtras(getBundle());
             startActivity(intent);
         }else{
@@ -73,7 +76,13 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
 
     public void setFollowers(List<User> followers) {
         this.followers = followers;
-        this.tracking.getCreator().setFollowers(followers);
+    }
+
+    public void gtData(View v) {
+        DatabaseService databaseService = new DatabaseService();
+        databaseService.readTracksFromDb();
+        databaseService.readUsersFromDb();
+
     }
 
 }
