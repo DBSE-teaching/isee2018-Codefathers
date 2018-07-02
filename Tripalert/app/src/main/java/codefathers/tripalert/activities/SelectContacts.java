@@ -13,12 +13,13 @@ import java.util.List;
 import codefathers.tripalert.R;
 import codefathers.tripalert.interfaces.NextStepActivity;
 import codefathers.tripalert.models.Tracking;
-import codefathers.tripalert.models.User;
+import codefathers.tripalert.models.AppUser;
+import codefathers.tripalert.services.DatabaseService;
 
 public class SelectContacts extends AppCompatActivity implements NextStepActivity{
 
     private Tracking tracking;
-    private List<User> followers = null;
+    private List<AppUser> followers = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +32,9 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
         if(tracking.getCreator().getFollowers() != null){
 
             Intent intent = new Intent(SelectContacts.this,ConfirmTracking.class);
-            List <User> userList = new ArrayList<User>();
-            userList.add(new User("6948231245","Mitsaros","mitsos@gmail.com"));
-            userList.add(new User("6948261245","Mitsaros3","mitso2s@gmail.com"));
+            List <AppUser> userList = new ArrayList<AppUser>();
+            userList.add(new AppUser("6948231245","Mitsaros","mitsos@gmail.com"));
+            userList.add(new AppUser("6948261245","Mitsaros3","mitso2s@gmail.com"));
             setFollowers(userList);
             intent.putExtras(getBundle());
             startActivity(intent);
@@ -74,7 +75,7 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
         toast.show();
     }
 
-    public void setFollowers(List<User> followers) {
+    public void setFollowers(List<AppUser> followers) {
         this.followers = followers;
     }
 

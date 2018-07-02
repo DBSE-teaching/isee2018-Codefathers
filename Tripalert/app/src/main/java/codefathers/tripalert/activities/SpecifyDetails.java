@@ -18,7 +18,7 @@ import codefathers.tripalert.R;
 import codefathers.tripalert.interfaces.NextStepActivity;
 import codefathers.tripalert.models.Location;
 import codefathers.tripalert.models.Tracking;
-import codefathers.tripalert.models.User;
+import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.services.DatabaseService;
 
 public class SpecifyDetails extends AppCompatActivity implements NextStepActivity{
@@ -117,7 +117,7 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
      */
     @Override
     public void onNext(View v) {
-        //set whatever the user has in the field.
+        //set whatever the AppUser has in the field.
         setEstimatedTime();
         //check if every input is specified
         if(destination != null && startingPoint != null && !estimatedTime.equals("") && !estimatedTime.equals("0")){
@@ -136,8 +136,8 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
     }
 
      private  Bundle makeBundle(){
-         //todo: pass the user object from homescreen.
-         User creator = new User("39473957403","mitsaras","mitsos14@hotmail.gr");
+         //todo: pass the AppUser object from homescreen.
+         AppUser creator = new AppUser("39473957403","mitsaras","mitsos14@hotmail.gr");
          Tracking temp = new Tracking(startingPoint,destination,0,Integer.parseInt(estimatedTime), creator);
          Bundle bundle = new Bundle();
          bundle.putSerializable("tracking",temp);

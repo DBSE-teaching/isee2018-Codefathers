@@ -159,7 +159,7 @@ public class GoogleLoginActivity extends AppCompatActivity implements
                     Thread.currentThread().interrupt();
                 }
                 //MUST DO: REMOVE THE THREAD SLEEP
-                Intent nextAct = new Intent(this,SpecifyDetails.class);
+                Intent nextAct = new Intent(this,HomeScreen.class);
                 startActivity(nextAct);
             } else {
                 Log.d(TAG,"onActivityResult: failed");

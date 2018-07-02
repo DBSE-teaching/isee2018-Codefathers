@@ -20,6 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyArHpPNqowyMiNjeoCFrrPS29T_BmyAEGA"
+            />
         <activity
             android:name=".activities.GoogleLoginActivity"
             android:theme="@style/Light.NoActionBar">
@@ -51,7 +55,9 @@
             android:name=".activities.ConfirmTracking"
             android:label="Confirm Tracking"
             android:theme="@style/Steps" />
-        <activity android:name=".activities.HomeScreen"></activity>
+        <activity android:name=".activities.HomeScreen"
+            android:theme="@style/Light.NoActionBar"
+            ></activity>
     </application>
 
 </manifest>
