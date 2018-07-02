@@ -196,30 +196,22 @@ public class DatabaseService extends Service {
     }
 
 public void readUsersFromDb(){
-    Map<String,Object> userList = new HashMap<>();
-        dbRef = FirebaseDatabase.getInstance().getReference("users");
+    dbRef = FirebaseDatabase.getInstance().getReference("users");
     Query userQuery = dbRef
             .limitToFirst(100);
     // My top posts by number of stars
     userQuery.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-               for (DataSnapshot uSnapshot: dataSnapshot.getChildren()) {
-                   Object item = uSnapshot.getValue();
-                   String key = uSnapshot.getKey();
-                   userList.put(key, item);
-                   AppUser user = uSnapshot.getValue(AppUser.class);
-                   Log.d(TAG, "DATA<<<<loading");
-                   Log.d(TAG, user.getEmail());
-                   Log.d(TAG, user.getToken());
+            for (DataSnapshot uSnapshot: dataSnapshot.getChildren()) {
+                AppUser user = uSnapshot.getValue(AppUser.class);
+                int i=0; i= 1+i;
+                Log.d(TAG, i + "DATA<<<<loading");
 
-               }
-
-            for (Map.Entry<String, Object> entry : userList.entrySet()) {
-                System.out.println("Item : " + entry.getKey() + " Count : " + entry.getValue());
+                Log.d(TAG, user.getEmail());
+                Log.d(TAG, user.getToken());
             }
-
-               }
+        }
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
