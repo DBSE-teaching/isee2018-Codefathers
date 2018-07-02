@@ -50,7 +50,6 @@ public class DatabaseService extends Service {
     public void writeTracking(Tracking tracking) {
         Log.d(TAG,"db write tracking");
 
-
         dbRef = FirebaseDatabase.getInstance().getReference("tracks");
         String trackId = dbRef.push().getKey();
         dbRef.child(trackId).setValue(tracking);
