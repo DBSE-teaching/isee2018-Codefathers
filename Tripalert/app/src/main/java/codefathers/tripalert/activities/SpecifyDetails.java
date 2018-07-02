@@ -4,7 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.interfaces.NextStepActivity;
@@ -18,12 +25,88 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
     private Location startingPoint = null ;
     private int estimatedTime = 0 ;
 
+    private TextView tv_StartingPoint, tv_Destination;
+    private ImageView iv_StartingPoint, iv_Destination;
+    private int PLACE_PICKER_REQUEST_1 = 1;
+    private int PLACE_PICKER_REQUEST_2 = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specify_details);
 
+        tv_StartingPoint = (TextView) findViewById(R.id.tv_StartingPoint);
+        tv_Destination = (TextView) findViewById(R.id.tv_Destination);
+        iv_StartingPoint = (ImageView) findViewById(R.id.iv_StartingPoint);
+        iv_Destination = (ImageView) findViewById(R.id.iv_Destination);
+
+        iv_StartingPoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                try {
+                    startActivityForResult(builder.build(SpecifyDetails.this), PLACE_PICKER_REQUEST_1);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        iv_Destination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                try {
+                    startActivityForResult(builder.build(SpecifyDetails.this), PLACE_PICKER_REQUEST_2);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
+
+
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST_1) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(this, data);
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(SpecifyDetails.this, toastMsg, Toast.LENGTH_LONG).show();
+
+                String s = place.getLatLng().toString();
+                String[] latLng = s.substring(10, s.length() - 1).split(",");
+                String LatStartingPoint = latLng[0];
+                String LongStartingPoint = latLng[1];
+                setStartingPoint(LongStartingPoint, LatStartingPoint, place.getAddress().toString());
+
+                tv_StartingPoint.setText("Starting Point: " + place.getName());
+            }
+        }
+        if (requestCode == PLACE_PICKER_REQUEST_2) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(this, data);
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(SpecifyDetails.this, toastMsg, Toast.LENGTH_LONG).show();
+
+                String s = place.getLatLng().toString();
+                String[] latLng = s.substring(10, s.length() - 1).split(",");
+                String LatDestination = latLng[0];
+                String LongDestination = latLng[1];
+                setDestination(LongDestination, LatDestination, place.getAddress().toString());
+
+                tv_Destination.setText("Destination: " + place.getName());
+            }
+        }
+    }
+
 
     /**
      * event that handles the transition to the next step, and passes data.

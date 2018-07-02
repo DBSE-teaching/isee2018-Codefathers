@@ -9,7 +9,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="660dp"
         tools:layout_editor_absoluteY="0dp">
 
         <TableRow
@@ -24,24 +24,25 @@
             android:layout_margin="10dp">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/iv_StartingPoint"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 app:srcCompat="@drawable/ic_gps_fixed_black_24dp" />
 
-            <EditText
-                android:id="@+id/editStartingPoint"
+            <TextView
+                android:id="@+id/tv_StartingPoint"
                 android:layout_width="317dp"
                 android:layout_height="match_parent"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:text="Starting Point" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
         </TableRow>
 
@@ -51,25 +52,26 @@
             android:layout_margin="10dp">
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/iv_Destination"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
-            <EditText
-                android:id="@+id/editLocation"
+            <TextView
+                android:id="@+id/tv_Destination"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:text="Destination"
                 tools:layout_editor_absoluteY="46dp" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
         </TableRow>
 
@@ -97,6 +99,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </TableLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <Button
         android:id="@+id/on6"
