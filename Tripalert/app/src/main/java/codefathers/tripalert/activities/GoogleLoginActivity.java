@@ -152,7 +152,7 @@ public class GoogleLoginActivity extends AppCompatActivity implements
                 databaseService.writeUser(user);
                 try
                 {
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                 }
                 catch(InterruptedException ex)
                 {
