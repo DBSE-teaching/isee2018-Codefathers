@@ -58,10 +58,11 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
             holder.phoneNumber.setText(current.getCreator().getPhoneNumber());
             holder.destination.setText(current.getDestination().getAddress());
             holder.startingPoint.setText(current.getStartingPoint().getAddress());
-            int color =  ContextCompat.getColor(holder.card.getContext(),R.color.colorEverythingFine);;
+            int color;
             switch (current.getStatus()){
                 case 2: color = ContextCompat.getColor(holder.card.getContext(),R.color.colorDelayPauseNotResponding);break;
                 case 3: color = ContextCompat.getColor(holder.card.getContext(),R.color.colorEmergency);break;
+                default: color = ContextCompat.getColor(holder.card.getContext(),R.color.colorEverythingFine);
             }
             holder.phoneNumber.setTextColor(color);
             holder.card.setCardBackgroundColor(color);

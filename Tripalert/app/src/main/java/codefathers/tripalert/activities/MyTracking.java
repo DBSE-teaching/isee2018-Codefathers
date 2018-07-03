@@ -52,11 +52,11 @@ public class MyTracking extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         viewModel =  ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
         viewModel.getCreatedTracking().observe(this, new Observer<Tracking>() {
             @Override
             public void onChanged(@Nullable Tracking tracking) {
-
                 TextView txt = (TextView) getView().findViewById(R.id.currStart);
                 TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
                 TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
@@ -69,7 +69,6 @@ public class MyTracking extends Fragment {
                 notCreatedLayout.setVisibility(View.INVISIBLE);
             }
         });
-
     }
 
     @Override

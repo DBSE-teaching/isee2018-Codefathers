@@ -27,7 +27,7 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
 
     private Location destination = null ;
     private Location startingPoint = null ;
-    private String estimatedTime = "" ;
+    private int estimatedTime = 0 ;
 
     private TextView tv_StartingPoint, tv_Destination;
     private Button iv_StartingPoint, iv_Destination;
@@ -120,9 +120,10 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
         //set whatever the AppUser has in the field.
         setEstimatedTime();
         //check if every input is specified
-        if(destination != null && startingPoint != null && !estimatedTime.equals("") && !estimatedTime.equals("0")){
+        if(destination != null && startingPoint != null &&  estimatedTime  > 0 && estimatedTime <= 120 ){
             //create the intent and pass the data.
             Intent intent = new Intent(SpecifyDetails.this, SelectContacts.class);
+
             intent.putExtras(makeBundle());
             startActivity(intent);
 
@@ -138,7 +139,7 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
      private  Bundle makeBundle(){
          //todo: pass the AppUser object from homescreen.
          AppUser creator = new AppUser("39473957403","mitsaras","mitsos14@hotmail.gr");
-         Tracking temp = new Tracking(startingPoint,destination,0,Integer.parseInt(estimatedTime), creator);
+         Tracking temp = new Tracking(startingPoint,destination,0,estimatedTime, creator);
          Bundle bundle = new Bundle();
          bundle.putSerializable("tracking",temp);
         return bundle;
@@ -182,7 +183,7 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
      */
     private void setEstimatedTime(){
         EditText string  = (EditText) findViewById(R.id.estimatedTImeField);
-        estimatedTime = string.getText().toString();
+        estimatedTime = Integer.parseInt(string.getText().toString());
         }
     /**
      * event that handles the on back click event.
