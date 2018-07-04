@@ -20,6 +20,8 @@ public class AppUser implements Serializable{
 
     private String phoneNumber;
 
+    private boolean isChecked;
+
 
     /**
      * user name of the user, todo: specify if we really need this
@@ -126,5 +128,13 @@ public class AppUser implements Serializable{
         int hash = 3;
         hash = 53 * hash + (this.phoneNumber != null ? this.phoneNumber.hashCode() : 0);
         return hash;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

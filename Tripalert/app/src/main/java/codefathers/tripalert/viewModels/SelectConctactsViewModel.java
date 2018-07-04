@@ -21,6 +21,7 @@ public class SelectConctactsViewModel extends AndroidViewModel {
     }
 
     public List<AppUser> getFilteredContacts (List<AppUser> databaseUsers) {
+
         for( AppUser contact : contacts){
             if (databaseUsers.contains(contact)){
                 addToFilterContacts(contact);
@@ -67,7 +68,19 @@ public class SelectConctactsViewModel extends AndroidViewModel {
          */
         //load here the users as list.
         List<AppUser> userList = new ArrayList<AppUser>();
-        userList.add(new AppUser("111111111"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+        userList.add(new AppUser("+30 694 386 4227"));
+
         userList.add(new AppUser("222222222"));
         userList.add(new AppUser("333333333"));
         userList.add(new AppUser("444444444"));

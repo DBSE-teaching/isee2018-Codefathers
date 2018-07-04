@@ -27,11 +27,6 @@
         <activity
             android:name=".activities.GoogleLoginActivity"
             android:theme="@style/Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- parentActivity name is only used above api 17 but should be fine i guess -->
         <activity
@@ -57,7 +52,13 @@
             android:theme="@style/Steps" />
         <activity android:name=".activities.HomeScreen"
             android:theme="@style/Light.NoActionBar"
-            ></activity>
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
