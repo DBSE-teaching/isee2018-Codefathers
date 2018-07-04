@@ -16,7 +16,7 @@ import codefathers.tripalert.models.Tracking;
 public class HomeScreenViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Tracking>> followedTrackings;
-    private LiveData<Tracking> createdTracking;
+    private MutableLiveData<Tracking> createdTracking;
     //private AppDatabase appDatabase;
     public HomeScreenViewModel(@NonNull Application application) {
         super(application);
@@ -27,7 +27,7 @@ public class HomeScreenViewModel extends AndroidViewModel {
        // appDatabase.tracking().deleteTracking(tracking);
     }
 
-    public LiveData<List<Tracking>> getFollowedTrackings() {
+    public MutableLiveData<List<Tracking>> getFollowedTrackings() {
        // followedTrackings = appDatabase.trackingModel().getFollowedTrackings();
         if(followedTrackings == null){
             followedTrackings = new MutableLiveData <List<Tracking>>();
@@ -36,7 +36,7 @@ public class HomeScreenViewModel extends AndroidViewModel {
         return followedTrackings;
     }
 
-    public LiveData<Tracking> getCreatedTracking() {
+    public MutableLiveData<Tracking> getCreatedTracking() {
         if(createdTracking == null ){
             createdTracking = new MutableLiveData<Tracking>();
             loadCreatedTracking();
