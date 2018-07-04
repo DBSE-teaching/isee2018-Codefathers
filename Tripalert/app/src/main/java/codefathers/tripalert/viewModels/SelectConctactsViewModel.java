@@ -12,12 +12,49 @@ import codefathers.tripalert.models.AppUser;
 
 public class SelectConctactsViewModel extends AndroidViewModel {
 
+    private List<AppUser> contacts;
     private MutableLiveData<List<AppUser>> databaseUsers;
-    public SelectConctactsViewModel(@NonNull Application application) {
+    private List<AppUser>filteredContacts;
+    private List<AppUser>selectedContacts;
+    public SelectConctactsViewModel(@NonNull Application application ) {
         super(application);
     }
 
-    private MutableLiveData<List<AppUser>> getDatabaseUsers(){
+    public List<AppUser> getFilteredContacts (List<AppUser> databaseUsers) {
+        for( AppUser contact : contacts){
+            if (databaseUsers.contains(contact)){
+                addToFilterContacts(contact);
+            };
+        }
+        return filteredContacts;
+    }
+
+    private void addToFilterContacts(AppUser contact){
+        if (filteredContacts == null){
+            filteredContacts = new ArrayList<AppUser>();
+        }
+        filteredContacts.add(contact);
+    }
+
+    public List<AppUser> getSelectedContacts(){
+     return selectedContacts;
+    }
+
+    public boolean addRemoveSelectedContact(AppUser contact) {
+        if (selectedContacts == null) {
+            selectedContacts = new ArrayList<AppUser>();
+        }
+        if(selectedContacts.contains(contact)){
+            this.selectedContacts.remove(contact);
+            return false;
+        }else{
+            this.selectedContacts.add(contact);
+            return true;
+        }
+    }
+
+    public MutableLiveData<List<AppUser>> getDatabaseUsers(){
+
         if(databaseUsers == null){
             databaseUsers = new MutableLiveData <List<AppUser>>();
             loadDatabaseUsers();
@@ -26,12 +63,28 @@ public class SelectConctactsViewModel extends AndroidViewModel {
     }
 
     private void loadDatabaseUsers(){
-        //todo : implement firebase logic to fetch Users
-
-        //load here the users.
+        /*todo : [ALABA] implement firebase logic to fetch Users
+         */
+        //load here the users as list.
         List<AppUser> userList = new ArrayList<AppUser>();
+        userList.add(new AppUser("111111111"));
+        userList.add(new AppUser("222222222"));
+        userList.add(new AppUser("333333333"));
+        userList.add(new AppUser("444444444"));
+        userList.add(new AppUser("555555555"));
+        userList.add(new AppUser("666666666"));
+        userList.add(new AppUser("777777777"));
+        //then just pass the data here whenever it changes
         databaseUsers.setValue(userList);
 
+
+    }
+
+    public void addContact(AppUser user){
+        if(this.contacts == null){
+            this.contacts = new ArrayList<AppUser>();
+        }
+        this.contacts.add(user);
     }
 
 

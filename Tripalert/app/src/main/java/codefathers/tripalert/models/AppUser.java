@@ -105,4 +105,26 @@ public class AppUser implements Serializable{
     public void setToken(String token) {
         this.token = token;
     }
+
+    /**
+     * we need to overwrite this in order to remove an AppUser entry from an ArrayList
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj){
+        return (this.phoneNumber.equals(((AppUser)obj).phoneNumber));
+    }
+
+    /**
+     * we need to overwrite the hashcode as well, because it is required.
+     * since every collection is using hashcodes to identify instances of objects
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + (this.phoneNumber != null ? this.phoneNumber.hashCode() : 0);
+        return hash;
+    }
 }
