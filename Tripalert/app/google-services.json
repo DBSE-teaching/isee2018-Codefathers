@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "636579396052-c29eh5sq30660ug8101ire0fr82ra6vk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "codefathers.isee.com.tripalert",
+            "certificate_hash": "1625be62fbacec7a536683c846539569f9d23406"
+          }
+        },
+        {
           "client_id": "636579396052-osathh9i5loitjqjrqs4okbip4vtg43h.apps.googleusercontent.com",
           "client_type": 3
         }
