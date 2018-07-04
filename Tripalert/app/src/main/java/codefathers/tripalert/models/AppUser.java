@@ -18,15 +18,8 @@ public class AppUser implements Serializable{
      */
     private String token;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     private String phoneNumber;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     /**
      * user name of the user, todo: specify if we really need this
@@ -51,23 +44,30 @@ public class AppUser implements Serializable{
      */
     private List<AppUser> following = null ;
 
+    //constructor for sign in
     public AppUser(String email, String token) {
         this.token = token;
         this.email = email;
     }
 
-    public AppUser(String phoneNumber, String userName, String email){
+    //constructor for contacts
+    public AppUser(String phoneNumber){
         this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.userName = userName;
     }
 
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
 
+    public void setPhoneNumber(String phoneNumber) {
+         this.phoneNumber = phoneNumber;
+    }
     public String getUserName() {
         return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {

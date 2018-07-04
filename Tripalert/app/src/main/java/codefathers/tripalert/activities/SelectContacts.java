@@ -19,6 +19,7 @@ import codefathers.tripalert.services.DatabaseService;
 public class SelectContacts extends AppCompatActivity implements NextStepActivity{
 
     private Tracking tracking;
+    private List<AppUser> contacts;
     private List<AppUser> followers = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,8 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
 
             Intent intent = new Intent(SelectContacts.this,ConfirmTracking.class);
             List <AppUser> userList = new ArrayList<AppUser>();
-            userList.add(new AppUser("6948231245","Mitsaros","mitsos@gmail.com"));
-            userList.add(new AppUser("6948261245","Mitsaros3","mitso2s@gmail.com"));
+            userList.add(new AppUser("6948231245"));
+            userList.add(new AppUser("6948261245"));
             setFollowers(userList);
             intent.putExtras(getBundle());
             startActivity(intent);
@@ -76,8 +77,10 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
     }
 
     public void setFollowers(List<AppUser> followers) {
+
         this.followers = followers;
     }
+
 
     public void gtData(View v) {
         DatabaseService databaseService = new DatabaseService();

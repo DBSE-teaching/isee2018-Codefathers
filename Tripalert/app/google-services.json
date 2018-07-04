@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "636579396052-fdcv6as68qn4574vgjgnjr5oes5dslhm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "codefathers.isee.com.tripalert",
+            "certificate_hash": "79b992876495c76731b4194a02eeca840db13820"
+          }
+        },
+        {
           "client_id": "636579396052-osathh9i5loitjqjrqs4okbip4vtg43h.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -64,6 +72,14 @@
           "android_info": {
             "package_name": "codefathers.tripalert",
             "certificate_hash": "8ecccdf438f01db2459c21cd848f03ab0ae6ef2d"
+          }
+        },
+        {
+          "client_id": "636579396052-irpo9bbee3ilhqek99401vga8fe2623r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "codefathers.tripalert",
+            "certificate_hash": "79b992876495c76731b4194a02eeca840db13820"
           }
         },
         {
