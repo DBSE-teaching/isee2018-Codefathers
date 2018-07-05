@@ -253,7 +253,7 @@ private final String MVERIFICATION_ID = null;
                         }
                     }
                 });
-        startActivity(new Intent(this, SpecifyDetails.class));
+        startActivity(new Intent(this, HomeScreen.class));
     }
     // [END sign_in_with_phone]
 

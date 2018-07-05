@@ -29,7 +29,6 @@
             android:theme="@style/Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -54,6 +53,7 @@
             android:name=".activities.ConfirmTracking"
             android:label="Confirm Tracking"
             android:theme="@style/Steps" />
+
         <activity android:name=".activities.PhoneAuthActivity"
             android:theme="@style/Light.NoActionBar"
             ></activity>

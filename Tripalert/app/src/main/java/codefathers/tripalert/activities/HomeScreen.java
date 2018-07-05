@@ -36,13 +36,7 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         Log.d(TAG, "current User is "+mUser);
         if (mUser == null || mUser.getPhoneNumber().isEmpty()){
             startActivity(new Intent(this, PhoneAuthActivity.class));
-        }else
-        {
-            Log.d(TAG, "current User is "+mUser.getPhoneNumber());
-            Log.d(TAG, "current User is "+mUser.getPhoneNumber());
-            startActivity(new Intent(this, SpecifyDetails.class));
         }
-
     }
 
     private void goToSettings(){
