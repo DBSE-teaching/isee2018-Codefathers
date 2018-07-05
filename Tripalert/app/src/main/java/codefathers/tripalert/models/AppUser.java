@@ -49,6 +49,10 @@ public class AppUser implements Serializable{
         this.token = token;
         this.email = email;
     }
+    public AppUser(String email, String name, String token) {
+        this.token = token;
+        this.email = email;
+    }
 
     //constructor for contacts
     public AppUser(String phoneNumber){

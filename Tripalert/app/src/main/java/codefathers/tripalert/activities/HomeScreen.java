@@ -7,15 +7,22 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.gms.signin.SignIn;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import codefathers.tripalert.adapters.HomesPagerAdapter;
 import codefathers.tripalert.R;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
+
 public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragmentInteractionListener, FollowedTrackings.OnFragmentInteractionListener{
     public HomeScreenViewModel viewModel;
+    String TAG = "HOMESCREEN";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +30,18 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         viewModel = ViewModelProviders.of(this).get(HomeScreenViewModel.class);
         goToSettings();
         makeTabs();
+
+        ///check authentication status, redirect to login page if not authenticated
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d(TAG, "current User is "+mUser);
+        if (mUser == null || mUser.getPhoneNumber().isEmpty()){
+            startActivity(new Intent(this, PhoneAuthActivity.class));
+        }else
+        {
+            Log.d(TAG, "current User is "+mUser.getPhoneNumber());
+            Log.d(TAG, "current User is "+mUser.getPhoneNumber());
+            startActivity(new Intent(this, SpecifyDetails.class));
+        }
 
     }
 
@@ -72,5 +91,7 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    ////
 
 }
