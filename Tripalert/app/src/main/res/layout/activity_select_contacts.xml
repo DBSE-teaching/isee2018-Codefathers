@@ -34,4 +34,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next"
         tools:text="@android:string/cancel" />
+
+    <ListView
+        android:id="@+id/lvContacts"
+        android:layout_width="match_parent"
+        android:layout_height="384dp"
+        android:layout_centerInParent="true" />
 </android.support.constraint.ConstraintLayout>

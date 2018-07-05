@@ -138,7 +138,7 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
 
      private  Bundle makeBundle(){
          //todo: pass the AppUser object from homescreen.
-         AppUser creator = new AppUser("39473957403","mitsaras","mitsos14@hotmail.gr");
+         AppUser creator = new AppUser("39473957403");
          Tracking temp = new Tracking(startingPoint,destination,0,estimatedTime, creator);
          Bundle bundle = new Bundle();
          bundle.putSerializable("tracking",temp);
