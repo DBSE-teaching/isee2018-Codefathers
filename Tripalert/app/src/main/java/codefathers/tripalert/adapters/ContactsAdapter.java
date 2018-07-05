@@ -1,6 +1,7 @@
 package codefathers.tripalert.adapters;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,6 @@ public class ContactsAdapter extends BaseAdapter {
 
             holder.tvName = (TextView) view.findViewById(R.id.tv_Name);
             holder.tvNumber = (TextView) view.findViewById(R.id.tv_Number);
-            holder.cbCheckBox = (CheckBox) view.findViewById(R.id.cb_CheckBox);
 
             view.setTag(holder);
         }
@@ -71,12 +71,11 @@ public class ContactsAdapter extends BaseAdapter {
         AppUser contact = contacs.get(i);
         holder.tvName.setText(contact.getUserName());
         holder.tvNumber.setText(contact.getPhoneNumber());
-
         if(contact.isChecked()){
-            holder.cbCheckBox.setChecked(false);
+            view.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.colorNextAction));
+        }else{
+            view.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.colorBackGround));
         }
-        else holder.cbCheckBox.setChecked(true);
-
         return view;
     }
 

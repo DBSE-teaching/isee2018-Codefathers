@@ -4,9 +4,15 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +37,8 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
 
     private Tracking tracking;
     private SelectConctactsViewModel viewModel;
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +50,12 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
             @Override
             public void onChanged(@Nullable List<AppUser> appUsers) {
 
-                createAppUserView(viewModel.getFilteredContacts(appUsers));
+                List<AppUser> filteredContacts = viewModel.getFilteredContacts(appUsers);
+                if(filteredContacts != null ){
+                    createAppUserView(filteredContacts);
+                }else{
+                    onNoFilteredContacts();
+                }
             }
 
         });
@@ -50,18 +63,18 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
     }
     @Override
     public void onNext(View v) {
-        AppUser user3 = new AppUser("3333333333");
-        AppUser user4 = new AppUser("5555555555");
-        AppUser user5 = new AppUser("2222222222");
-        onClickContact(user3);
-        onClickContact(user4);
-        onClickContact(user3);
         setFollowers();
-        if(tracking.getCreator().getFollowers() != null){
+        if(tracking.getCreator().getFollowers() != null ){
+            if(tracking.getCreator().getFollowers().size() != 0){
+                Intent intent = new Intent(SelectContacts.this,ConfirmTracking.class);
+                intent.putExtras(getBundle());
+                startActivity(intent);
+            }else{
+                String msg = getString(R.string.cannotProcceedFollowers);
+                Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+                toast.show();
+            }
 
-            Intent intent = new Intent(SelectContacts.this,ConfirmTracking.class);
-            intent.putExtras(getBundle());
-            startActivity(intent);
         }else{
             String msg = getString(R.string.cannotProcceedFollowers);
             Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
@@ -133,7 +146,7 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
                     {
                         String phoneNumber = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-                        AppUser user = new AppUser(phoneNumber);
+                        AppUser user = new AppUser(phoneNumber.replaceAll("\\s+",""));
                         user.setUserName(name);
                         user.setChecked(false);
                         viewModel.addContact(user);
@@ -146,31 +159,32 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
 
     }
 
+    private void onNoFilteredContacts(){
+     findViewById(R.id.contacts).setVisibility(View.INVISIBLE);
+     findViewById(R.id.noContacts).setVisibility(View.VISIBLE);
+
+    }
+
     private void createAppUserView(List<AppUser> contacts ){
         /* TODO:[ILIAS] create the logic behind displaying the contacts
             here define any logic in order to create the listview (or whatever u
             choose) for the displayed contacts, you dont need to worry about
             filtering the contacts, or how you get this contacts list.
          */
-
-
         ListView listView = (ListView) findViewById(R.id.lvContacts);
-
         final ContactsAdapter adapter = new ContactsAdapter(this,contacts);
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 AppUser contact = contacts.get(i);
-
                 boolean isChecked = onClickContact(contact);
-
                 contact.setChecked(isChecked);
 
                 contacts.set(i,contact);
-
                 adapter.updateRecords(contacts);
+
             }
         });
 

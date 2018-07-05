@@ -30,6 +30,7 @@
     <string name="cannotProcceedDetails"> Make sure you fill out all details</string>
     <string name="cannotProcceedGoBack"> You cant go back, press cancel to go to the home screen </string>
     <string name="cannotProcceedFollowers"> Please select some contacts as followers. </string>
+    <string name="noContacts"> None of your contacts has the app installed. Maybe spread the word?</string>
     <!-- -->
     <!-- -->
     <!-- -->

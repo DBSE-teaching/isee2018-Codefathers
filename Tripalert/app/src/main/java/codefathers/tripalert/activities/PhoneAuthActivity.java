@@ -107,7 +107,7 @@ private final String MVERIFICATION_ID = null;
                 //     detect the incoming verification SMS and perform verification without
                 //     user action.
                 Log.d(TAG, "onVerificationCompleted:" + credential);
-                Log.d(TAG, "onVerificationCompleted:" + credential.toString());
+                Log.d(TAG,  "onVerificationCompleted:" + credential.toString());
                 Log.d(TAG, "onVerificationCompleted:" + credential.getSignInMethod().toString());
                 // [START_EXCLUDE silent]
                 mVerificationInProgress = false;

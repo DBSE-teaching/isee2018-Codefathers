@@ -119,7 +119,10 @@ public class AppUser implements Serializable{
      */
     @Override
     public boolean equals(Object obj){
-        return (this.phoneNumber.equals(((AppUser)obj).phoneNumber));
+        //compare the phonenumber without whitespace.
+        String myPhoneNumber = this.phoneNumber;
+        String objPhoneNumber = ((AppUser)obj).phoneNumber;
+        return (this.phoneNumber.equals(objPhoneNumber));
     }
 
     /**

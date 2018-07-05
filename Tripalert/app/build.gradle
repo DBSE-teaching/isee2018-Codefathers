@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "codefathers.tripalert"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 22
         versionCode 1
         multiDexEnabled true
         versionName "1.0"

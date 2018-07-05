@@ -68,21 +68,10 @@ public class SelectConctactsViewModel extends AndroidViewModel {
          */
         //load here the users as list.
         List<AppUser> userList = new ArrayList<AppUser>();
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-        userList.add(new AppUser("+30 694 386 4227"));
-
-        userList.add(new AppUser("222222222"));
-        userList.add(new AppUser("333333333"));
+        userList.add(new AppUser("+306943864227"));
+        userList.add(new AppUser("+4915251956592"));
+        userList.add(new AppUser("+306972834844"));
+        userList.add(new AppUser("+4915730263379"));
         userList.add(new AppUser("444444444"));
         userList.add(new AppUser("555555555"));
         userList.add(new AppUser("666666666"));

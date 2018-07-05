@@ -183,7 +183,11 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
      */
     private void setEstimatedTime(){
         EditText string  = (EditText) findViewById(R.id.estimatedTImeField);
-        estimatedTime = Integer.parseInt(string.getText().toString());
+        try{
+            estimatedTime = Integer.parseInt(string.getText().toString());
+        }catch (NumberFormatException e){
+            estimatedTime = 0;
+        }
         }
     /**
      * event that handles the on back click event.
