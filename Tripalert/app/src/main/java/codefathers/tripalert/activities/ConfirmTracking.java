@@ -31,9 +31,7 @@ public class ConfirmTracking extends AppCompatActivity implements NextStepActivi
     @Override
     public void onNext(View v) {
         // logic behind the submit
-        //TODO: Fix NullPOinterException on the observer
-        viewModel.writeTrackingToDb();
-     /*   viewModel.isWritten().observe(this, new Observer<Boolean>() {
+        viewModel.isWritten().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if(aBoolean){
@@ -44,7 +42,9 @@ public class ConfirmTracking extends AppCompatActivity implements NextStepActivi
                 }
             }
         });
-        */
+        viewModel.writeTrackingToDb();
+
+
     }
 
     @Override
@@ -58,8 +58,5 @@ public class ConfirmTracking extends AppCompatActivity implements NextStepActivi
 
     }
 
-    @Override
-    public void saveData() {
 
-    }
 }

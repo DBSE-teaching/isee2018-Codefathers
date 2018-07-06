@@ -7,5 +7,4 @@ public interface NextStepActivity  {
     public void onNext( View v);
     public void onCancel( View v);
     public void getData();
-    public void saveData();
 }
