@@ -148,17 +148,6 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
     }
 
     /**
-     * make sure to disable going back.
-     */
-    @Override
-    public void onBackPressed()
-    {
-        String msg = getString(R.string.cannotProcceedGoBack);
-        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
-    /**
      * function to call in order to set the destination
      * @param longt
      * @param lat
@@ -206,9 +195,5 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
 
     }
 
-    @Override
-    public void saveData() {
-        // im not sure if we are going to use this, only if a back button is impleemnted
 
-    }
 }

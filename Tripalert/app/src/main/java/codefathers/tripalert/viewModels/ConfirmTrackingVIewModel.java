@@ -17,41 +17,66 @@ import com.google.firebase.database.ValueEventListener;
 import codefathers.tripalert.models.Tracking;
 
 public class ConfirmTrackingVIewModel extends AndroidViewModel {
+    /**
+     * the tracking to be created
+     */
     private Tracking tracking;
+    /**
+     * determnines if the tracking is written in the database.
+     */
     private MutableLiveData<Boolean> written;
 
     public ConfirmTrackingVIewModel(@NonNull Application application) {
         super(application);
+        written = new MutableLiveData<Boolean>();
     }
 
+    /**
+     * returns MutableLiveData that can be listened on the ui and
+     * changes to true or false depending on if the tracking is
+     * written on the db.
+     * @return MutableLiveData
+     */
     public MutableLiveData<Boolean> isWritten() {
         return written;
     }
 
+    /**
+     * sets the written value
+     * @param value
+     */
     private void setWritten(Boolean value) {
+        if(written == null){
+            written = new MutableLiveData<Boolean>();
+        }
         this.written.setValue(value);
     }
 
+    /**
+     * sets the current tracking to be sent to database
+     * @param tracking
+     */
     public void setTracking(Tracking tracking) {
         this.tracking = tracking;
     }
 
+    /**
+     * writes tracking to db and checks if it is written also notifies the observers that
+     * listen to isWritten by changing the written value.
+     */
     public void writeTrackingToDb() {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("trackings");
         String trackingID = tracking.getCreator();
-                                                                        //write tracking to db and then check if succees
         dbRef.child(trackingID).setValue(tracking)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                                                                        //notify written valuse
                         setWritten(true);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                                                                        //notify written value
                         setWritten(false);
                     }
                 });

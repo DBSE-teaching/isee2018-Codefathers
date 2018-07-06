@@ -101,37 +101,18 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
         tracking = (Tracking)getIntent().getSerializableExtra("tracking");
     }
 
-    @Override
-    public void saveData() {
-
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        String msg = getString(R.string.cannotProcceedGoBack);
-        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
     /**
      * converts the List of followers into a HashMap in order to send to Firebase.
      */
     private void setFollowers() {
         Map<String,Boolean> map = new HashMap<>();
-        for (AppUser user : viewModel.getSelectedContacts()) map.put(user.getPhoneNumber(),true);
-        this.tracking.setFollowers(map);
+        if(viewModel.getSelectedContacts()!= null ){
+            for (AppUser user : viewModel.getSelectedContacts()) map.put(user.getPhoneNumber(),true);
+            this.tracking.setFollowers(map);
+        }
     }
 
     private void setContacts(){
-        /*TODO: [ILIAS] create here the logic behind getting the contacts
-            make sure that for each contact, an AppUser object is created and the
-            viewmodel.addContact is called. so perhaps u need to wrap it into
-            a foreach loop, or whatever :P
-         */
-
-        //EDO FORTONEI TIS EPAFES PO TO KINITO
-
         ContentResolver contentResolver = getContentResolver();
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
 
@@ -172,11 +153,6 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
     }
 
     private void createAppUserView(List<AppUser> contacts ){
-        /* TODO:[ILIAS] create the logic behind displaying the contacts
-            here define any logic in order to create the listview (or whatever u
-            choose) for the displayed contacts, you dont need to worry about
-            filtering the contacts, or how you get this contacts list.
-         */
         ListView listView = (ListView) findViewById(R.id.lvContacts);
         final ContactsAdapter adapter = new ContactsAdapter(this,contacts);
         listView.setAdapter(adapter);
@@ -196,10 +172,6 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
 
     }
 
-    /* TODO: [ILIAS] use this to remove or add a selected contact
-     *
-     * //if you want to see the selected contacts call viewmodel.getSelectedContacts
-     * */
     private boolean onClickContact(AppUser contact){
         return this.viewModel.addRemoveSelectedContact(contact);
     }
