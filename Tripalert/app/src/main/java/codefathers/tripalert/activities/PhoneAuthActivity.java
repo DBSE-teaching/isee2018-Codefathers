@@ -28,6 +28,8 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 import codefathers.tripalert.R;
+import codefathers.tripalert.models.AppUser;
+import codefathers.tripalert.services.DatabaseService;
 
 public class PhoneAuthActivity extends AppCompatActivity implements
         View.OnClickListener {
@@ -42,6 +44,9 @@ private final String MVERIFICATION_ID = null;
 
  // [START declare_auth]
     private FirebaseAuth mAuth;
+    DatabaseService databaseService;
+    FirebaseUser user;
+    AppUser mUser;
     // [END declare_auth]
 
     private boolean mVerificationInProgress = false;
@@ -107,12 +112,13 @@ private final String MVERIFICATION_ID = null;
                 //     detect the incoming verification SMS and perform verification without
                 //     user action.
                 Log.d(TAG, "onVerificationCompleted:" + credential);
-                Log.d(TAG,  "onVerificationCompleted:" + credential.toString());
+                Log.d(TAG, "onVerificationCompleted:" + credential.toString());
                 Log.d(TAG, "onVerificationCompleted:" + credential.getSignInMethod().toString());
                 // [START_EXCLUDE silent]
                 mVerificationInProgress = false;
 
                 signInWithPhoneAuthCredential(credential);
+
             }
 
             @Override
@@ -200,6 +206,7 @@ private final String MVERIFICATION_ID = null;
                 mCallbacks);        // OnVerificationStateChangedCallbacks
         // [END start_phone_auth]
 
+
         mVerificationInProgress = true;
     }
 
@@ -237,7 +244,16 @@ private final String MVERIFICATION_ID = null;
                             Log.d(TAG, "uuid "+user.getUid());
                             Log.d(TAG, "phone "+user.getPhoneNumber().toString());
                             Log.d(TAG, "email"+user.getEmail().toString());
-
+                            //
+                            //start db
+                            String phone = user.getPhoneNumber();
+                            String uuid = user.getUid();
+                            mUser = new AppUser();
+                            mUser.setPhoneNumber(phone);
+                            mUser.setToken(uuid);
+                            databaseService.writeUser(mUser);
+                            ///
+                            //
 
                         } else {
                             // Sign in failed, display a message and update the UI
@@ -253,7 +269,17 @@ private final String MVERIFICATION_ID = null;
                         }
                     }
                 });
-        startActivity(new Intent(this, HomeScreen.class));
+        //start db
+        mAuth = FirebaseAuth.getInstance();
+        String phone = mAuth.getCurrentUser().getPhoneNumber();
+        String email = mAuth.getCurrentUser().getEmail();
+        String token = mAuth.getCurrentUser().getUid();
+        mUser = new AppUser();
+        mUser.setPhoneNumber(phone);
+        mUser.setToken(token);
+        databaseService.writeUser(mUser);
+        //
+        startActivity(new Intent(this, SpecifyDetails.class));
     }
     // [END sign_in_with_phone]
 

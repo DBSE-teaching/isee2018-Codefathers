@@ -227,5 +227,19 @@ public class GoogleLoginActivity extends AppCompatActivity implements
         }
     }
 
+/*
 
+        //start db
+        mAuth = FirebaseAuth.getInstance();
+        String phone = mAuth.getCurrentUser().getPhoneNumber();
+        String email = mAuth.getCurrentUser().getEmail();
+        String token = mAuth.getCurrentUser().getUid();
+        mUser = new AppUser();
+        mUser.setPhoneNumber(phone);
+        mUser.setToken(token);
+        databaseService.writeUser(mUser);
+        ///
+*/
 }
+
+

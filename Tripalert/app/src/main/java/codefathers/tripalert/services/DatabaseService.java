@@ -17,9 +17,11 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import codefathers.tripalert.models.AppUser;
@@ -31,6 +33,7 @@ public class DatabaseService extends Service {
     String TAG = "DB WRITE";
     private DatabaseReference dbRef;
     private DatabaseReference userRef;
+    private ArrayList<AppUser> usersList;
     public DatabaseService() {
     }
 
@@ -251,6 +254,37 @@ public void readUsersFromDb(){
         });
 
 
+    }
+
+
+    public ArrayList<AppUser> readUsersList(){
+        dbRef = FirebaseDatabase.getInstance().getReference("users");
+        usersList = new ArrayList<>();
+        Query userQuery = dbRef
+                .limitToFirst(100);
+        userQuery.addListenerForSingleValueEvent( new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot uSnapshot: dataSnapshot.getChildren()) {
+                    AppUser user = uSnapshot.getValue(AppUser.class);
+                    usersList.add(user);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+
+                // ...
+            }
+
+        });
+        String kk= usersList.getClass().getName();
+        boolean pp =usersList.isEmpty();
+        boolean pp2 =usersList.isEmpty();
+    return usersList;
     }
 
 }
