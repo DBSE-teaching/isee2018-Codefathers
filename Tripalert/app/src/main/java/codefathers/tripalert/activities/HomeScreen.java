@@ -1,8 +1,10 @@
 package codefathers.tripalert.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +12,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.signin.SignIn;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +29,7 @@ import codefathers.tripalert.viewModels.HomeScreenViewModel;
 public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragmentInteractionListener, FollowedTrackings.OnFragmentInteractionListener{
     public HomeScreenViewModel viewModel;
     String TAG = "HOMESCREEN";
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,5 +92,15 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
     }
 
     ////
+    public void onSignOut(View view) {
+        mAuth = FirebaseAuth.getInstance();
+        Log.d(TAG,"User signed out before is "+ mAuth.getCurrentUser());
+        mAuth.signOut();
+        Log.d(TAG,"User signed out after is "+ mAuth.getCurrentUser());
+        if(mAuth.getCurrentUser()==null) {
+            startActivity(new Intent(HomeScreen.this, PhoneAuthActivity.class));
+        }
+    }
+
 
 }

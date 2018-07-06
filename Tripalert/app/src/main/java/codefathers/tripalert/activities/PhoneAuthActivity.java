@@ -54,9 +54,6 @@ public class PhoneAuthActivity extends AppCompatActivity implements
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
-    private TextView mStatusText;
-    private TextView mDetailText;
-
     private EditText mPhoneNumberField;
     private EditText mVerificationField;
 
@@ -84,22 +81,19 @@ public class PhoneAuthActivity extends AppCompatActivity implements
         }
 
 
-        mStatusText = findViewById(R.id.status);
-        mDetailText = findViewById(R.id.details);
-
         mPhoneNumberField = findViewById(R.id.field_phone_number);
         mVerificationField = findViewById(R.id.field_verification_code);
 
         mStartButton = findViewById(R.id.button_start_verification);
         mVerifyButton = findViewById(R.id.button_verify_phone);
-        mResendButton = findViewById(R.id.button_resend);
-        mSignOutButton = findViewById(R.id.sign_out_button);
+       // mResendButton = findViewById(R.id.button_resend);
+        //mSignOutButton = findViewById(R.id.sign_out_button);
         databaseService = new DatabaseService();
         // Assign click listeners
         mStartButton.setOnClickListener(this);
         mVerifyButton.setOnClickListener(this);
-        mResendButton.setOnClickListener(this);
-        mSignOutButton.setOnClickListener(this);
+        //mResendButton.setOnClickListener(this);
+        //mSignOutButton.setOnClickListener(this);
 
         // [START initialize_auth]
         mAuth = FirebaseAuth.getInstance();
@@ -310,12 +304,14 @@ public class PhoneAuthActivity extends AppCompatActivity implements
 
                 verifyPhoneNumberWithCode(mVerificationId, code);
                 break;
+                /*
             case R.id.button_resend:
                 resendVerificationCode(mPhoneNumberField.getText().toString(), mResendToken);
                 break;
             case R.id.sign_out_button:
                 signOut();
                 break;
+                */
         }
     }
 }

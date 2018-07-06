@@ -76,7 +76,7 @@
     <string name="signedOut">Signed out</string>
 
     <!-- Strings related to login -->
-     <!-- -->
+    <!-- -->
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -90,7 +90,7 @@
         completions."
     </string>
     <string name="phone">Phone Number</string>
-    <string name="otp">token</string>
+    <string name="otp">Token(Optional)</string>
     <string name="token_prompt">Enter token</string>
     <string name="send_token">Send Token</string>
 
