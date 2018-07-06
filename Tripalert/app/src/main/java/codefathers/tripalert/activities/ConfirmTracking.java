@@ -18,18 +18,20 @@ public class ConfirmTracking extends AppCompatActivity implements NextStepActivi
     private Tracking tracking;
     private ConfirmTrackingVIewModel viewModel;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
+
+        //TODO: Create the UI for this activity that displays the tracking
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_tracking);
         viewModel = ViewModelProviders.of(this).get(ConfirmTrackingVIewModel.class);
         tracking = (Tracking)getIntent().getSerializableExtra("tracking");
         viewModel.setTracking(tracking);
-
     }
 
     @Override
     public void onNext(View v) {
         // logic behind the submit
+        //TODO: Fix NullPOinterException on the observer
         viewModel.writeTrackingToDb();
      /*   viewModel.isWritten().observe(this, new Observer<Boolean>() {
             @Override

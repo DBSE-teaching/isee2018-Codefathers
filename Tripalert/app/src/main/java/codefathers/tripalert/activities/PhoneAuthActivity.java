@@ -68,6 +68,12 @@ public class PhoneAuthActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO:[ALABA] make sure you implement this login screen mate;
+        /*TODO:[ALABA] if I delete the Authenticated User, session is not invalidated
+            if there is any way we can do this it would be really nice, but lets not
+            put much effort cause once the application is done there is hardly any chance
+            to remove someone manually.
+        */
         //setContentView(R.layout.activity_login);
         setContentView(R.layout.activity_phone_auth);
 
@@ -232,7 +238,7 @@ public class PhoneAuthActivity extends AppCompatActivity implements
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = task.getResult().getUser();
 
-                            /* TODO: [ALABA} dude please use the debug mode with the breakpoints
+                            /* TODO: dude please use the debug mode with the breakpoints
                                 do not use logs :P we are not writing javascript here hahaha
                                 if you put a breakpoint the execution will stop in it so you will
                                 know when you reach a part of your code, also it will monitor

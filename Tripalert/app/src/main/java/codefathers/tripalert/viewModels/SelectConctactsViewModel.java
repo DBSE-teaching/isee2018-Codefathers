@@ -77,8 +77,6 @@ public class SelectConctactsViewModel extends AndroidViewModel {
     }
 
     private void loadDatabaseUsers(){
-        /*todo : [ALABA] implement firebase logic to fetch Users
-         */
         List<AppUser> userList = new ArrayList<>();
         DatabaseReference dbRef;
         databaseService = new DatabaseService();
