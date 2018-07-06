@@ -55,7 +55,7 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
             holder.destination.setText(current.getDestination().getAddress());
             holder.startingPoint.setText(current.getStartingPoint().getAddress());
 */
-            holder.phoneNumber.setText(current.getCreator().getPhoneNumber());
+            holder.phoneNumber.setText(current.getCreator());
             holder.destination.setText(current.getDestination().getAddress());
             holder.startingPoint.setText(current.getStartingPoint().getAddress());
             int color;

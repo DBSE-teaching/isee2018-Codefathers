@@ -30,10 +30,8 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         viewModel = ViewModelProviders.of(this).get(HomeScreenViewModel.class);
         goToSettings();
         makeTabs();
-
         ///check authentication status, redirect to login page if not authenticated
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d(TAG, "current User is "+mUser);
         if (mUser == null || mUser.getPhoneNumber().isEmpty()){
             startActivity(new Intent(this, PhoneAuthActivity.class));
         }

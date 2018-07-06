@@ -3,7 +3,9 @@ package codefathers.tripalert.models;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is used to provide the structure of the corresponding
@@ -37,7 +39,7 @@ public class Tracking implements Serializable{
         this.estimatedTime = estimatedTime;
     }
 
-    public void setCreator(AppUser creator) {
+    public void setCreator(String creator) {
         this.creator = creator;
     }
 
@@ -58,7 +60,9 @@ public class Tracking implements Serializable{
     /**
      * holds the data of the creator, like phonenumber etc...
      */
-    private AppUser creator;
+    private String  creator;
+
+    private Map<String,Boolean> followers; //phonenumbers
     /**
      * the time that the user exepcts a trip to last. The time
      * is in minutes.
@@ -77,12 +81,13 @@ public class Tracking implements Serializable{
 
     private List<LogItem> situationLog;
 
-    public Tracking(Location startingPoint, Location destination, int status, int estimatedTime, AppUser creator) {
+    public Tracking(Location startingPoint, Location destination, int status, int estimatedTime, String creator) {
         this.startingPoint = startingPoint;
         this.estimatedTime = estimatedTime;
         this.status = status;
         this.creator = creator;
         this.destination = destination;
+        this.followers = null;
     }
 
 
@@ -100,10 +105,9 @@ public class Tracking implements Serializable{
         return status;
     }
 
-    public AppUser getCreator() {
+    public String  getCreator() {
         return creator;
     }
-
 
     public Location getDestination() {
         return destination;
@@ -116,6 +120,14 @@ public class Tracking implements Serializable{
     public void setSituationLog(List<LogItem> situationLog) {
         this.situationLog = situationLog;
         
+    }
+
+    public Map<String,Boolean> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Map<String,Boolean> followers) {
+        this.followers = followers;
     }
 }
 

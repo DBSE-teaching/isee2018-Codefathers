@@ -22,7 +22,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.adapters.ContactsAdapter;
@@ -64,8 +66,8 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
     @Override
     public void onNext(View v) {
         setFollowers();
-        if(tracking.getCreator().getFollowers() != null ){
-            if(tracking.getCreator().getFollowers().size() != 0){
+        if(tracking.getFollowers() != null ){
+            if(tracking.getFollowers().size() != 0){
                 Intent intent = new Intent(SelectContacts.this,ConfirmTracking.class);
                 intent.putExtras(getBundle());
                 startActivity(intent);
@@ -112,8 +114,13 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
         toast.show();
     }
 
+    /**
+     * converts the List of followers into a HashMap in order to send to Firebase.
+     */
     private void setFollowers() {
-        this.tracking.getCreator().setFollowers(viewModel.getSelectedContacts());
+        Map<String,Boolean> map = new HashMap<>();
+        for (AppUser user : viewModel.getSelectedContacts()) map.put(user.getPhoneNumber(),true);
+        this.tracking.setFollowers(map);
     }
 
     private void setContacts(){
@@ -145,8 +152,7 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
                     while(cursor2.moveToNext())
                     {
                         String phoneNumber = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
-                        AppUser user = new AppUser(phoneNumber.replaceAll("\\s+",""));
+                        AppUser user = new AppUser(phoneNumber.replaceAll("[\\s\\-()]", ""));
                         user.setUserName(name);
                         user.setChecked(false);
                         viewModel.addContact(user);

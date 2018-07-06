@@ -33,16 +33,16 @@ import codefathers.tripalert.services.DatabaseService;
 
 public class PhoneAuthActivity extends AppCompatActivity implements
         View.OnClickListener {
-//WHITELISTED NUMBER TO BE REMOVED
-private final String MVERIFICATION_ID = null;
- private final String PHONENUM= "+13494446565";
- private final String TEST_VERIFICATION_CODE = "777777";
- ////////////
+    //WHITELISTED NUMBER TO BE REMOVED
+    private final String MVERIFICATION_ID = null;
+    private final String PHONENUM = "+13494446565";
+    private final String TEST_VERIFICATION_CODE = "777777";
+    ////////////
     private static final String TAG = "PhoneAuthActivity";
 
     private static final String KEY_VERIFY_IN_PROGRESS = "key_verify_in_progress";
 
- // [START declare_auth]
+    // [START declare_auth]
     private FirebaseAuth mAuth;
     DatabaseService databaseService;
     FirebaseUser user;
@@ -69,7 +69,7 @@ private final String MVERIFICATION_ID = null;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_login);
-       setContentView(R.layout.activity_phone_auth);
+        setContentView(R.layout.activity_phone_auth);
 
 
         // Restore instance state
@@ -88,7 +88,7 @@ private final String MVERIFICATION_ID = null;
         mVerifyButton = findViewById(R.id.button_verify_phone);
         mResendButton = findViewById(R.id.button_resend);
         mSignOutButton = findViewById(R.id.sign_out_button);
-
+        databaseService = new DatabaseService();
         // Assign click listeners
         mStartButton.setOnClickListener(this);
         mVerifyButton.setOnClickListener(this);
@@ -111,9 +111,6 @@ private final String MVERIFICATION_ID = null;
                 // 2 - Auto-retrieval. On some devices Google Play services can automatically
                 //     detect the incoming verification SMS and perform verification without
                 //     user action.
-                Log.d(TAG, "onVerificationCompleted:" + credential);
-                Log.d(TAG, "onVerificationCompleted:" + credential.toString());
-                Log.d(TAG, "onVerificationCompleted:" + credential.getSignInMethod().toString());
                 // [START_EXCLUDE silent]
                 mVerificationInProgress = false;
 
@@ -125,7 +122,6 @@ private final String MVERIFICATION_ID = null;
             public void onVerificationFailed(FirebaseException e) {
                 // This callback is invoked in an invalid request for verification is made,
                 // for instance if the the phone number format is not valid.
-                Log.w(TAG, "onVerificationFailed", e);
                 // [START_EXCLUDE silent]
                 mVerificationInProgress = false;
                 // [END_EXCLUDE]
@@ -151,13 +147,9 @@ private final String MVERIFICATION_ID = null;
                 // The SMS verification code has been sent to the provided phone number, we
                 // now need to ask the user to enter the code and then construct a credential
                 // by combining the code with a verification ID.
-                Log.d(TAG, "onCodeSent:" + verificationId);
-
                 // Save verification ID and resending token so we can use them later
                 mVerificationId = verificationId;
                 mResendToken = token;
-
-
             }
         };
         // [END phone_auth_callbacks]
@@ -168,11 +160,10 @@ private final String MVERIFICATION_ID = null;
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        if(mAuth.getCurrentUser()!= null) {
+        if (mAuth.getCurrentUser() != null) {
             FirebaseUser currentUser = mAuth.getCurrentUser();
-           // updateUI(currentUser);
+            // updateUI(currentUser);
         }
-
         // [START_EXCLUDE]
         if (mVerificationInProgress && validatePhoneNumber()) {
             startPhoneNumberVerification(mPhoneNumberField.getText().toString());
@@ -236,15 +227,24 @@ private final String MVERIFICATION_ID = null;
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-
                             FirebaseUser user = task.getResult().getUser();
-                            Log.d(TAG, "uuid "+user.getUid());
-                            Log.d(TAG, "phone "+user.getPhoneNumber().toString());
-                            Log.d(TAG, "email"+user.getEmail().toString());
-                            //
+
+                            /* TODO: [ALABA} dude please use the debug mode with the breakpoints
+                                do not use logs :P we are not writing javascript here hahaha
+                                if you put a breakpoint the execution will stop in it so you will
+                                know when you reach a part of your code, also it will monitor
+                                any value of any variable that has been set till this part...
+                                to set a breakpoint click on the whitespace near the linenumber
+                                and to go to debug mode click on the bug icon with the little play
+                                green icon. also there is a debug tab near the run tab (that u see the
+                                console, there if you switch to debugger you will see your variables.
+                                the ccurrent class will always be referenced as "this" Logs makes the code
+                                more difficult to read, and its also time consuming for you.
+                             */
+
                             //start db
                             String phone = user.getPhoneNumber();
                             String uuid = user.getUid();
@@ -252,12 +252,10 @@ private final String MVERIFICATION_ID = null;
                             mUser.setPhoneNumber(phone);
                             mUser.setToken(uuid);
                             databaseService.writeUser(mUser);
-                            ///
-                            //
+                            startActivity(new Intent(PhoneAuthActivity.this, HomeScreen.class));
 
                         } else {
                             // Sign in failed, display a message and update the UI
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
                                 // [START_EXCLUDE silent]
@@ -269,17 +267,6 @@ private final String MVERIFICATION_ID = null;
                         }
                     }
                 });
-        //start db
-        mAuth = FirebaseAuth.getInstance();
-        String phone = mAuth.getCurrentUser().getPhoneNumber();
-        String email = mAuth.getCurrentUser().getEmail();
-        String token = mAuth.getCurrentUser().getUid();
-        mUser = new AppUser();
-        mUser.setPhoneNumber(phone);
-        mUser.setToken(token);
-        databaseService.writeUser(mUser);
-        //
-        startActivity(new Intent(this, SpecifyDetails.class));
     }
     // [END sign_in_with_phone]
 

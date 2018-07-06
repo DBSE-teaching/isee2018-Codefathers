@@ -32,7 +32,6 @@ public class MyInstanceIdService extends FirebaseInstanceIdService {
 
             databaseService.dbWriteToken(userEmail, refreshedToken);
             Log.d(TAG, "User data saved");
-
                  } else {
 
             Log.d(TAG, "USER NOT SIGNED IN, hence no data saved");

@@ -3,6 +3,7 @@ package codefathers.tripalert.viewModels;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.ClipData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -14,7 +15,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.services.DatabaseService;
@@ -87,22 +90,17 @@ public class SelectConctactsViewModel extends AndroidViewModel {
                 //List<AppUser> userList = new ArrayList<>();
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Log.d(TAG, "FETCHING Users ");
                     for (DataSnapshot uSnapshot: dataSnapshot.getChildren()) {
                         AppUser user = uSnapshot.getValue(AppUser.class);
                         userList.add(user);
-                        Log.d(TAG, user.getPhoneNumber());
                     }
-                    Log.d(TAG, "DONE ");
 
-                //TODO   passing userList to LiveData<databaseUsers>
-                    // databaseUsers.setValue(userList);
+                    databaseUsers.setValue(userList);
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     // Getting Post failed, log a message
-                    Log.w(TAG, "loadUser:onCancelled", databaseError.toException());
 
                     // ...
                 }
@@ -111,10 +109,9 @@ public class SelectConctactsViewModel extends AndroidViewModel {
             });
 
 
-    /*
 
-        List<AppUser> userList = new ArrayList<AppUser>();
-        userList.add(new AppUser("+306943864227"));
+
+       /* userList.add(new AppUser("+306943864227"));
         userList.add(new AppUser("+4915251956592"));
         userList.add(new AppUser("+306972834844"));
         userList.add(new AppUser("+4915730263379"));
@@ -123,9 +120,8 @@ public class SelectConctactsViewModel extends AndroidViewModel {
         userList.add(new AppUser("666666666"));
         userList.add(new AppUser("777777777"));
         //then just pass the data here whenever it changes
-        databaseUsers.setValue(userList);
+        databaseUsers.setValue(userList); */
 
-*/
    }
 
     public void addContact(AppUser user){

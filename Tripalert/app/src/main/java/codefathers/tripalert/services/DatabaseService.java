@@ -53,29 +53,24 @@ public class DatabaseService extends Service {
     public void writeTracking(Tracking tracking) {
         Log.d(TAG,"db write tracking");
 
-        dbRef = FirebaseDatabase.getInstance().getReference("tracks");
-        String trackId = dbRef.push().getKey();
-        dbRef.child(trackId).setValue(tracking);
+        dbRef = FirebaseDatabase.getInstance().getReference("trackings");
+        String trackingID = tracking.getCreator();
+        dbRef.child(trackingID).setValue(tracking);
         // add value listener
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                   if(dataSnapshot.exists() && dataSnapshot != null) {
+                   if(dataSnapshot.exists()) {
 
                     for (DataSnapshot trackingSnapshot: dataSnapshot.getChildren()) {
                         Tracking tracking1 = trackingSnapshot.getValue(Tracking.class);
-                        Log.d(TAG, "DATA CHANGED");
-                        Log.d(TAG, tracking1.toString());
                     }
 
-                } else {
-                    Log.d(TAG, "NuLLLL");
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });       //
     }

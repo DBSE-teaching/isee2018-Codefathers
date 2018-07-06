@@ -9,10 +9,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.interfaces.NextStepActivity;
@@ -137,8 +140,7 @@ public class SpecifyDetails extends AppCompatActivity implements NextStepActivit
     }
 
      private  Bundle makeBundle(){
-         //todo: pass the AppUser object from homescreen.
-         AppUser creator = new AppUser("39473957403");
+         String creator = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
          Tracking temp = new Tracking(startingPoint,destination,0,estimatedTime, creator);
          Bundle bundle = new Bundle();
          bundle.putSerializable("tracking",temp);

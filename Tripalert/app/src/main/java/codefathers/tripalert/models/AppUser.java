@@ -1,6 +1,7 @@
 package codefathers.tripalert.models;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
@@ -20,13 +21,16 @@ public class AppUser implements Serializable{
 
     private String phoneNumber;
 
+    @Exclude
     private boolean isChecked;
 
 
+    @Exclude
     /**
-     * user name of the user, todo: specify if we really need this
+     * user name of the user
      */
     private String userName;
+
     /**
      * the tracking that a user has created, null if no tracking
      */
@@ -120,7 +124,6 @@ public class AppUser implements Serializable{
     @Override
     public boolean equals(Object obj){
         //compare the phonenumber without whitespace.
-        String myPhoneNumber = this.phoneNumber;
         String objPhoneNumber = ((AppUser)obj).phoneNumber;
         return (this.phoneNumber.equals(objPhoneNumber));
     }
