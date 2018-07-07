@@ -88,6 +88,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:clickable="true"
+        android:onClick="onEmergency"
         app:backgroundTint="@color/colorEmergency"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

@@ -96,13 +96,12 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
     public void onFragmentInteraction(Uri uri) {
 
     }
-
-    ////
+    public void onEmergency(View view){
+        viewModel.changeCreatedTrackingtatus(3);
+    }
     public void onSignOut(View view) {
         mAuth = FirebaseAuth.getInstance();
-        Log.d(TAG,"User signed out before is "+ mAuth.getCurrentUser());
         mAuth.signOut();
-        Log.d(TAG,"User signed out after is "+ mAuth.getCurrentUser());
         if(mAuth.getCurrentUser()==null) {
             startActivity(new Intent(HomeScreen.this, PhoneAuthActivity.class));
         }

@@ -121,6 +121,18 @@ public class Tracking implements Serializable{
         
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + (this.getCreator() != null ? this.getCreator().hashCode(): 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.getCreator().equals(((Tracking)obj).getCreator());
+    }
+
     public Map<String,Boolean> getFollowers() {
         return followers;
     }

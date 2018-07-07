@@ -21,7 +21,6 @@ import codefathers.tripalert.models.Tracking;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -35,6 +34,7 @@ public class MyTracking extends Fragment {
     private LinearLayout createdLayout;
     private HomeScreenViewModel viewModel;
     private OnFragmentInteractionListener mListener;
+
     public MyTracking() {
         // Required empty public constructor
     }
@@ -53,21 +53,28 @@ public class MyTracking extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel =  ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
         //TODO: create a list that shows the followers.
         viewModel.getCreatedTracking().observe(this, new Observer<Tracking>() {
             @Override
             public void onChanged(@Nullable Tracking tracking) {
-                TextView txt = (TextView) getView().findViewById(R.id.currStart);
-                TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
-                TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
-                TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
-                txt.setText(tracking.getStartingPoint().getAddress());
-                txt2.setText(tracking.getDestination().getAddress());
-                txt4.setText(String.valueOf(tracking.getEstimatedTime()));
-                txt3.setText("TODO");
-                createdLayout.setVisibility(View.VISIBLE);
-                notCreatedLayout.setVisibility(View.INVISIBLE);
+                if (tracking != null) {
+                    TextView txt = (TextView) getView().findViewById(R.id.currStart);
+                    TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
+                    TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
+                    TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
+                    txt.setText(tracking.getStartingPoint().getAddress());
+                    txt2.setText(tracking.getDestination().getAddress());
+                    txt4.setText(String.valueOf(tracking.getEstimatedTime()));
+                    txt3.setText("TODO");
+                    createdLayout.setVisibility(View.VISIBLE);
+                    notCreatedLayout.setVisibility(View.INVISIBLE);
+                }else{
+                    notCreatedLayout.setVisibility(View.VISIBLE);
+                    createdLayout.setVisibility(View.INVISIBLE);
+
+
+                }
             }
         });
     }
@@ -76,9 +83,9 @@ public class MyTracking extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_my_tracking, container,    false);
-        this.createdLayout = (LinearLayout) v.findViewById(R.id.created) ;
-        this.notCreatedLayout = (ConstraintLayout) v.findViewById(R.id.notCreated) ;
+        View v = inflater.inflate(R.layout.fragment_my_tracking, container, false);
+        this.createdLayout = (LinearLayout) v.findViewById(R.id.created);
+        this.notCreatedLayout = (ConstraintLayout) v.findViewById(R.id.notCreated);
         Button settingsBtn = (Button) v.findViewById(R.id.newTrackingBtn);
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
