@@ -88,7 +88,9 @@ public class HomeScreenViewModel extends AndroidViewModel {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Tracking tracking = dataSnapshot.getValue(Tracking.class);
-                createdTracking.setValue(tracking);
+                if(tracking != null){
+                    createdTracking.setValue(tracking);
+                }
             }
 
             @Override
