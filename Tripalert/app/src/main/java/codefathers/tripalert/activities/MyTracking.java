@@ -54,6 +54,7 @@ public class MyTracking extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         viewModel =  ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
+        //TODO: create a list that shows the followers.
         viewModel.getCreatedTracking().observe(this, new Observer<Tracking>() {
             @Override
             public void onChanged(@Nullable Tracking tracking) {
@@ -61,10 +62,10 @@ public class MyTracking extends Fragment {
                 TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
                 TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
                 TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
-                txt.setText("TO DO");
-                txt2.setText("TO DO");
+                txt.setText(tracking.getStartingPoint().getAddress());
+                txt2.setText(tracking.getDestination().getAddress());
                 txt4.setText(String.valueOf(tracking.getEstimatedTime()));
-                txt3.setText("dunno");
+                txt3.setText("TODO");
                 createdLayout.setVisibility(View.VISIBLE);
                 notCreatedLayout.setVisibility(View.INVISIBLE);
             }

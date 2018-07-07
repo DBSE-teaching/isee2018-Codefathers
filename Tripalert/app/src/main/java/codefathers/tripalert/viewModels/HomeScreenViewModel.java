@@ -6,12 +6,19 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.models.Location;
 import codefathers.tripalert.models.Tracking;
+import codefathers.tripalert.services.DatabaseService;
 
 public class HomeScreenViewModel extends AndroidViewModel {
 
@@ -35,6 +42,7 @@ public class HomeScreenViewModel extends AndroidViewModel {
 
 
     */
+    private AppUser user;
     private MutableLiveData<List<Tracking>> followedTrackings;
     private MutableLiveData<Tracking> createdTracking;
     //private AppDatabase appDatabase;
@@ -47,6 +55,9 @@ public class HomeScreenViewModel extends AndroidViewModel {
        // appDatabase.tracking().deleteTracking(tracking);
     }
 
+    public void setUser(AppUser user){
+        this.user = user;
+    }
     public MutableLiveData<List<Tracking>> getFollowedTrackings() {
        // followedTrackings = appDatabase.trackingModel().getFollowedTrackings();
         if(followedTrackings == null){
@@ -71,6 +82,20 @@ public class HomeScreenViewModel extends AndroidViewModel {
     }
 
     private void loadCreatedTracking(){
+        DatabaseReference dbRef;
+        dbRef = FirebaseDatabase.getInstance().getReference("trackings").child(user.getPhoneNumber());
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Tracking tracking = dataSnapshot.getValue(Tracking.class);
+                createdTracking.setValue(tracking);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
 }

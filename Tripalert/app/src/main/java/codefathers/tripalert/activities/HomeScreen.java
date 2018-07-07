@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import codefathers.tripalert.adapters.HomesPagerAdapter;
 import codefathers.tripalert.R;
+import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
@@ -41,6 +42,11 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser == null || mUser.getPhoneNumber().isEmpty()){
             startActivity(new Intent(this, PhoneAuthActivity.class));
+        }else{
+            AppUser user = new AppUser();
+            user.setPhoneNumber(mUser.getPhoneNumber());
+            //whatever we need to set we do that here.
+            viewModel.setUser(user);
         }
     }
 

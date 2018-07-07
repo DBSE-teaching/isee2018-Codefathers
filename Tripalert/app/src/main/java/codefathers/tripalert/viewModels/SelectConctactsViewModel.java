@@ -28,7 +28,6 @@ public class SelectConctactsViewModel extends AndroidViewModel {
     private MutableLiveData<List<AppUser>> databaseUsers;
     private List<AppUser>filteredContacts;
     private List<AppUser>selectedContacts;
-    private DatabaseService databaseService;
     public SelectConctactsViewModel(@NonNull Application application ) {
         super(application);
     }
@@ -79,7 +78,6 @@ public class SelectConctactsViewModel extends AndroidViewModel {
     private void loadDatabaseUsers(){
         List<AppUser> userList = new ArrayList<>();
         DatabaseReference dbRef;
-        databaseService = new DatabaseService();
 
         dbRef = FirebaseDatabase.getInstance().getReference("users");
 
