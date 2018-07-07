@@ -16,7 +16,6 @@ public class Tracking implements Serializable{
 
     /**
      * id will be used as the primary key of the Tracking
-     * todo:do we need a primary key for NoSql?
      */
     public int id;
 

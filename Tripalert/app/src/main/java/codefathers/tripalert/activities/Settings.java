@@ -10,9 +10,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class Settings extends AppCompatActivity {
-    String TAG = "SETTINGS";
-    FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +19,5 @@ public class Settings extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void onSignOut(View view) {
-        mAuth.signOut();
-        Log.d(TAG,"User signed out");
-        startActivity(new Intent( Settings.this, PhoneAuthActivity.class));
 
-    }
 }
