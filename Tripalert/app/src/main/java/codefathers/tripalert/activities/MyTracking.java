@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.models.AppUser;
+import codefathers.tripalert.models.Location;
 import codefathers.tripalert.models.Tracking;
 import codefathers.tripalert.models.TrackingStatus;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
@@ -32,10 +33,13 @@ import codefathers.tripalert.viewModels.HomeScreenViewModel;
  * create an instance of this fragment.
  */
 public class MyTracking extends Fragment {
+
     private ConstraintLayout notCreatedLayout;
     private LinearLayout createdLayout;
     private HomeScreenViewModel viewModel;
     private OnFragmentInteractionListener mListener;
+    static final int TIME_LIMIT = 1;
+
 
     public MyTracking() {
         // Required empty public constructor
@@ -70,7 +74,7 @@ public class MyTracking extends Fragment {
                     txt3.setText("TODO");
                     createdLayout.setVisibility(View.VISIBLE);
                     notCreatedLayout.setVisibility(View.INVISIBLE);
-                    startGps();
+                    startGps(tracking);
                 }else{
                     notCreatedLayout.setVisibility(View.VISIBLE);
                     createdLayout.setVisibility(View.INVISIBLE);
@@ -109,9 +113,13 @@ public class MyTracking extends Fragment {
         }
     }
 
-    public void startGps(){
-
+    public void startGps(Tracking tracking){
+        /*Location destination = tracking.getDestination();
+        destination.getLang();
+        destination.getLat();
+        */
     }
+
     public void onFinish(){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.FINISHED);
     }
