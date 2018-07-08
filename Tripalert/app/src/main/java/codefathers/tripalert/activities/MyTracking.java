@@ -54,7 +54,8 @@ public class MyTracking extends Fragment implements LocationListener {
     double myDestinationLatitude;
     double MyDestinationLongitude;
     private int timeStationary;
-    private CountDownTimer myTimer;
+    private double totalTimePassed;
+    private CountDownTimer delayTimer, estimatedTimer;
 
 
     public MyTracking() {
@@ -69,6 +70,8 @@ public class MyTracking extends Fragment implements LocationListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Override
@@ -91,6 +94,7 @@ public class MyTracking extends Fragment implements LocationListener {
                     txt3.setText("TODO");
                     createdLayout.setVisibility(View.VISIBLE);
                     notCreatedLayout.setVisibility(View.INVISIBLE);
+                    totalTimePassed = 0.0;
                     startGps(tracking);
                 }else{
                     notCreatedLayout.setVisibility(View.VISIBLE);
@@ -131,10 +135,6 @@ public class MyTracking extends Fragment implements LocationListener {
     }
 
     public void startGps(Tracking tracking){
-        /*Location destination = tracking.getDestination();
-        destination.getLang();
-        destination.getLat();
-        */
 
         LocationManager lm = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
 
@@ -146,10 +146,18 @@ public class MyTracking extends Fragment implements LocationListener {
 
         myDestinationLatitude = Double.parseDouble(tracking.getDestination().getLat());
         MyDestinationLongitude = Double.parseDouble(tracking.getDestination().getLang());
-    }
+
+        }
+
+
+
+
 
     public void onFinish(){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.FINISHED);
+    }
+    public void onResumeMoving(){
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.STARTED);
     }
     public void onDelay(){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.DELAYED);
@@ -170,10 +178,11 @@ public class MyTracking extends Fragment implements LocationListener {
     @Override
     public void onLocationChanged(android.location.Location location) {
 
+
         try
         {
             if (getDistance(myLocation.getLatitude(),location.getLatitude() ,myLocation.getLongitude(),location.getLongitude(),0,0) > 20)
-                myTimer.cancel();
+                delayTimer.cancel();
 
             else if (getDistance(myLocation.getLatitude(),location.getLatitude() ,myLocation.getLongitude(),location.getLongitude(),0,0) != 0)
                 return;
@@ -183,11 +192,14 @@ public class MyTracking extends Fragment implements LocationListener {
 
 
         myLocation = location;
+        onResumeMoving();
         timeStationary = 0;
-        myTimer = new CountDownTimer(60000*TIME_LIMIT, 1000) {
+        delayTimer = new CountDownTimer(60000*TIME_LIMIT, 1000) {
             @Override
             public void onTick(long l) {
                 timeStationary++;
+                totalTimePassed++;
+                //if (totalTimePassed > 120) Toast.makeText(getActivity(), "YOU ARE DELAYED", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -198,13 +210,27 @@ public class MyTracking extends Fragment implements LocationListener {
 
 
         double distance = getDistance(myLocation.getLatitude(),myDestinationLatitude ,myLocation.getLongitude(),MyDestinationLongitude,0,0);
-        if (distance <= LOCATION_LIMIT) onFinish();
+        if (distance <= LOCATION_LIMIT)
+        {
+            estimatedTimer.cancel();
+            delayTimer.cancel();
+            onTrackingTerminate();
+            onFinish();
+        }
 
     }
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
 
+    }
+
+    public void onTrackingTerminate ()
+    {
+        LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            return; //koitaei na dei an exei adeies
+        lm.removeUpdates(this); //stamatei na pairnei tin thesi tou kinitou
     }
 
     @Override
