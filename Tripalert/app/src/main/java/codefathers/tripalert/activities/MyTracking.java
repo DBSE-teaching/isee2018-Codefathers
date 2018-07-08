@@ -19,6 +19,7 @@ import android.widget.TextView;
 import codefathers.tripalert.R;
 import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.models.Tracking;
+import codefathers.tripalert.models.TrackingStatus;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
@@ -69,6 +70,7 @@ public class MyTracking extends Fragment {
                     txt3.setText("TODO");
                     createdLayout.setVisibility(View.VISIBLE);
                     notCreatedLayout.setVisibility(View.INVISIBLE);
+                    startGps();
                 }else{
                     notCreatedLayout.setVisibility(View.VISIBLE);
                     createdLayout.setVisibility(View.INVISIBLE);
@@ -107,22 +109,27 @@ public class MyTracking extends Fragment {
         }
     }
 
+    public void startGps(){
+
+    }
+    public void onFinish(){
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.FINISHED);
+    }
+    public void onDelay(){
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.DELAYED);
+    }
+    public void onAbort(){
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.ABORTED);
+    }
+    public void onNotResponding(){
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.NOT_RESPONDING);
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }

@@ -51,6 +51,7 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         goToSettings();
         makeTabs();
 
+
     }
 
     private void goToSettings(){
@@ -103,18 +104,7 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
     public void onEmergency(View view){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.EMERGENCY);
     }
-    public void onFinish(){
-        viewModel.changeCreatedTrackingtatus(TrackingStatus.FINISHED);
-    }
-    public void onDelay(){
-        viewModel.changeCreatedTrackingtatus(TrackingStatus.DELAYED);
-    }
-    public void onAbort(){
-        viewModel.changeCreatedTrackingtatus(TrackingStatus.ABORTED);
-    }
-    public void onNotResponding(){
-        viewModel.changeCreatedTrackingtatus(TrackingStatus.NOT_RESPONDING);
-    }
+
 
 
     public void onSignOut(View view) {
