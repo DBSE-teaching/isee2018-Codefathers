@@ -15,6 +15,8 @@
     <color name="primary_material_light">#ffc107</color>
     <color name="accent_material_light">#009688</color>
     <color name="colorTextOnWhiteTrans">#c8263238</color>
+    <color name="colorArrived">#009900</color>
+
 
 
 </resources>

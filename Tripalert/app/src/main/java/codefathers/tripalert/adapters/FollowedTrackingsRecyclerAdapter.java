@@ -78,6 +78,9 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
                 case TrackingStatus.ABORTED:
                     color = ContextCompat.getColor(holder.card.getContext(), R.color.colorDestructiveAction);
                     break;
+                case TrackingStatus.FINISHED:
+                    color = ContextCompat.getColor(holder.card.getContext(), R.color.colorArrived);
+                    break;
                 default:
                     color = ContextCompat.getColor(holder.card.getContext(), R.color.colorEverythingFine);
             }

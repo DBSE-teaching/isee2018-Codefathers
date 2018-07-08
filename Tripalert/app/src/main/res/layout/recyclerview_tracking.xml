@@ -9,91 +9,125 @@
     <android.support.v7.widget.CardView
         android:id="@+id/recCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="219dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         app:cardBackgroundColor="@color/colorEverythingFine">
 
-        <TableLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="32dp"
-            android:background="@color/cardview_light_background">
+            android:layout_marginLeft="8dp"
+            android:background="@color/colorCardBackGround">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/recPhoneNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="TextView"
-                    android:textColor="@color/colorEverythingFine"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp">
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="141dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/currTrackingStart"
-                    android:textColor="@color/colorTextOnWhite"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="124dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/currTrackingDestination"
-                    android:textColor="@color/colorTextOnWhite"
-                    android:textStyle="bold" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="18dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="16dp">
-
-                <TextView
-                    android:id="@+id/recStartingPoint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/recDestination"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/recPhoneNumber"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right">
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:textColor="@color/colorEverythingFine"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/unfollowButton"
-                    android:layout_width="107dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="8dp"
-                    android:background="@color/colorDestructiveAction"
-                    android:textColor="@color/colorTextOnBlack"
-                    tools:text="@string/unfollow" />
-            </TableRow>
-        </TableLayout>
+            <Button
+                android:id="@+id/unfollowButton"
+                android:layout_width="105dp"
+                android:layout_height="30dp"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/colorDestructiveAction"
+                android:text="@string/unfollow"
+                android:textColor="@color/colorTextOnBlack"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="@string/unfollow" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="141dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="44dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="52dp"
+                android:text="@string/currTrackingStart"
+                android:textColor="@color/colorTextOnWhite"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/recStartingPoint"
+                android:layout_width="266dp"
+                android:layout_height="34dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="52dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="52dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="124dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="44dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/currTrackingDestination"
+                android:textColor="@color/colorTextOnWhite"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recDestination" />
+
+            <TextView
+                android:id="@+id/recDestination"
+                android:layout_width="271dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="52dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="52dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                app:layout_constraintEnd_toStartOf="@+id/textView5"
+                app:layout_constraintTop_toTopOf="@+id/textView5"
+                app:srcCompat="@drawable/ic_location_on_black_24dp" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView4"
+                app:srcCompat="@drawable/ic_gps_fixed_black_24dp" />
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 </LinearLayout>

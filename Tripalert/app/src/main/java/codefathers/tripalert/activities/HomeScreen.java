@@ -46,10 +46,11 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
             user.setPhoneNumber(mUser.getPhoneNumber());
             //whatever we need to set we do that here.
             viewModel.setUser(user);
+            setContentView(R.layout.activity_home_screen);
+            goToSettings();
+            makeTabs();
+
         }
-        setContentView(R.layout.activity_home_screen);
-        goToSettings();
-        makeTabs();
 
 
     }
