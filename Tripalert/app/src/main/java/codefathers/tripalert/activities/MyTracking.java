@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import codefathers.tripalert.R;
+import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.models.Tracking;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
@@ -52,7 +53,6 @@ public class MyTracking extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         viewModel = ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
         //TODO: create a list that shows the followers.
         viewModel.getCreatedTracking().observe(this, new Observer<Tracking>() {

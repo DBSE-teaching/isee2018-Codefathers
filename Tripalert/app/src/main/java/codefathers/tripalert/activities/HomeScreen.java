@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import codefathers.tripalert.adapters.HomesPagerAdapter;
 import codefathers.tripalert.R;
 import codefathers.tripalert.models.AppUser;
+import codefathers.tripalert.models.TrackingStatus;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
@@ -34,10 +35,8 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
         viewModel = ViewModelProviders.of(this).get(HomeScreenViewModel.class);
-        goToSettings();
-        makeTabs();
+
         ///check authentication status, redirect to login page if not authenticated
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser == null || mUser.getPhoneNumber().isEmpty()){
@@ -48,6 +47,10 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
             //whatever we need to set we do that here.
             viewModel.setUser(user);
         }
+        setContentView(R.layout.activity_home_screen);
+        goToSettings();
+        makeTabs();
+
     }
 
     private void goToSettings(){
@@ -96,9 +99,24 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
     public void onFragmentInteraction(Uri uri) {
 
     }
+
     public void onEmergency(View view){
-        viewModel.changeCreatedTrackingtatus(3);
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.EMERGENCY);
     }
+    public void onFinish(){
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.FINISHED);
+    }
+    public void onDelay(){
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.DELAYED);
+    }
+    public void onAbort(){
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.ABORTED);
+    }
+    public void onNotResponding(){
+        viewModel.changeCreatedTrackingtatus(TrackingStatus.NOT_RESPONDING);
+    }
+
+
     public void onSignOut(View view) {
         mAuth = FirebaseAuth.getInstance();
         mAuth.signOut();
