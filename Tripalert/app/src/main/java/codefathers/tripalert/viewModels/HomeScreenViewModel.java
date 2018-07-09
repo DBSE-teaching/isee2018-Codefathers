@@ -6,6 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +24,7 @@ import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.models.Location;
 import codefathers.tripalert.models.LogItem;
 import codefathers.tripalert.models.Tracking;
+import codefathers.tripalert.models.TrackingStatus;
 import codefathers.tripalert.services.DatabaseService;
 
 public class HomeScreenViewModel extends AndroidViewModel {
@@ -30,6 +32,7 @@ public class HomeScreenViewModel extends AndroidViewModel {
     private AppUser user;
     private MutableLiveData<List<Tracking>> followedTrackings;
     private MutableLiveData<Tracking> createdTracking;
+    private MutableLiveData<List<LogItem>> logItems;
 
     //private AppDatabase appDatabase;
     public HomeScreenViewModel(@NonNull Application application) {
@@ -37,22 +40,37 @@ public class HomeScreenViewModel extends AndroidViewModel {
         // this.appDatabase = AppDatabase.getDatabase(this.getApplication());
     }
 
+
+    public AppUser getUser(){
+        return user;
+    }
     public void unfollowTracking(Tracking tracking) {
       FirebaseDatabase.getInstance().getReference("trackings").child(tracking.getCreator()+"/followers/" + user.getPhoneNumber()).setValue(false);
     }
 
     public void addSituationLog(LogItem log) {
-
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("trackings");
-
+        if(log.getRecievers() == null && createdTracking !=null){
+            if(createdTracking.getValue().getFollowers() != null)log.setRecievers(createdTracking.getValue().getFollowers());
+        };
+        if(log.getCreator() == null && createdTracking != null ){
+            log.setCreator(createdTracking.getValue().getCreator());
+        }
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("logItems");
         String id = dbRef.push().getKey();
-        dbRef.child(user.getPhoneNumber()).child("situationLog").child(id).setValue(log);
+        dbRef.child(id).setValue(log);
     }
 
     public void setUser(AppUser user) {
         this.user = user;
     }
 
+    public MutableLiveData<List<LogItem>> getLogItems(){
+     if(logItems == null ){
+         logItems = new MutableLiveData<List<LogItem>>();
+         loadLogItems();
+     }
+     return logItems;
+    }
     public MutableLiveData<List<Tracking>> getFollowedTrackings() {
         // followedTrackings = appDatabase.trackingModel().getFollowedTrackings();
         if (followedTrackings == null) {
@@ -71,6 +89,44 @@ public class HomeScreenViewModel extends AndroidViewModel {
         return createdTracking;
     }
 
+    private void loadLogItems(){
+        Query dbRef;
+        dbRef = FirebaseDatabase.getInstance().getReference("logItems").orderByChild("recievers/" + user.getPhoneNumber())
+                .equalTo(true);
+        dbRef.addChildEventListener(new ChildEventListener() {
+            List<LogItem> logItemsList= new ArrayList<>();
+
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                LogItem item = dataSnapshot.getValue(LogItem.class);
+
+                logItemsList.add(0,item);
+                logItems.setValue(logItemsList);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                LogItem item = dataSnapshot.getValue(LogItem.class);
+                logItemsList.remove(item);
+                logItems.setValue(logItemsList);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
     private void loadFollowedTrackings() {
         Query dbRef;
         dbRef = FirebaseDatabase.getInstance().getReference("trackings").orderByChild("followers/" + user.getPhoneNumber())
@@ -119,18 +175,41 @@ public class HomeScreenViewModel extends AndroidViewModel {
         dbRef.child(user.getPhoneNumber()).child("status").setValue(status);
     }
 
+    public void removeCreatedTracking(){
+      FirebaseDatabase.getInstance().getReference("trackings").child(user.getPhoneNumber()).setValue(null);
+    }
     private void loadCreatedTracking() {
-        DatabaseReference dbRef;
-        dbRef = FirebaseDatabase.getInstance().getReference("trackings").child(user.getPhoneNumber());
-        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query dbRef;
+        dbRef = FirebaseDatabase.getInstance().getReference("trackings").orderByKey().equalTo(user.getPhoneNumber());
+        dbRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Tracking tracking = dataSnapshot.getValue(Tracking.class);
                 if (tracking != null) {
                     createdTracking.setValue(tracking);
                 } else {
                     createdTracking.setValue(null);
                 }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Tracking tracking = dataSnapshot.getValue(Tracking.class);
+                if (tracking != null) {
+                    createdTracking.setValue(tracking);
+                } else {
+                    createdTracking.setValue(null);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                createdTracking.setValue(null);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override

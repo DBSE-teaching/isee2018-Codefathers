@@ -26,9 +26,6 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
     public interface FollowedTrackingsListener {
 
         void unfollowOnClick(View v, int position);
-
-        void logOnClick(View v, int position);
-
     }
 
     //the view holder holds the seperate views.
@@ -49,7 +46,6 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
             destination = itemView.findViewById(R.id.recDestination);
             card = itemView.findViewById(R.id.recCard);
             unfollow = itemView.findViewById(R.id.unfollowButton);
-            log = itemView.findViewById(R.id.log);
 
             unfollow.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,19 +73,11 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mTrackings != null) {
             Tracking current = mTrackings.get(position);
-            /* holder.phoneNumber.setText(current.getCreator().getPhoneNumber());
-            holder.destination.setText(current.getDestination().getAddress());
-            holder.startingPoint.setText(current.getStartingPoint().getAddress());
-*/
 
             holder.phoneNumber.setText(current.getCreator());
             holder.destination.setText(current.getDestination().getAddress());
             holder.startingPoint.setText(current.getStartingPoint().getAddress());
-            if(current.getSituationLog()!= null){
-                holder.log.setText(Integer.toString(current.getSituationLog().size()));
-            }else{
-                holder.log.setText("0");
-            }
+
 
             int color;
             switch (current.getStatus()) {

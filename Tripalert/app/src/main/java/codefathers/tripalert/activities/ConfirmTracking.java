@@ -11,20 +11,24 @@ import android.widget.Toast;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.interfaces.NextStepActivity;
+import codefathers.tripalert.models.LogItem;
+import codefathers.tripalert.models.LogMessages;
 import codefathers.tripalert.models.Tracking;
+import codefathers.tripalert.models.TrackingStatus;
 import codefathers.tripalert.viewModels.ConfirmTrackingVIewModel;
 
-public class ConfirmTracking extends AppCompatActivity implements NextStepActivity{
+public class ConfirmTracking extends AppCompatActivity implements NextStepActivity {
     private Tracking tracking;
     private ConfirmTrackingVIewModel viewModel;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
 
         //TODO: Create the UI for this activity that displays the tracking
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_tracking);
         viewModel = ViewModelProviders.of(this).get(ConfirmTrackingVIewModel.class);
-        tracking = (Tracking)getIntent().getSerializableExtra("tracking");
+        tracking = (Tracking) getIntent().getSerializableExtra("tracking");
         viewModel.setTracking(tracking);
     }
 
@@ -34,9 +38,16 @@ public class ConfirmTracking extends AppCompatActivity implements NextStepActivi
         viewModel.isWritten().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if(aBoolean){
-                    startActivity(new Intent(ConfirmTracking.this, HomeScreen.class ));
-                }else{
+                if (aBoolean) {
+                    viewModel.addSituationLog(new LogItem(TrackingStatus.STARTED,
+                            LogMessages.getOnStart(
+                                    tracking.getStartingPoint().getAddress(),
+                                    tracking.getDestination().getAddress(),
+                                    tracking.getEstimatedTime()
+                            ))
+                    );
+                    startActivity(new Intent(ConfirmTracking.this, HomeScreen.class));
+                } else {
                     Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.errorDB), Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -50,7 +61,7 @@ public class ConfirmTracking extends AppCompatActivity implements NextStepActivi
     @Override
     public void onCancel(View v) {
 
-        startActivity(new Intent(ConfirmTracking.this, HomeScreen.class ));
+        startActivity(new Intent(ConfirmTracking.this, HomeScreen.class));
     }
 
     @Override

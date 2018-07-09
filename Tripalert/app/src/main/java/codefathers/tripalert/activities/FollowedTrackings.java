@@ -15,11 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.adapters.FollowedTrackingsRecyclerAdapter;
+import codefathers.tripalert.models.LogItem;
+import codefathers.tripalert.models.LogMessages;
 import codefathers.tripalert.models.Tracking;
+import codefathers.tripalert.models.TrackingStatus;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
 
@@ -101,12 +106,14 @@ public class FollowedTrackings extends Fragment {
                     @Override
                     public void unfollowOnClick(View v, int position) {
                         viewModel.unfollowTracking(trackings.get(position));
+                        LogItem log = new LogItem(TrackingStatus.ABORTED, LogMessages.onUnfollow());
+                        log.setCreator(viewModel.getUser().getPhoneNumber());
+                        Map <String, Boolean> map  = new HashMap();
+                        map.put(trackings.get(position).getCreator(),true);
+                        log.setRecievers(map);
+                        viewModel.addSituationLog(log);
                     }
 
-                    @Override
-                    public void logOnClick(View v, int position) {
-
-                    }
                 });
                 followingLayout.setVisibility(View.VISIBLE);
                 notFollowingLayout.setVisibility(View.INVISIBLE);

@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.models.Location;
+import codefathers.tripalert.models.LogItem;
+import codefathers.tripalert.models.LogMessages;
 import codefathers.tripalert.models.Tracking;
 import codefathers.tripalert.models.TrackingStatus;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
@@ -57,7 +59,8 @@ public class MyTracking extends Fragment implements LocationListener {
     private double totalTimePassed;
     private CountDownTimer delayTimer, estimatedTimer;
     private boolean hasDelayed = false;
-
+    private int count;
+    private Tracking cachedTracking;
 
     public MyTracking() {
         // Required empty public constructor
@@ -85,6 +88,7 @@ public class MyTracking extends Fragment implements LocationListener {
             public void onChanged(@Nullable Tracking tracking) {
 
                 if (tracking != null) {
+                    cachedTracking = tracking;
                     TextView txt = (TextView) getView().findViewById(R.id.currStart);
                     TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
                     TextView txt3 = (TextView) getView().findViewById(R.id.currStartedAt);
@@ -92,12 +96,19 @@ public class MyTracking extends Fragment implements LocationListener {
                     txt.setText(tracking.getStartingPoint().getAddress());
                     txt2.setText(tracking.getDestination().getAddress());
                     txt4.setText(String.valueOf(tracking.getEstimatedTime()));
-                    txt3.setText("TODO");
                     createdLayout.setVisibility(View.VISIBLE);
                     notCreatedLayout.setVisibility(View.INVISIBLE);
-                    startGps(tracking);
-                    globalTimerStart(tracking.getEstimatedTime());
+                    if(count == 0 && tracking.getStatus()!= TrackingStatus.EMERGENCY){
+                        startGps(tracking);
+                        globalTimerStart(tracking.getEstimatedTime());
+                    }
+                    if(tracking.getStatus() == TrackingStatus.EMERGENCY){
+                        onTrackingTerminate();
+                    }
+                    count++;
+
                 }else{
+                    count = 0;
                     notCreatedLayout.setVisibility(View.VISIBLE);
                     createdLayout.setVisibility(View.INVISIBLE);
 
@@ -112,7 +123,6 @@ public class MyTracking extends Fragment implements LocationListener {
 
         try {
             estimatedTimer.cancel();
-
         }
         catch (Exception e) {
             estimatedTimer = new CountDownTimer((long) (1.1 * 60000 * time), 1000) {
@@ -181,18 +191,26 @@ public class MyTracking extends Fragment implements LocationListener {
 
     public void onFinish(){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.FINISHED);
+        viewModel.addSituationLog(new LogItem(TrackingStatus.FINISHED,LogMessages.onArrived(cachedTracking.getDestination().getAddress())));
+        viewModel.removeCreatedTracking();
     }
+
     public void onResumeMoving(){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.STARTED);
+        viewModel.addSituationLog(new LogItem(TrackingStatus.STARTED,LogMessages.onResume()));
     }
+
     public void onDelay(){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.DELAYED);
+        viewModel.addSituationLog(new LogItem(TrackingStatus.DELAYED,LogMessages.delayed()));
     }
     public void onAbort(){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.ABORTED);
     }
+
     public void onNotResponding(){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.NOT_RESPONDING);
+        viewModel.addSituationLog(new LogItem(TrackingStatus.NOT_RESPONDING,LogMessages.getOnNotResponding()));
     }
 
     @Override
@@ -207,15 +225,15 @@ public class MyTracking extends Fragment implements LocationListener {
 
         try
         {
-            if (getDistance(myLocation.getLatitude(),location.getLatitude() ,myLocation.getLongitude(),location.getLongitude(),0,0) > 20)
+            if (getDistance(myLocation.getLatitude(),location.getLatitude() ,myLocation.getLongitude(),location.getLongitude(),0,0) > 5)
                 delayTimer.cancel();
 
             else if (getDistance(myLocation.getLatitude(),location.getLatitude() ,myLocation.getLongitude(),location.getLongitude(),0,0) != 0)
                 return;
         }
-        catch (Exception e) {}
+        catch (Exception e) {
 
-
+        }
 
         myLocation = location;
         if (!hasDelayed) onResumeMoving();
@@ -228,8 +246,7 @@ public class MyTracking extends Fragment implements LocationListener {
 
             @Override
             public void onFinish() {
-                onDelay();
-                //TODO: Substitute with onNotReponding();
+                onNotResponding();
             }
         }.start();
 
@@ -259,7 +276,6 @@ public class MyTracking extends Fragment implements LocationListener {
 
     @Override
     public void onProviderEnabled(String s) {
-
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import codefathers.tripalert.activities.FollowedTrackings;
 import codefathers.tripalert.activities.MyTracking;
+import codefathers.tripalert.activities.SituationLog;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -25,6 +26,8 @@ public class HomesPagerAdapter extends FragmentPagerAdapter {
                 return  new MyTracking();
             case 1:
                 return new FollowedTrackings();
+            case 2:
+                return new SituationLog();
             default :
                 return  null;
 

@@ -72,13 +72,8 @@ public class Tracking implements Serializable{
      * the status of the current tracking. We use here the specified
      * code of each status.
      */
-    private int status;         //todo: see if its possible to do this in enum.
+    private int status;
 
-    /**
-     * if the tracking is created or t
-     */
-
-    private Map <String,LogItem> situationLog;
 
     public Tracking(Location startingPoint, Location destination, int status, int estimatedTime, String creator) {
         this.startingPoint = startingPoint;
@@ -89,16 +84,13 @@ public class Tracking implements Serializable{
         this.followers = null;
     }
 
-
     public Location getStartingPoint() {
         return startingPoint;
     }
 
-
     public int getEstimatedTime() {
         return estimatedTime;
     }
-
 
     public int getStatus() {
         return status;
@@ -112,13 +104,6 @@ public class Tracking implements Serializable{
         return destination;
     }
 
-    public Map<String,LogItem> getSituationLog() {
-        return situationLog;
-    }
-
-    public void setSituationLog(Map<String,LogItem> situationLog) {
-        this.situationLog = situationLog;
-    }
 
     @Override
     public int hashCode() {

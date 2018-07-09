@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import codefathers.tripalert.models.LogItem;
 import codefathers.tripalert.models.Tracking;
 
 public class ConfirmTrackingVIewModel extends AndroidViewModel {
@@ -82,4 +83,16 @@ public class ConfirmTrackingVIewModel extends AndroidViewModel {
                 });
 
     }
+    public void addSituationLog(LogItem log) {
+        if(log.getRecievers() == null && tracking !=null){
+            if(tracking.getFollowers() != null)log.setRecievers(tracking.getFollowers());
+        };
+        if(log.getCreator() == null && tracking != null){
+            log.setCreator(tracking.getCreator());
+        }
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("logItems");
+        String id = dbRef.push().getKey();
+        dbRef.child(id).setValue(log);
+    }
+
 }

@@ -94,4 +94,7 @@
     <string name="token_prompt">Enter token</string>
     <string name="send_token">Send Token</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
