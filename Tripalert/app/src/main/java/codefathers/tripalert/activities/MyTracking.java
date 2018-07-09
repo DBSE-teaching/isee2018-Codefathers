@@ -56,6 +56,7 @@ public class MyTracking extends Fragment implements LocationListener {
     private int timeStationary;
     private double totalTimePassed;
     private CountDownTimer delayTimer, estimatedTimer;
+    private boolean hasDelayed = false;
 
 
     public MyTracking() {
@@ -123,6 +124,8 @@ public class MyTracking extends Fragment implements LocationListener {
                 @Override
                 public void onFinish() {
                     Toast.makeText(getActivity(), "YOU ARE LATE:" + totalTimePassed, Toast.LENGTH_LONG).show();
+                    //TODO: Make time estimate on LOG be RED
+                    hasDelayed = true;
                     onDelay();
                 }
             }.start();
@@ -215,7 +218,7 @@ public class MyTracking extends Fragment implements LocationListener {
 
 
         myLocation = location;
-        onResumeMoving();
+        if (!hasDelayed) onResumeMoving();
         timeStationary = 0;
         delayTimer = new CountDownTimer(60000*TIME_LIMIT, 1000) {
             @Override
@@ -226,6 +229,7 @@ public class MyTracking extends Fragment implements LocationListener {
             @Override
             public void onFinish() {
                 onDelay();
+                //TODO: Substitute with onNotReponding();
             }
         }.start();
 
