@@ -21,14 +21,26 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
     private static final String TAG = "FollowedTrackingsRecycl";
     private LayoutInflater mInflater;           //i have no idea what this is
     private List<Tracking> mTrackings;      //cached copies of trackings
+    public FollowedTrackingsListener onClickListener;
+
+    public interface FollowedTrackingsListener {
+
+        void unfollowOnClick(View v, int position);
+
+        void logOnClick(View v, int position);
+
+    }
 
     //the view holder holds the seperate views.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView phoneNumber;
         TextView startingPoint;
         TextView destination;
+        TextView log;
         CardView card;
         Button unfollow;
+
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -37,6 +49,14 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
             destination = itemView.findViewById(R.id.recDestination);
             card = itemView.findViewById(R.id.recCard);
             unfollow = itemView.findViewById(R.id.unfollowButton);
+            log = itemView.findViewById(R.id.log);
+
+            unfollow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.unfollowOnClick(v, getAdapterPosition());
+                }
+            });
 
 
         }
@@ -61,9 +81,16 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
             holder.destination.setText(current.getDestination().getAddress());
             holder.startingPoint.setText(current.getStartingPoint().getAddress());
 */
+
             holder.phoneNumber.setText(current.getCreator());
             holder.destination.setText(current.getDestination().getAddress());
             holder.startingPoint.setText(current.getStartingPoint().getAddress());
+            if(current.getSituationLog()!= null){
+                holder.log.setText(Integer.toString(current.getSituationLog().size()));
+            }else{
+                holder.log.setText("0");
+            }
+
             int color;
             switch (current.getStatus()) {
                 case TrackingStatus.DELAYED:
@@ -91,6 +118,9 @@ public class FollowedTrackingsRecyclerAdapter extends RecyclerView.Adapter<Follo
 
     }
 
+    public void setListener(FollowedTrackingsListener listener){
+        onClickListener = listener;
+    }
     public void setTrackings(List<Tracking> trackings) {
         mTrackings = trackings;
         notifyDataSetChanged();

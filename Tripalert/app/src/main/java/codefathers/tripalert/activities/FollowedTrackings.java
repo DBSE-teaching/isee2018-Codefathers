@@ -97,6 +97,17 @@ public class FollowedTrackings extends Fragment {
             public void onChanged(@Nullable List<Tracking> trackings) {
 
                 adapter.setTrackings(trackings);
+                adapter.setListener(new FollowedTrackingsRecyclerAdapter.FollowedTrackingsListener() {
+                    @Override
+                    public void unfollowOnClick(View v, int position) {
+                        viewModel.unfollowTracking(trackings.get(position));
+                    }
+
+                    @Override
+                    public void logOnClick(View v, int position) {
+
+                    }
+                });
                 followingLayout.setVisibility(View.VISIBLE);
                 notFollowingLayout.setVisibility(View.INVISIBLE);
             }

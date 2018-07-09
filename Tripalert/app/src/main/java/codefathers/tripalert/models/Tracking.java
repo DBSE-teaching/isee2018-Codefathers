@@ -78,7 +78,7 @@ public class Tracking implements Serializable{
      * if the tracking is created or t
      */
 
-    private List<LogItem> situationLog;
+    private Map <String,LogItem> situationLog;
 
     public Tracking(Location startingPoint, Location destination, int status, int estimatedTime, String creator) {
         this.startingPoint = startingPoint;
@@ -112,13 +112,12 @@ public class Tracking implements Serializable{
         return destination;
     }
 
-    public List<LogItem> getSituationLog() {
+    public Map<String,LogItem> getSituationLog() {
         return situationLog;
     }
 
-    public void setSituationLog(List<LogItem> situationLog) {
+    public void setSituationLog(Map<String,LogItem> situationLog) {
         this.situationLog = situationLog;
-        
     }
 
     @Override

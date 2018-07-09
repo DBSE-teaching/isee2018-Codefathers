@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import codefathers.tripalert.adapters.HomesPagerAdapter;
 import codefathers.tripalert.R;
 import codefathers.tripalert.models.AppUser;
+import codefathers.tripalert.models.LogItem;
 import codefathers.tripalert.models.TrackingStatus;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
 
@@ -44,7 +45,6 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         }else{
             AppUser user = new AppUser();
             user.setPhoneNumber(mUser.getPhoneNumber());
-            //whatever we need to set we do that here.
             viewModel.setUser(user);
             setContentView(R.layout.activity_home_screen);
             goToSettings();
@@ -104,6 +104,7 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
 
     public void onEmergency(View view){
         viewModel.changeCreatedTrackingtatus(TrackingStatus.EMERGENCY);
+        viewModel.addSituationLog(new LogItem(TrackingStatus.EMERGENCY, " User is in emergency "));
     }
 
 

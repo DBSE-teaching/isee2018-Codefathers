@@ -17,34 +17,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import codefathers.tripalert.models.AppUser;
 import codefathers.tripalert.models.Location;
+import codefathers.tripalert.models.LogItem;
 import codefathers.tripalert.models.Tracking;
 import codefathers.tripalert.services.DatabaseService;
 
 public class HomeScreenViewModel extends AndroidViewModel {
 
-    /*
-    TODO: [ALABA or ME or ANYONE:P ] fetch the current tracking and followed Trackings from Firebase
-    The time has come, the most important part of the app, and the one that actually made
-    me anxious in the past.We shall not let the fear take over, lets go and implement
-    the most crucial part of the application!!
-
-    in order for the user to get only the trackings that follows/owns, we need to use the
-    query functions of firebase library like orderBy child.equalsTo, for the owner of the
-    tracking there is the child owner with value that equals to the phonenumber. that
-    should be very easy to implement...
-
-    For the followers we have the followers child which contains each follower as a child,
-    the child name is the phone of the follower, the value is true (or false if the follower
-    unfollows) so somehow we have to query the trackings by getting the child inside followers
-    (which should be the phone of the follower, and then this child should equals to true;
-    check more details here:
-    https://firebase.google.com/docs/database/android/lists-of-data
-
-
-    */
     private AppUser user;
     private MutableLiveData<List<Tracking>> followedTrackings;
     private MutableLiveData<Tracking> createdTracking;
@@ -56,7 +38,15 @@ public class HomeScreenViewModel extends AndroidViewModel {
     }
 
     public void unfollowTracking(Tracking tracking) {
-        // appDatabase.tracking().deleteTracking(tracking);
+      FirebaseDatabase.getInstance().getReference("trackings").child(tracking.getCreator()+"/followers/" + user.getPhoneNumber()).setValue(false);
+    }
+
+    public void addSituationLog(LogItem log) {
+
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("trackings");
+
+        String id = dbRef.push().getKey();
+        dbRef.child(user.getPhoneNumber()).child("situationLog").child(id).setValue(log);
     }
 
     public void setUser(AppUser user) {
@@ -87,17 +77,18 @@ public class HomeScreenViewModel extends AndroidViewModel {
                 .equalTo(true);
         dbRef.addChildEventListener(new ChildEventListener() {
             List<Tracking> trackings = new ArrayList<>();
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    Tracking tracking = dataSnapshot.getValue(Tracking.class);
-                    trackings.add(tracking);
+                Tracking tracking = dataSnapshot.getValue(Tracking.class);
+                trackings.add(tracking);
                 followedTrackings.setValue(trackings);
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Tracking tracking = dataSnapshot.getValue(Tracking.class);
-                trackings.set(trackings.indexOf(tracking),tracking);
+                trackings.set(trackings.indexOf(tracking), tracking);
                 followedTrackings.setValue(trackings);
             }
 
@@ -123,9 +114,9 @@ public class HomeScreenViewModel extends AndroidViewModel {
         followedTrackings.setValue(list);
     }
 
-     public void changeCreatedTrackingtatus(int status){
-        DatabaseReference  dbRef = FirebaseDatabase.getInstance().getReference("trackings");
-                dbRef.child(user.getPhoneNumber()).child("status").setValue(status);
+    public void changeCreatedTrackingtatus(int status) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("trackings");
+        dbRef.child(user.getPhoneNumber()).child("status").setValue(status);
     }
 
     private void loadCreatedTracking() {
@@ -137,7 +128,7 @@ public class HomeScreenViewModel extends AndroidViewModel {
                 Tracking tracking = dataSnapshot.getValue(Tracking.class);
                 if (tracking != null) {
                     createdTracking.setValue(tracking);
-                }else{
+                } else {
                     createdTracking.setValue(null);
                 }
             }
