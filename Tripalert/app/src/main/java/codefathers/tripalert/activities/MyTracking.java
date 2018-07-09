@@ -94,8 +94,8 @@ public class MyTracking extends Fragment implements LocationListener {
                     txt3.setText("TODO");
                     createdLayout.setVisibility(View.VISIBLE);
                     notCreatedLayout.setVisibility(View.INVISIBLE);
-                    totalTimePassed = 0.0;
                     startGps(tracking);
+                    globalTimerStart(tracking.getEstimatedTime());
                 }else{
                     notCreatedLayout.setVisibility(View.VISIBLE);
                     createdLayout.setVisibility(View.INVISIBLE);
@@ -104,6 +104,29 @@ public class MyTracking extends Fragment implements LocationListener {
                 }
             }
         });
+    }
+
+    public void globalTimerStart(int time) {
+        totalTimePassed = 0.0;
+
+        try {
+            estimatedTimer.cancel();
+
+        }
+        catch (Exception e) {
+            estimatedTimer = new CountDownTimer((long) (1.1 * 60000 * time), 1000) {
+                @Override
+                public void onTick(long l) {
+                    totalTimePassed++;
+                }
+
+                @Override
+                public void onFinish() {
+                    Toast.makeText(getActivity(), "YOU ARE LATE:" + totalTimePassed, Toast.LENGTH_LONG).show();
+                    onDelay();
+                }
+            }.start();
+        }
     }
 
     @Override
@@ -198,8 +221,6 @@ public class MyTracking extends Fragment implements LocationListener {
             @Override
             public void onTick(long l) {
                 timeStationary++;
-                totalTimePassed++;
-                //if (totalTimePassed > 120) Toast.makeText(getActivity(), "YOU ARE DELAYED", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -212,7 +233,6 @@ public class MyTracking extends Fragment implements LocationListener {
         double distance = getDistance(myLocation.getLatitude(),myDestinationLatitude ,myLocation.getLongitude(),MyDestinationLongitude,0,0);
         if (distance <= LOCATION_LIMIT)
         {
-            estimatedTimer.cancel();
             delayTimer.cancel();
             onTrackingTerminate();
             onFinish();
