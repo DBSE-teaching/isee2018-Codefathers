@@ -50,10 +50,55 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/colorDelayPauseNotResponding">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/delayMessage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:background="@color/colorCardBackGround">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="238dp"
+                    android:layout_height="59dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/delayMessage"
+                    android:textColor="@color/colorTextOnWhite"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="53dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_warning_black_24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="243dp">
 
@@ -77,6 +122,7 @@
                         android:layout_marginTop="8dp"
                         android:text="@string/currTrackingStart"
                         android:textColor="@color/colorTextOnWhite"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,6 +161,7 @@
                         android:layout_marginTop="0dp"
                         android:text="@string/currTrackingDestination"
                         android:textColor="@color/colorTextOnWhite"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </TableRow>
@@ -146,82 +193,110 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp">
 
-            <TableLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="fill"
-                android:padding="8dp">
+                android:layout_height="match_parent">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="27dp"
-                    android:layout_marginBottom="8dp">
+                <TableLayout
+                    android:layout_width="153dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="fill"
+                    android:padding="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/labelAt"
-                        android:layout_width="146dp"
-                        android:layout_height="19dp"
-                        android:layout_margin="0dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/currTrackingTimeStarted"
-                        android:textColor="@color/colorTextOnWhite"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:layout_marginBottom="8dp">
 
-                    <TextView
-                        android:id="@+id/labelEstimated"
-                        android:layout_width="143dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="0dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/EstimatedTime"
-                        android:textColor="@color/colorTextOnWhite"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/labelEstimated"
+                            android:layout_width="143dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="0dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/EstimatedTime"
+                            android:textColor="@color/colorTextOnWhite"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </TableRow>
+                    </TableRow>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/currStartedAt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="0dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="TextView"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/LabelFrom" />
+                        <TextView
+                            android:id="@+id/currEstimated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="0dp"
+                            android:layout_marginEnd="68dp"
+                            android:layout_marginRight="68dp"
+                            android:layout_marginTop="16dp"
+                            android:text="TextView"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                    </TableRow>
 
-                    <TextView
-                        android:id="@+id/currEstimated"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="0dp"
-                        android:layout_marginEnd="68dp"
-                        android:layout_marginRight="68dp"
-                        android:layout_marginTop="16dp"
-                        android:text="TextView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-                </TableRow>
+                </TableLayout>
 
-            </TableLayout>
+                <Button
+                    android:id="@+id/reestimatebtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Edit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Edit" />
+
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="238dp"
-            android:layout_margin="8dp" />
+            android:layout_height="132dp"
+            android:layout_margin="8dp">
+
+            <ListView
+                android:id="@+id/followersListView"
+                android:layout_width="match_parent"
+                android:layout_height="131dp" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/abortButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/colorDestructiveAction"
+                    android:text="Abort"
+                    android:textColor="@color/colorTextOnBlack"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Abort" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 

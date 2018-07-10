@@ -154,7 +154,7 @@ public class SelectContacts extends AppCompatActivity implements NextStepActivit
 
     private void createAppUserView(List<AppUser> contacts ){
         ListView listView = (ListView) findViewById(R.id.lvContacts);
-        final ContactsAdapter adapter = new ContactsAdapter(this,contacts);
+        final ContactsAdapter adapter = new ContactsAdapter(this,contacts,false);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

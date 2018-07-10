@@ -17,6 +17,10 @@
     <string name="reachDestinationPref"> Destination reached area (Meters) </string>
     <string name="reachDestinationPrefDesc"> How many meters should be the radius of the area around the destination that when reached the tracking is considered finished</string>
     <string name="delayedNotificationPref"> Delay notification (Minutes) </string>
+    <string name="inactivityAllowancePref"> Inactivity Allowance (Minutes) </string>
+    <string name="inactivityAllowanceDesc"> How many minutes should pass while you are stationary to be considered not responding </string>
+    <string name="inactivityMeterDesc"> How many  meters you have to stay stationary to be consider inactive</string>
+    <string name="inactivityMeter"> Inactivity radius (Meters) </string>
     <string name="delayedNotificationPrefDesc"> How many minutes after the passing of the estimated time the tracking is considered delayed</string>
     <string name="currTrackingStart"> From </string>
     <string name="currTrackingDestination"> To </string>
@@ -32,6 +36,7 @@
     <string name="cannotProcceedFollowers"> Please select some contacts as followers. </string>
     <string name="noContacts"> None of your contacts has the app installed. Maybe spread the word?</string>
     <string name="errorDB"> Could not write to db </string>
+    <string name="delayMessage"> You seem to having a delay in your trip. You can always abort, or estimate again!</string>
     <!-- -->
     <!-- -->
     <!-- -->

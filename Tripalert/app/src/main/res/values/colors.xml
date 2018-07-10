@@ -8,7 +8,7 @@
     <color name="colorNextAction">#4dd0e1</color>
     <color name="colorConfirmAction">#c49900</color>
     <color name="colorEmergency">#ff6433</color>
-    <color name="colorDelayPauseNotResponding">#FFB74B</color>
+    <color name="colorDelayPauseNotResponding">#ffb74b</color>
     <color name="colorEverythingFine">#b0bec5</color>
     <color name="colorTextOnWhite">#263238</color>
     <color name="colorTextOnBlack">#eeeeee</color>

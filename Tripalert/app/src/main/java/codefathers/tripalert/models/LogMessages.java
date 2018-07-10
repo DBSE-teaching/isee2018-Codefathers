@@ -31,7 +31,7 @@ public final class LogMessages {
         return "... has arrived to "+address+" safely";
     }
     public static String onAbort(String reason){
-        return "... the track was aborted. Reason of abortion "+reason;
+        return "... the tracking was aborted. Because:"+reason;
     };
     public static String onUnfollow(){
         return "... is no longer following your tracking.";

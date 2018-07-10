@@ -115,8 +115,11 @@ public class FollowedTrackings extends Fragment {
                     }
 
                 });
-                followingLayout.setVisibility(View.VISIBLE);
-                notFollowingLayout.setVisibility(View.INVISIBLE);
+                if(trackings != null ){
+                    followingLayout.setVisibility(View.VISIBLE);
+                    notFollowingLayout.setVisibility(View.INVISIBLE);
+                }
+
             }
         });
 

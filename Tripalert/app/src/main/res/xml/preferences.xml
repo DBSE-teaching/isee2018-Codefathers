@@ -8,16 +8,6 @@
     <EditTextPreference
         android:inputType="numberDecimal"
         android:digits="0123456789"
-        android:defaultValue="1"
-        android:key="gpsInterval"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/gpsRefreshRatePref"
-        android:summary="@string/gpsRefreshRatePrefDesc"
-        />
-    <EditTextPreference
-        android:inputType="numberDecimal"
-        android:digits="0123456789"
         android:defaultValue="5"
         android:key="reachDestinationRadius"
         android:selectAllOnFocus="true"
@@ -28,11 +18,31 @@
     <EditTextPreference
         android:inputType="numberDecimal"
         android:digits="0123456789"
-        android:defaultValue="1"
+        android:defaultValue="0"
         android:key="delayedAllowance"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="@string/delayedNotificationPref"
         android:summary="@string/delayedNotificationPrefDesc"
+        />
+    <EditTextPreference
+        android:inputType="numberDecimal"
+        android:digits="0123456789"
+        android:defaultValue="5"
+        android:key="inactivityAllowance"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/inactivityAllowancePref"
+        android:summary="@string/inactivityAllowanceDesc"
+        />
+    <EditTextPreference
+        android:inputType="numberDecimal"
+        android:digits="0123456789"
+        android:defaultValue="10"
+        android:key="inactivityMeters"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/inactivityMeter"
+        android:summary="@string/inactivityMeterDesc"
         />
 </PreferenceScreen>

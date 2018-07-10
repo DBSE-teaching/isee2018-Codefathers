@@ -2,13 +2,16 @@ package codefathers.tripalert.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +32,7 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(HomeScreenViewModel.class);
-
+        updatePreferences();
         ///check authentication status, redirect to login page if not authenticated
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser == null || mUser.getPhoneNumber().isEmpty()){
@@ -41,20 +44,23 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
             setContentView(R.layout.activity_home_screen);
             goToSettings();
             makeTabs();
-
         }
-
-
     }
 
     private void goToSettings(){
-        Button settingsBtn = (Button) findViewById(R.id.settingsBtn);
-        settingsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent( HomeScreen.this, Settings.class));
-            }
-        });
+            Button settingsBtn = (Button) findViewById(R.id.settingsBtn);
+            settingsBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(viewModel.getCreatedTracking().getValue() == null ) {
+                        startActivity(new Intent(HomeScreen.this, Settings.class));
+                    }else{
+                        Toast.makeText(getApplicationContext(), "You can't edit the preferences when you have an ongoing tracking.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
+
 
     }
 
@@ -104,8 +110,14 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         viewModel.addSituationLog(logItem);
     }
 
-
-
+    public void updatePreferences(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        viewModel.TIME_LIMIT =  Integer.valueOf(sharedPref.getString("inactivityAllowance","5"));
+        viewModel.TIME_LOCATTION_LIMIT =Integer.valueOf(sharedPref.getString("inactivityMeters", "10"));
+        viewModel.LOCATION_LIMIT =  Integer.valueOf(sharedPref.getString("reachDestinationRadius", "10"));
+        viewModel.HAS_LOCATION_ENABLED = sharedPref.getBoolean("sharedLocation", false);
+        viewModel.DELAY_LIMIT = Integer.valueOf(sharedPref.getString("delayedAllowance","0"));
+    }
     public void onSignOut(View view) {
         mAuth = FirebaseAuth.getInstance();
         mAuth.signOut();

@@ -84,6 +84,17 @@ public class Tracking implements Serializable{
         this.followers = null;
     }
 
+    public List<AppUser> getFollowersToList(){
+         List<AppUser> list = new ArrayList<AppUser>();
+         if(followers!=null){
+             for (Map.Entry <String, Boolean> entry : followers.entrySet()) {
+                 AppUser follower = new AppUser(entry.getKey());
+                 follower.setChecked(entry.getValue());
+                 list.add(follower);
+             }
+         }
+        return list;
+    };
     public Location getStartingPoint() {
         return startingPoint;
     }

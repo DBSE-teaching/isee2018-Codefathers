@@ -33,6 +33,11 @@ public class HomeScreenViewModel extends AndroidViewModel {
     private MutableLiveData<List<Tracking>> followedTrackings;
     private MutableLiveData<Tracking> createdTracking;
     private MutableLiveData<List<LogItem>> logItems;
+    public   int TIME_LIMIT;
+    public   int TIME_LOCATTION_LIMIT;
+    public   int LOCATION_LIMIT ;
+    public   int DELAY_LIMIT;
+    public   boolean HAS_LOCATION_ENABLED;
 
     //private AppDatabase appDatabase;
     public HomeScreenViewModel(@NonNull Application application) {
@@ -175,6 +180,12 @@ public class HomeScreenViewModel extends AndroidViewModel {
         dbRef.child(user.getPhoneNumber()).child("status").setValue(status);
     }
 
+    public void changeCreatedTrackingEstimatedTime(int time){
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("trackings");
+        dbRef.child(user.getPhoneNumber()).child("estimatedTime").setValue(time);
+
+
+    }
     public void removeCreatedTracking(){
       FirebaseDatabase.getInstance().getReference("trackings").child(user.getPhoneNumber()).setValue(null);
     }
