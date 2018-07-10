@@ -2,11 +2,14 @@ package codefathers.tripalert.activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -43,6 +46,7 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         super.onCreate(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(HomeScreenViewModel.class);
         updatePreferences();
+        setContacts();
         ///check authentication status, redirect to login page if not authenticated
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser == null || mUser.getPhoneNumber().isEmpty()) {
@@ -89,15 +93,17 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
                 return true;
             }
         });
-        viewModel.getCreatedTracking().
-
-                observe(this, new Observer<Tracking>() {
+        viewModel.getCreatedTracking().observe(this, new Observer<Tracking>() {
                     @Override
                     public void onChanged(@Nullable Tracking tracking) {
                         if (tracking == null) {
                             findViewById(R.id.emergencyBtn).setVisibility(View.INVISIBLE);
+                            findViewById(R.id.settingsBtn).setVisibility(View.VISIBLE);
+                            findViewById(R.id.signOutBtn).setVisibility(View.VISIBLE);
                         } else {
                             findViewById(R.id.emergencyBtn).setVisibility(View.VISIBLE);
+                            findViewById(R.id.settingsBtn).setVisibility(View.INVISIBLE);
+                            findViewById(R.id.signOutBtn).setVisibility(View.INVISIBLE);
                             countDown.setText("5");
 
                         }
@@ -160,9 +166,21 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
     }
 
     public void onEmergency() {
-        String creator = viewModel.getCreatedTracking().getValue().getCreator();
+        Tracking tracking = viewModel.getCreatedTracking().getValue();
+        String creator = tracking.getCreator();
+        String location = "?";
+        if(viewModel.getCurrentLocation() !=null){
+             location = viewModel.getCurrentLocation();
+        }
         viewModel.changeCreatedTrackingtatus(TrackingStatus.EMERGENCY);
-        LogItem logItem = new LogItem(TrackingStatus.EMERGENCY, creator + "is on emergency");
+        String message ="";
+        if(viewModel.HAS_LOCATION_ENABLED) {
+            message = creator + "is on emergency on Location: " + location+"  please contact him as soon as possible";
+        }else{
+            message = creator + "is on emergency please contact him as soon as possible";
+        }
+        LogItem logItem = new LogItem(TrackingStatus.EMERGENCY, message);
+
         logItem.setCreator(creator);
         viewModel.addSituationLog(logItem);
     }
@@ -182,6 +200,40 @@ public class HomeScreen extends AppCompatActivity implements MyTracking.OnFragme
         if (mAuth.getCurrentUser() == null) {
             startActivity(new Intent(HomeScreen.this, PhoneAuthActivity.class));
         }
+    }
+
+    private void setContacts(){
+        ContentResolver contentResolver = getContentResolver();
+        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+
+        if (cursor.getCount() > 0)
+        {
+            while(cursor.moveToNext())
+            {
+                String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                int hasPhoneNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)));
+
+                if(hasPhoneNumber > 0)
+                {
+                    Cursor cursor2 = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                            new String[] {id}, null);
+                    while(cursor2.moveToNext())
+                    {
+                        String phoneNumber = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        AppUser user = new AppUser(phoneNumber.replaceAll("[\\s\\-()]", ""));
+                        user.setUserName(name);
+                        user.setChecked(false);
+                        viewModel.addContact(user);
+                    }
+                    cursor2.close();
+                }
+            }
+        }
+        cursor.close();
+
     }
 
 

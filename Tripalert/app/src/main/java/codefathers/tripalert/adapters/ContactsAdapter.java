@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.models.AppUser;
@@ -19,16 +22,23 @@ public class ContactsAdapter extends BaseAdapter {
     List<AppUser> contacs;
     LayoutInflater inflater;
     boolean isFollowers;
+    Map<String,String> contactsDict;
 
     public ContactsAdapter(Activity activity) {
         this.activity = activity;
     }
-
-    public ContactsAdapter(Activity activity, List<AppUser> contacs, boolean isFollowers) {
+    public ContactsAdapter(Activity activity, List<AppUser> contacs, boolean isFollower) {
         this.activity = activity;
         this.contacs = contacs;
         this.isFollowers = isFollowers;
         inflater = activity.getLayoutInflater();
+    }
+    public ContactsAdapter(Activity activity, List<AppUser> contacs, boolean isFollowers, Map<String,String>contactsDict) {
+        this.activity = activity;
+        this.contacs = contacs;
+        this.isFollowers = isFollowers;
+        inflater = activity.getLayoutInflater();
+        this.contactsDict = contactsDict;
     }
 
     @Override
@@ -69,7 +79,14 @@ public class ContactsAdapter extends BaseAdapter {
 
         AppUser contact = contacs.get(i);
         if(isFollowers){
-            holder.tvName.setText(contact.getPhoneNumber());
+            String text = "";
+            if(contactsDict.get(contact.getPhoneNumber()) !=null){
+                text = contactsDict.get(contact.getPhoneNumber())+" ("+contact.getPhoneNumber()+")";
+            }
+            else{
+                text = contact.getPhoneNumber();
+            }
+            holder.tvName.setText(text);
         }else{
             holder.tvName.setText(contact.getUserName()  );
             holder.tvNumber.setText(contact.getPhoneNumber());

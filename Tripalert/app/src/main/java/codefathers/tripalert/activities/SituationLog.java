@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.List;
 import java.util.Random;
@@ -34,12 +35,23 @@ public class SituationLog extends Fragment{
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_situation_log, container, false);
+        Button btn = (Button) v.findViewById(R.id.discardAllMessages);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.discardAllMessages();
+            }
+        });
         RecyclerView recyclerView = v.findViewById(R.id.logItemRecyclerView);
+        recyclerView.setNestedScrollingEnabled(false);
         final LogItemRecyclerAdapter adapter = new LogItemRecyclerAdapter(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -47,10 +59,12 @@ public class SituationLog extends Fragment{
         viewModel.getLogItems().observe(this, new Observer<List<LogItem>>() {
             @Override
             public void onChanged(@Nullable List<LogItem> logItems) {
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity(), CHANNEL_ID)
-                        .setContentTitle(logItems.get(0).getCreator())
-                        .setContentText(logItems.get(0).getMessage())
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                if(logItems != null){
+                    v.findViewById(R.id.discardAllMessages).setVisibility(View.VISIBLE);
+                }else{
+                    v.findViewById(R.id.discardAllMessages).setVisibility(View.INVISIBLE);
+                }
+                adapter.setlogItems(logItems);
             }
         });
         return v;

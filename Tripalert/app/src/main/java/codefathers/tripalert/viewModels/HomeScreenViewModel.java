@@ -9,7 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +21,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import codefathers.tripalert.models.AppUser;
@@ -33,25 +37,37 @@ import static codefathers.tripalert.FireSettings.CHANNEL_ID;
 
 public class HomeScreenViewModel extends AndroidViewModel {
 
+    public int count = 0;
     private AppUser user;
     private MutableLiveData<List<Tracking>> followedTrackings;
     private MutableLiveData<Tracking> createdTracking;
     private MutableLiveData<List<LogItem>> logItems;
+    private String CurrentLocation;
     public   int TIME_LIMIT;
     public   int TIME_LOCATTION_LIMIT;
     public   int LOCATION_LIMIT ;
     public   int DELAY_LIMIT;
     public   boolean HAS_LOCATION_ENABLED;
+    public Map<String,String> contacts;
 
     //private AppDatabase appDatabase;
     public HomeScreenViewModel(@NonNull Application application) {
         super(application);
         // this.appDatabase = AppDatabase.getDatabase(this.getApplication());
     }
-
+    public void addContact(AppUser user){
+        if(this.contacts == null){
+            this.contacts = new HashMap<String, String >();
+        }
+        this.contacts.put(user.getPhoneNumber(),user.getUserName());
+    }
 
     public AppUser getUser(){
         return user;
+    }
+
+    public void discardLogItem(LogItem item){
+        FirebaseDatabase.getInstance().getReference("logItems").child(item.getKey()).child("recievers/" + user.getPhoneNumber()).setValue(false);
     }
     public void unfollowTracking(Tracking tracking) {
       FirebaseDatabase.getInstance().getReference("trackings").child(tracking.getCreator()+"/followers/" + user.getPhoneNumber()).setValue(false);
@@ -108,8 +124,12 @@ public class HomeScreenViewModel extends AndroidViewModel {
 
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String key = dataSnapshot.getKey();
                 LogItem item = dataSnapshot.getValue(LogItem.class);
-
+                item.setKey(key);
+                if(contacts.get(item.getCreator())!= null){
+                    item.setName(contacts.get(item.getCreator()));
+                }
                 logItemsList.add(0,item);
                 logItems.setValue(logItemsList);
             }
@@ -181,7 +201,16 @@ public class HomeScreenViewModel extends AndroidViewModel {
 
     public void changeCreatedTrackingtatus(int status) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("trackings");
-        dbRef.child(user.getPhoneNumber()).child("status").setValue(status);
+        dbRef.child(user.getPhoneNumber()).child("status").setValue(status).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                //handle special cases.
+                if(status == TrackingStatus.FINISHED || status == TrackingStatus.ABORTED ){
+                    removeCreatedTracking();
+                }
+            }
+        });
+
     }
 
     public void changeCreatedTrackingEstimatedTime(int time){
@@ -192,6 +221,12 @@ public class HomeScreenViewModel extends AndroidViewModel {
     }
     public void removeCreatedTracking(){
       FirebaseDatabase.getInstance().getReference("trackings").child(user.getPhoneNumber()).setValue(null);
+    }
+
+    public void discardAllMessages(){
+        for (LogItem log : logItems.getValue()) {
+            discardLogItem(log);
+        }
     }
     private void loadCreatedTracking() {
         Query dbRef;
@@ -234,4 +269,11 @@ public class HomeScreenViewModel extends AndroidViewModel {
         });
     }
 
+    public String getCurrentLocation() {
+        return CurrentLocation;
+    }
+
+    public void setCurrentLocation(String currentLongt, String currentLat) {
+        CurrentLocation = currentLongt+";"+currentLat;
+    }
 }

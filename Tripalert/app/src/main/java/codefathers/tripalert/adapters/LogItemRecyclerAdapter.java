@@ -35,7 +35,11 @@ public class LogItemRecyclerAdapter extends RecyclerView.Adapter<LogItemRecycler
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mlogItems != null) {
             LogItem current = mlogItems.get(position);
-            holder.creator.setText(current.getCreator());
+            if(current.getName()!= null){
+                holder.creator.setText(current.getName());
+            }else{
+                holder.creator.setText(current.getCreator());
+            }
             holder.time.setText(current.getCreatedAt());
             holder.message.setText(current.getMessage());
             int color;

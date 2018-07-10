@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
@@ -34,7 +35,9 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.adapters.ContactsAdapter;
@@ -52,7 +55,7 @@ import static java.lang.Integer.valueOf;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subcolass.
  * Activities that contain this fragment must implement the
  * {@link MyTracking.OnFragmentInteractionListener} interface
  * to handle interaction events.
@@ -96,15 +99,12 @@ public class MyTracking extends Fragment implements LocationListener {
         super.onActivityCreated(savedInstanceState);
         notCreatedLayout.setVisibility(View.INVISIBLE);
         viewModel = ViewModelProviders.of(getActivity()).get(HomeScreenViewModel.class);
-        if (viewModel.getCreatedTracking().getValue() == null) {
-            notCreatedLayout.setVisibility(View.VISIBLE);
-        }
+        if(viewModel.getCreatedTracking().getValue() == null)notCreatedLayout.setVisibility(View.VISIBLE);
         viewModel.getCreatedTracking().observe(this, new Observer<Tracking>() {
             @Override
             public void onChanged(@Nullable Tracking tracking) {
                 if (tracking != null) {
                     cachedTracking = tracking;
-
                     TextView txt = (TextView) getView().findViewById(R.id.currStart);
                     TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
                     TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
@@ -122,7 +122,7 @@ public class MyTracking extends Fragment implements LocationListener {
                             reestimateClick();
                         }
                     });
-                    createAppUserView(tracking.getFollowersToList());
+                    createAppUserView(tracking.getFollowersToList(),viewModel.contacts);
                     txt.setText(tracking.getStartingPoint().getAddress());
                     txt2.setText(tracking.getDestination().getAddress());
                     txt4.setText(String.valueOf(tracking.getEstimatedTime()));
@@ -145,7 +145,9 @@ public class MyTracking extends Fragment implements LocationListener {
                     } else if (tracking.getStatus() == TrackingStatus.EMERGENCY) {
                         CardView card = (CardView)getView().findViewById(R.id.delayMessage);
                         card.setVisibility(View.VISIBLE);
-                        card.setCardBackgroundColor(getActivity().getColor(R.color.colorEmergency));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            card.setCardBackgroundColor(getActivity().getColor(R.color.colorEmergency));
+                        }
                         TextView text = (TextView) getView().findViewById(R.id.delayTxt);
                         text.setText(getString(R.string.emergencyMessage));
                         onTrackingTerminate();
@@ -159,8 +161,6 @@ public class MyTracking extends Fragment implements LocationListener {
                     count = 0;
                     notCreatedLayout.setVisibility(View.VISIBLE);
                     createdLayout.setVisibility(View.INVISIBLE);
-
-
                 }
             }
         });
@@ -223,8 +223,8 @@ public class MyTracking extends Fragment implements LocationListener {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return;
 
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
-        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 10, this);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 2, this);
+        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 2, this);
 
         myDestinationLatitude = Double.parseDouble(tracking.getDestination().getLat());
         MyDestinationLongitude = Double.parseDouble(tracking.getDestination().getLang());
@@ -234,7 +234,6 @@ public class MyTracking extends Fragment implements LocationListener {
     public void onFinish() {
         viewModel.changeCreatedTrackingtatus(TrackingStatus.FINISHED);
         viewModel.addSituationLog(new LogItem(TrackingStatus.FINISHED, LogMessages.onArrived(cachedTracking.getDestination().getAddress())));
-        viewModel.removeCreatedTracking();
     }
 
     public void onResumeMoving() {
@@ -248,15 +247,13 @@ public class MyTracking extends Fragment implements LocationListener {
         if (TrackingStatus.DELAYED != cachedTracking.getStatus()) {
             viewModel.changeCreatedTrackingtatus(TrackingStatus.DELAYED);
             viewModel.addSituationLog(new LogItem(TrackingStatus.DELAYED, LogMessages.delayed()));
-
-
         }
     }
 
     public void onAbort(String reason) {
         viewModel.changeCreatedTrackingtatus(TrackingStatus.ABORTED);
         viewModel.addSituationLog(new LogItem(TrackingStatus.ABORTED, LogMessages.onAbort(reason)));
-        viewModel.removeCreatedTracking();
+        onTrackingTerminate();
     }
 
     public void onReestimate(int time) {
@@ -334,8 +331,9 @@ public class MyTracking extends Fragment implements LocationListener {
 
         }
 
+        viewModel.setCurrentLocation(Double.toString(location.getLongitude()),Double.toString(location.getLatitude()));
         myLocation = location;
-        if (!hasDelayed) onResumeMoving();
+        if (cachedTracking.getStatus()!= TrackingStatus.DELAYED) onResumeMoving();
         timeStationary = 0;
         delayTimer = new CountDownTimer(60000 * viewModel.TIME_LIMIT, 1000) {
             @Override
@@ -352,7 +350,6 @@ public class MyTracking extends Fragment implements LocationListener {
 
         double distance = getDistance(myLocation.getLatitude(), myDestinationLatitude, myLocation.getLongitude(), MyDestinationLongitude, 0, 0);
         if (distance <= viewModel.LOCATION_LIMIT) {
-            delayTimer.cancel();
             onTrackingTerminate();
             onFinish();
         }
@@ -365,6 +362,12 @@ public class MyTracking extends Fragment implements LocationListener {
     }
 
     public void onTrackingTerminate() {
+        if(estimatedTimer != null){
+            estimatedTimer.cancel();
+        }
+        if(delayTimer !=null) {
+            delayTimer.cancel();
+        }
         LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return; //koitaei na dei an exei adeies
@@ -385,9 +388,9 @@ public class MyTracking extends Fragment implements LocationListener {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void createAppUserView(List<AppUser> contacts) {
+    private void createAppUserView(List<AppUser> contacts, Map<String,String> contactsDict) {
         ListView listView = (ListView) getView().findViewById(R.id.followersListView);
-        final ContactsAdapter adapter = new ContactsAdapter(getActivity(), contacts, true);
+        final ContactsAdapter adapter = new ContactsAdapter(getActivity(), contacts, true,contactsDict);
         listView.setAdapter(adapter);
     }
 

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import codefathers.tripalert.R;
@@ -30,6 +31,12 @@ public class ConfirmTracking extends AppCompatActivity implements NextStepActivi
         viewModel = ViewModelProviders.of(this).get(ConfirmTrackingVIewModel.class);
         tracking = (Tracking) getIntent().getSerializableExtra("tracking");
         viewModel.setTracking(tracking);
+        TextView txt = (TextView) findViewById(R.id.currStart);
+        TextView txt2 = (TextView) findViewById(R.id.currDestination);
+        TextView txt4 = (TextView) findViewById(R.id.currEstimated);
+        txt.setText(tracking.getStartingPoint().getAddress());
+        txt2.setText(tracking.getDestination().getAddress());
+        txt4.setText(String.valueOf(tracking.getEstimatedTime()));
     }
 
     @Override

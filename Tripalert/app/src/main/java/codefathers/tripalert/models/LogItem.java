@@ -22,7 +22,9 @@ public class LogItem implements Serializable {
     private String message;
     private String createdAt;
     private String creator;
+    private String name;
     private Map<String,Boolean> recievers ;
+    private String key;
 
     public LogItem(){
 
@@ -79,5 +81,21 @@ public class LogItem implements Serializable {
         boolean state3 = this.getCreatedAt().equals(((LogItem) obj).getCreatedAt());
         boolean state1 = this.getMessage().equals(((LogItem) obj).getMessage());
         return state1 && state2 && state3;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
