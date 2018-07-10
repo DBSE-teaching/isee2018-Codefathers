@@ -1,12 +1,14 @@
 package codefathers.tripalert.viewModels;
 
 import android.app.Application;
+import android.app.NotificationManager;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +28,8 @@ import codefathers.tripalert.models.LogItem;
 import codefathers.tripalert.models.Tracking;
 import codefathers.tripalert.models.TrackingStatus;
 import codefathers.tripalert.services.DatabaseService;
+
+import static codefathers.tripalert.FireSettings.CHANNEL_ID;
 
 public class HomeScreenViewModel extends AndroidViewModel {
 
@@ -60,6 +64,7 @@ public class HomeScreenViewModel extends AndroidViewModel {
         if(log.getCreator() == null && createdTracking != null ){
             log.setCreator(createdTracking.getValue().getCreator());
         }
+
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("logItems");
         String id = dbRef.push().getKey();
         dbRef.child(id).setValue(log);
@@ -108,7 +113,6 @@ public class HomeScreenViewModel extends AndroidViewModel {
                 logItemsList.add(0,item);
                 logItems.setValue(logItemsList);
             }
-
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 

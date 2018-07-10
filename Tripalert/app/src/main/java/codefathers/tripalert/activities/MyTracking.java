@@ -18,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,6 +104,7 @@ public class MyTracking extends Fragment implements LocationListener {
             public void onChanged(@Nullable Tracking tracking) {
                 if (tracking != null) {
                     cachedTracking = tracking;
+
                     TextView txt = (TextView) getView().findViewById(R.id.currStart);
                     TextView txt2 = (TextView) getView().findViewById(R.id.currDestination);
                     TextView txt4 = (TextView) getView().findViewById(R.id.currEstimated);
@@ -131,8 +133,25 @@ public class MyTracking extends Fragment implements LocationListener {
                         startGps(tracking);
                         globalTimerStart(tracking.getEstimatedTime());
                     }
-                    if (tracking.getStatus() == TrackingStatus.EMERGENCY) {
+
+                    if (tracking.getStatus() == TrackingStatus.DELAYED) {
+                        getView().findViewById(R.id.delayMessage).setVisibility(View.VISIBLE);
+                        TextView text = (TextView) getView().findViewById(R.id.delayTxt);
+                        text.setText(getString(R.string.delayMessage));
+                    } else if (tracking.getStatus() == TrackingStatus.NOT_RESPONDING) {
+                        getView().findViewById(R.id.delayMessage).setVisibility(View.VISIBLE);
+                        TextView text = (TextView) getView().findViewById(R.id.delayTxt);
+                        text.setText(getString(R.string.notRespondingMessage));
+                    } else if (tracking.getStatus() == TrackingStatus.EMERGENCY) {
+                        CardView card = (CardView)getView().findViewById(R.id.delayMessage);
+                        card.setVisibility(View.VISIBLE);
+                        card.setCardBackgroundColor(getActivity().getColor(R.color.colorEmergency));
+                        TextView text = (TextView) getView().findViewById(R.id.delayTxt);
+                        text.setText(getString(R.string.emergencyMessage));
                         onTrackingTerminate();
+                    } else {
+                        getView().findViewById(R.id.delayMessage).setVisibility(View.GONE);
+
                     }
                     count++;
 
@@ -222,8 +241,6 @@ public class MyTracking extends Fragment implements LocationListener {
         if (TrackingStatus.STARTED != cachedTracking.getStatus()) {
             viewModel.changeCreatedTrackingtatus(TrackingStatus.STARTED);
             viewModel.addSituationLog(new LogItem(TrackingStatus.STARTED, LogMessages.onResume()));
-            getView().findViewById(R.id.delayMessage).setVisibility(View.GONE);
-
         }
     }
 
@@ -231,20 +248,20 @@ public class MyTracking extends Fragment implements LocationListener {
         if (TrackingStatus.DELAYED != cachedTracking.getStatus()) {
             viewModel.changeCreatedTrackingtatus(TrackingStatus.DELAYED);
             viewModel.addSituationLog(new LogItem(TrackingStatus.DELAYED, LogMessages.delayed()));
-            getView().findViewById(R.id.delayMessage).setVisibility(View.VISIBLE);
+
 
         }
     }
 
-    public void onAbort(String reason ) {
+    public void onAbort(String reason) {
         viewModel.changeCreatedTrackingtatus(TrackingStatus.ABORTED);
-        viewModel.addSituationLog(new LogItem(TrackingStatus.ABORTED,LogMessages.onAbort(reason)));
+        viewModel.addSituationLog(new LogItem(TrackingStatus.ABORTED, LogMessages.onAbort(reason)));
         viewModel.removeCreatedTracking();
     }
 
-    public void onReestimate(int time){
+    public void onReestimate(int time) {
         viewModel.changeCreatedTrackingtatus(TrackingStatus.STARTED);
-        viewModel.addSituationLog(new LogItem(TrackingStatus.STARTED,LogMessages.onEstimateAgain(time)));
+        viewModel.addSituationLog(new LogItem(TrackingStatus.STARTED, LogMessages.onEstimateAgain(time)));
         viewModel.changeCreatedTrackingEstimatedTime(time);
         //reload.
         startActivity(new Intent(getActivity(), HomeScreen.class));
@@ -269,7 +286,8 @@ public class MyTracking extends Fragment implements LocationListener {
         dialog.setView(layout);
         dialog.show();
     }
-    public void reestimateClick(){
+
+    public void reestimateClick() {
         NumberPicker newTime = new NumberPicker(getActivity());
         newTime.setMinValue(1);
         newTime.setMaxValue(50);

@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,11 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.Random;
 
 import codefathers.tripalert.R;
 import codefathers.tripalert.adapters.LogItemRecyclerAdapter;
 import codefathers.tripalert.models.LogItem;
 import codefathers.tripalert.viewModels.HomeScreenViewModel;
+
+import static codefathers.tripalert.FireSettings.CHANNEL_ID;
 
 
 public class SituationLog extends Fragment{
@@ -42,7 +47,10 @@ public class SituationLog extends Fragment{
         viewModel.getLogItems().observe(this, new Observer<List<LogItem>>() {
             @Override
             public void onChanged(@Nullable List<LogItem> logItems) {
-                adapter.setlogItems(logItems);
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity(), CHANNEL_ID)
+                        .setContentTitle(logItems.get(0).getCreator())
+                        .setContentText(logItems.get(0).getMessage())
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
             }
         });
         return v;

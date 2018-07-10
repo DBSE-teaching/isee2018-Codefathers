@@ -12,7 +12,7 @@
         android:id="@+id/notCreated"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <Button
             android:id="@+id/newTrackingBtn"
@@ -48,6 +48,7 @@
         android:visibility="invisible">
 
         <android.support.v7.widget.CardView
+            android:id="@+id/delayMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -58,14 +59,13 @@
             app:cardBackgroundColor="@color/colorDelayPauseNotResponding">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/delayMessage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:background="@color/colorCardBackGround">
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/delayTxt"
                     android:layout_width="238dp"
                     android:layout_height="59dp"
                     android:layout_marginBottom="8dp"

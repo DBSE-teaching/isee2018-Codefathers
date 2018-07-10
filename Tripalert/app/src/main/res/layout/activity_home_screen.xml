@@ -8,89 +8,138 @@
     tools:context=".activities.HomeScreen">
 
 
-    <Button
-        android:id="@+id/signOutBtn"
-        android:layout_width="29dp"
-        android:layout_height="28dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/ic_exit_to_app_black_24dp"
-        android:onClick="onSignOut"
-        app:layout_constraintEnd_toStartOf="@+id/settingsBtn"
-        app:layout_constraintTop_toTopOf="@+id/settingsBtn" />
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/overlayEmergency"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@color/common_google_signin_btn_text_light_pressed"
+        android:visibility="invisible">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabLayout"
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="236dp"
+            android:layout_height="118dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginLeft="79dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginStart="79dp"
+            android:layout_marginTop="172dp"
+            android:text="@string/hold"
+            android:textColor="@color/colorTextOnBlack"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/hold" />
+
+        <TextView
+            android:id="@+id/countDown"
+            android:layout_width="35dp"
+            android:layout_height="53dp"
+            android:layout_marginLeft="96dp"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="12dp"
+            android:text="5"
+            android:textColor="@color/colorEmergency"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/normalLayout"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:tabGravity="center">
+        android:layout_height="match_parent">
 
-    </android.support.design.widget.TabLayout>
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="177dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        <Button
+            android:id="@+id/signOutBtn"
+            android:layout_width="29dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ic_exit_to_app_black_24dp"
+            android:onClick="onSignOut"
+            app:layout_constraintEnd_toStartOf="@+id/settingsBtn"
+            app:layout_constraintTop_toTopOf="@+id/settingsBtn" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-    <Button
-        android:id="@+id/settingsBtn"
-        android:layout_width="29dp"
-        android:layout_height="28dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/ic_settings_black_24dp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:tabGravity="center">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        </android.support.design.widget.TabLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="66dp"
-        android:layout_height="82dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:clickable="true"
-        android:onClick="onEmergency"
-        app:backgroundTint="@color/colorEmergency"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/settingsBtn"
+            android:layout_width="29dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_settings_black_24dp"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:background="@color/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="177dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/emergencyBtn"
+            android:layout_width="65dp"
+            android:layout_height="63dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:clickable="true"
+            android:onClick="onEmergency"
+            android:src="@drawable/ic_warning_white_ck_24dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/colorEmergency"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

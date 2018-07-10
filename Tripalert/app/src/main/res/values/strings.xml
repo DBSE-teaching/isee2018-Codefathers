@@ -37,6 +37,9 @@
     <string name="noContacts"> None of your contacts has the app installed. Maybe spread the word?</string>
     <string name="errorDB"> Could not write to db </string>
     <string name="delayMessage"> You seem to having a delay in your trip. You can always abort, or estimate again!</string>
+    <string name="notRespondingMessage"> You seem to have stopped moving for quite a long. You can always abort, or estimate again!</string>
+    <string name="emergencyMessage">You are on an emergency! Press Abort to cancel the Tracking. </string>
+    <string name="hold">Keep holding the button For emergency </string>
     <!-- -->
     <!-- -->
     <!-- -->
