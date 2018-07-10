@@ -35,6 +35,12 @@ Purpose: This app is NOT a GPS, it is only suitable for tracking a trip’s prog
 
 Supported Devices: Smartphones.
 
+You can download the apk from here:
+https://drive.google.com/drive/folders/1fvZLc85cA4NLTlS9AZ4lXy0jkGeS0EAi?usp=sharing
+
+Feel free to check out the code in our repository:
+https://github.com/DBSE-teaching/isee2018-Codefathers
+
 
 ![Steps image]({{site.baseurl}}/images/reflections/g1.png " ")
 
