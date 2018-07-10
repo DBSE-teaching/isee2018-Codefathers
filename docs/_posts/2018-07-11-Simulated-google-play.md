@@ -44,4 +44,4 @@ https://github.com/DBSE-teaching/isee2018-Codefathers
 
 ![Steps image]({{site.baseurl}}/images/reflections/g1.png  " "){:width="100%"}
 
-![Steps image]({{site.baseurl}}/images/reflections/g2.png " "):{width="100%"}
+![Steps image]({{site.baseurl}}/images/reflections/g2.png " "){:width="100%"}
