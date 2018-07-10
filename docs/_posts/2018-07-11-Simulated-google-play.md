@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Google PLay Supposed Entry"
+title: "Google Play Supposed Entry"
 date: 2018-07-11
 ---
 
 
-#  What is our app and why is it woth a shot?
+#  What is our app and why is it worth a shot?
 
 Our app, TripAlert, focuses on something that is not negotiable. That is, safety. It allowes the user to define the details of a trip and then simply checks on them.
 Are you late? Have you stopped moving? Have you arrived, or even, are you in a declared emergency? Your list of faithfull and caring followers will know. They have your back. 
